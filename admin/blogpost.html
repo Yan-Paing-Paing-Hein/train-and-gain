@@ -52,7 +52,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="payment.html">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="#" class="cyber-button">Access Terminal</a>
+                <a href="#" class="cyber-button">View Table Lists</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -146,6 +146,44 @@ https://templatemo.com/tm-594-nexus-flow
 
         </div>
     </section>
+
+
+
+    <!-- CRUD Table Section -->
+    <div class="crud-table-wrapper">
+        <h3 class="section-subtitle">All Blog Posts</h3>
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Blog Image</th>
+                    <th>Publish Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Row -->
+                <tr>
+                    <td>1</td>
+                    <td>Weight Loss</td>
+                    <td>Fat Burning Tips</td>
+                    <td>Short summary of content...</td>
+                    <td><img src="uploads/example.jpg" alt="Blog Image" width="60"></td>
+                    <td>2025-09-13</td>
+                    <td>Published</td>
+                    <td>
+                        <a href="edit_blog.php?id=1" class="btn-action edit">Edit</a>
+                        <a href="delete_blog.php?id=1" class="btn-action delete">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 
     <!-- Footer -->
     <footer class="footer">
