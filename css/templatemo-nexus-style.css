@@ -1376,10 +1376,46 @@ nav {
 .form-group select {
     background-color: #0a0a0a;
     /* dark cyber background */
-    color: #00ffff;
+    color: #f900e0;
     /* neon cyan text */
     border: 2px solid #00ffff;
-    /* cyan border */
+    /* cyan border default */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+    /* soft cyan neon glow */
+}
+
+/* Glow + Purple neon on hover/focus */
+.form-group select:hover,
+.form-group select:focus {
+    background-color: #111;
+    border-color: #f900e0;
+    /* purple border */
+    box-shadow: 0 0 25px #f900e0;
+    /* stronger purple neon glow */
+}
+
+/* Dropdown options */
+.form-group select option {
+    background-color: #0a0a0a;
+    color: #f900e0;
+    /* cyan text inside dropdown */
+}
+
+/* Cyber/Tech Neon Dropdown xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+/* .form-group select {
+    background-color: #0a0a0a;
+    dark cyber background
+    color: #00ffff;
+    neon cyan text
+    border: 2px solid #00ffff;
+    cyan border
     border-radius: 8px;
     padding: 10px;
     font-size: 1rem;
@@ -1388,30 +1424,30 @@ nav {
     outline: none;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    /* soft neon glow */
-}
+    soft neon glow
+} */
 
-.form-group select:hover,
+/* .form-group select:hover,
 .form-group select:focus {
     background-color: #111;
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-    /* brighter glow on hover */
+    brighter glow on hover
     border-color: #00e6e6;
-}
+} */
 
-.form-group select option {
+/* .form-group select option {
     background-color: #0a0a0a;
     color: #00ffff;
-}
+} */
 
 /* Cyber/Tech Neon File Upload */
 .form-group input[type="file"] {
     background-color: #0a0a0a;
     /* dark cyber bg */
-    color: #00ffff;
+    color: #f900e0;
     /* neon cyan text */
     border: 2px solid #00ffff;
-    /* glowing cyan border */
+    /* default cyan border */
     border-radius: 8px;
     padding: 10px;
     font-size: 1rem;
@@ -1419,19 +1455,35 @@ nav {
     cursor: pointer;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    /* soft neon glow */
+    box-shadow:
+        0 0 8px rgba(0, 255, 255, 0.5),
+        0 0 15px rgba(0, 255, 255, 0.3);
+    /* cyan glow */
 }
 
-/* Hover + Focus glow */
-.form-group input[type="file"]:hover,
+/* Hover stays cyan glow */
+.form-group input[type="file"]:hover {
+    background-color: #111;
+    box-shadow:
+        0 0 15px rgba(0, 255, 255, 0.8),
+        0 0 25px rgba(0, 255, 255, 0.6);
+    border-color: #00ffff;
+}
+
+/* Focus/Click = Purple Neon */
 .form-group input[type="file"]:focus {
     background-color: #111;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-    border-color: #00e6e6;
+    border-color: #f900e0;
+    /* purple neon */
+    box-shadow:
+        0 0 15px rgba(249, 0, 224, 1),
+        0 0 35px rgba(249, 0, 224, 0.9),
+        0 0 60px rgba(249, 0, 224, 0.7),
+        0 0 90px rgba(249, 0, 224, 0.5);
+    /* purple glow */
 }
 
-/* Style for small helper text */
+/* Helper text */
 .form-group small {
     display: block;
     margin-top: 5px;
@@ -1441,14 +1493,14 @@ nav {
     opacity: 0.8;
 }
 
-/* Cyber/Tech Neon Date Picker with Cyan Calendar Icon */
+/* Cyber/Tech Neon Date Picker */
 .form-group input[type="date"] {
     background-color: #0a0a0a;
     /* dark cyber bg */
-    color: #00ffff;
+    color: #f900e0;
     /* neon cyan text */
     border: 2px solid #00ffff;
-    /* glowing cyan border */
+    /* default cyan border */
     border-radius: 8px;
     padding: 10px;
     font-size: 1rem;
@@ -1456,25 +1508,32 @@ nav {
     cursor: pointer;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    /* soft neon glow */
+    box-shadow:
+        0 0 8px rgba(0, 255, 255, 0.5),
+        0 0 15px rgba(0, 255, 255, 0.3);
+    /* subtle cyan glow */
 }
 
-/* Glow on hover/focus */
-.form-group input[type="date"]:hover,
+/* Focus = Purple Neon */
 .form-group input[type="date"]:focus {
     background-color: #111;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-    border-color: #00e6e6;
+    border-color: #f900e0;
+    /* purple neon */
+    box-shadow:
+        0 0 15px rgba(249, 0, 224, 1),
+        0 0 35px rgba(249, 0, 224, 0.9),
+        0 0 60px rgba(249, 0, 224, 0.7),
+        0 0 90px rgba(249, 0, 224, 0.5);
+    /* strong purple glow */
 }
 
-/* Calendar icon customization (Webkit browsers: Chrome, Edge, Safari) */
+/* Calendar icon (Purple Neon) */
 .form-group input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(64%) sepia(100%) saturate(1000%) hue-rotate(130deg) brightness(120%) contrast(150%);
+    filter: invert(34%) sepia(98%) saturate(7463%) hue-rotate(289deg) brightness(100%) contrast(120%);
     cursor: pointer;
 }
 
-/* Firefox workaround (it doesn’t allow icon change, but we can tint text & border only) */
+/* Firefox fallback (dark mode styling only) */
 @-moz-document url-prefix() {
     .form-group input[type="date"] {
         color-scheme: dark;
@@ -1485,38 +1544,49 @@ nav {
 .form-group input[type="text"] {
     background-color: #0a0a0a;
     /* dark cyber background */
-    color: #00ffff;
+    color: #f900e0;
     /* neon cyan text */
     border: 2px solid #00ffff;
-    /* glowing cyan border */
+    /* default cyan border */
     border-radius: 8px;
     padding: 10px;
     font-size: 1rem;
     font-weight: bold;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    /* soft neon glow */
+    box-shadow:
+        0 0 8px rgba(0, 255, 255, 0.5),
+        0 0 15px rgba(0, 255, 255, 0.3);
+    /* subtle cyan glow */
 }
 
+/* Placeholder styling */
 .form-group input[type="text"]::placeholder {
     color: rgba(0, 255, 255, 0.6);
     /* neon cyan placeholder */
     font-style: italic;
 }
 
-.form-group input[type="text"]:hover,
+/* Focus = Purple Neon */
 .form-group input[type="text"]:focus {
     background-color: #111;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-    border-color: #00e6e6;
+    border-color: #f900e0;
+    /* purple neon */
+    box-shadow:
+        0 0 15px rgba(249, 0, 224, 1),
+        0 0 35px rgba(249, 0, 224, 0.9),
+        0 0 60px rgba(249, 0, 224, 0.7),
+        0 0 90px rgba(249, 0, 224, 0.5);
+    /* strong purple glow */
 }
 
 /* Cyber/Tech Neon Textarea (Blog Content) */
 .form-group textarea {
     background-color: #0a0a0a;
-    color: #00ffff;
+    color: #f900e0;
+    /* neon cyan text */
     border: 2px solid #00ffff;
+    /* default cyan border */
     border-radius: 8px;
     padding: 12px;
     font-size: 1rem;
@@ -1525,54 +1595,72 @@ nav {
     resize: vertical;
     /* allow resizing vertically */
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    box-shadow:
+        0 0 8px rgba(0, 255, 255, 0.5),
+        0 0 15px rgba(0, 255, 255, 0.3);
+    /* subtle cyan glow */
 }
 
+/* Placeholder styling */
 .form-group textarea::placeholder {
     color: rgba(0, 255, 255, 0.6);
     font-style: italic;
 }
 
-.form-group textarea:hover,
+/* Focus = Purple Neon */
 .form-group textarea:focus {
     background-color: #111;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-    border-color: #00e6e6;
+    border-color: #f900e0;
+    /* purple neon */
+    box-shadow:
+        0 0 15px rgba(249, 0, 224, 1),
+        0 0 35px rgba(249, 0, 224, 0.9),
+        0 0 60px rgba(249, 0, 224, 0.7),
+        0 0 90px rgba(249, 0, 224, 0.5);
+    /* strong purple glow */
 }
 
-/* Cyber/Tech Neon Number Input - Focus Glow Effect */
+/* Cyber/Tech Neon Number Input */
 .form-group input[type="number"] {
     background-color: #0a0a0a;
     /* dark cyber background */
-    color: #00ffff;
+    color: #f900e0;
     /* neon cyan text */
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    /* default subtle gray border */
+    border: 2px solid #00ffff;
+    /* default cyan border */
     border-radius: 8px;
     padding: 10px;
     font-size: 1rem;
     font-weight: bold;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 5px rgba(0, 255, 255, 0.1);
-    /* very subtle default glow */
+    box-shadow:
+        0 0 8px rgba(0, 255, 255, 0.5),
+        0 0 15px rgba(0, 255, 255, 0.3);
+    /* softer cyan glow */
 }
 
 /* Placeholder styling */
 .form-group input[type="number"]::placeholder {
-    color: rgba(0, 255, 255, 0.4);
+    color: rgba(0, 255, 255, 0.6);
     /* faint cyan placeholder */
     font-style: italic;
 }
 
-/* Glow effect when focused (clicked) */
+/* Focused state — Purple takes over with stronger glow */
 .form-group input[type="number"]:focus {
-    border-color: #00ffff;
-    /* bright cyan border */
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-    /* neon glow */
+    border-color: #f900e0;
+    /* purple neon border */
     background-color: #111;
-    /* slightly lighter dark bg on focus */
+    box-shadow:
+        0 0 15px rgba(249, 0, 224, 1),
+        /* inner bright glow */
+        0 0 35px rgba(249, 0, 224, 0.9),
+        /* mid-layer glow */
+        0 0 60px rgba(249, 0, 224, 0.7),
+        /* outer glow */
+        0 0 90px rgba(249, 0, 224, 0.5);
+    /* far spread glow */
 }
 
 .btn-submit {
