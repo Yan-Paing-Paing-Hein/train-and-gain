@@ -1372,6 +1372,174 @@ nav {
     min-height: 120px;
 }
 
+/* Cyber/Tech Neon Dropdown */
+.form-group select {
+    background-color: #0a0a0a;
+    /* dark cyber background */
+    color: #00ffff;
+    /* neon cyan text */
+    border: 2px solid #00ffff;
+    /* cyan border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    /* soft neon glow */
+}
+
+.form-group select:hover,
+.form-group select:focus {
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    /* brighter glow on hover */
+    border-color: #00e6e6;
+}
+
+.form-group select option {
+    background-color: #0a0a0a;
+    color: #00ffff;
+}
+
+/* Cyber/Tech Neon File Upload */
+.form-group input[type="file"] {
+    background-color: #0a0a0a;
+    /* dark cyber bg */
+    color: #00ffff;
+    /* neon cyan text */
+    border: 2px solid #00ffff;
+    /* glowing cyan border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    /* soft neon glow */
+}
+
+/* Hover + Focus glow */
+.form-group input[type="file"]:hover,
+.form-group input[type="file"]:focus {
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    border-color: #00e6e6;
+}
+
+/* Style for small helper text */
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #00ffff;
+    /* cyan text */
+    opacity: 0.8;
+}
+
+/* Cyber/Tech Neon Date Picker with Cyan Calendar Icon */
+.form-group input[type="date"] {
+    background-color: #0a0a0a;
+    /* dark cyber bg */
+    color: #00ffff;
+    /* neon cyan text */
+    border: 2px solid #00ffff;
+    /* glowing cyan border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    /* soft neon glow */
+}
+
+/* Glow on hover/focus */
+.form-group input[type="date"]:hover,
+.form-group input[type="date"]:focus {
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    border-color: #00e6e6;
+}
+
+/* Calendar icon customization (Webkit browsers: Chrome, Edge, Safari) */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(64%) sepia(100%) saturate(1000%) hue-rotate(130deg) brightness(120%) contrast(150%);
+    cursor: pointer;
+}
+
+/* Firefox workaround (it doesn’t allow icon change, but we can tint text & border only) */
+@-moz-document url-prefix() {
+    .form-group input[type="date"] {
+        color-scheme: dark;
+    }
+}
+
+/* Cyber/Tech Neon Input (Title) */
+.form-group input[type="text"] {
+    background-color: #0a0a0a;
+    /* dark cyber background */
+    color: #00ffff;
+    /* neon cyan text */
+    border: 2px solid #00ffff;
+    /* glowing cyan border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    /* soft neon glow */
+}
+
+.form-group input[type="text"]::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+    /* neon cyan placeholder */
+    font-style: italic;
+}
+
+.form-group input[type="text"]:hover,
+.form-group input[type="text"]:focus {
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    border-color: #00e6e6;
+}
+
+/* Cyber/Tech Neon Textarea (Blog Content) */
+.form-group textarea {
+    background-color: #0a0a0a;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    line-height: 1.6;
+    outline: none;
+    resize: vertical;
+    /* allow resizing vertically */
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.form-group textarea::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.form-group textarea:hover,
+.form-group textarea:focus {
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    border-color: #00e6e6;
+}
+
 .btn-submit {
     width: 100%;
     cursor: pointer;

@@ -97,6 +97,19 @@ https://templatemo.com/tm-594-nexus-flow
 
             <div class="contact-form-wrapper">
                 <form class="contact-form" method="POST" action="blogpost.php">
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="weight_loss">Weight Loss</option>
+                            <option value="muscle_gain">Muscle Gain</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="strength_training">Strength Training</option>
+                            <option value="hiit">HIIT</option>
+                            <option value="endurance">Endurance</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" id="title" name="title" placeholder="Enter your blog post title" required>
@@ -106,6 +119,12 @@ https://templatemo.com/tm-594-nexus-flow
                         <label for="content">Content</label>
                         <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..."
                             required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Upload Blog Image</label>
+                        <input type="file" id="image" name="image" accept="image/*" required>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
                     </div>
 
                     <div class="form-group">
@@ -125,33 +144,6 @@ https://templatemo.com/tm-594-nexus-flow
                 </form>
             </div>
 
-
-            <!-- <div class="contact-form-wrapper">
-                <div class="contact-form">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" name="title" placeholder="Enter your blog post title" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="content">Content</label>
-                        <input type="text" id="content" name="content" placeholder="Describe your blog post content"
-                            required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="date">Publish Date</label>
-                        <input type="date" id="message" name="message" placeholder="Enter your publish date" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <input type="enum" id="status" name="status" placeholder="Enter your blog post status" required>
-                    </div>
-
-                    <button type="submit" class="btn-primary btn-submit">Upload Blog Post</button>
-                </div>
-            </div> -->
         </div>
     </section>
 
