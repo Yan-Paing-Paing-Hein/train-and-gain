@@ -1667,7 +1667,7 @@ nav {
 .form-group input[type="email"] {
     background-color: #0a0a0a;
     /* dark cyber bg */
-    color: #00ffff;
+    color: #f900e0;
     /* neon cyan text */
     border: 2px solid #00ffff;
     /* cyan border default */
@@ -1715,7 +1715,7 @@ nav {
 .form-group input[type="text"]#phone {
     background-color: #0a0a0a;
     /* dark cyber bg */
-    color: #00ffff;
+    color: #f900e0;
     /* neon cyan text */
     border: 2px solid #00ffff;
     /* cyan border default */
@@ -1757,6 +1757,41 @@ nav {
 .form-group input[type="text"]#phone:-moz-autofill {
     box-shadow: 0 0 0px 1000px #0a0a0a inset;
     -moz-text-fill-color: #00ffff;
+}
+
+/* Cyber/Tech Neon Password Input */
+.form-group input[type="password"] {
+    background-color: #0a0a0a;
+    /* dark cyber background */
+    color: #f900e0;
+    /* neon cyan text */
+    border: 2px solid #00ffff;
+    /* default cyan border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+    /* soft cyan glow */
+}
+
+/* Placeholder styling */
+.form-group input[type="password"]::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+    /* cyan placeholder */
+    font-style: italic;
+}
+
+/* Focus (clicked / cursor inside) effect */
+.form-group input[type="password"]:focus {
+    border-color: #f900e0;
+    /* purple neon */
+    box-shadow: 0 0 25px #f900e0, 0 0 40px rgba(249, 0, 224, 0.8);
+    /* stronger purple glow */
+    background-color: #111;
+    /* slightly lighter dark bg */
 }
 
 .btn-submit {
