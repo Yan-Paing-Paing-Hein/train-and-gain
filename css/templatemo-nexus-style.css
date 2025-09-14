@@ -1663,6 +1663,102 @@ nav {
     /* far spread glow */
 }
 
+/* Cyber/Tech Neon Email Input */
+.form-group input[type="email"] {
+    background-color: #0a0a0a;
+    /* dark cyber bg */
+    color: #00ffff;
+    /* neon cyan text */
+    border: 2px solid #00ffff;
+    /* cyan border default */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+    /* soft cyan glow */
+}
+
+/* Placeholder */
+.form-group input[type="email"]::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* Focus = purple neon */
+.form-group input[type="email"]:focus {
+    background-color: #111;
+    border-color: #f900e0;
+    /* purple neon border */
+    box-shadow: 0 0 25px #f900e0;
+    /* stronger purple glow */
+}
+
+/* Handle autofill styles (Chrome, Safari, Edge) */
+.form-group input[type="email"]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #0a0a0a inset;
+    /* keep dark bg */
+    -webkit-text-fill-color: #f900e0;
+    /* keep neon cyan text */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Firefox autofill */
+.form-group input[type="email"]:-moz-autofill {
+    box-shadow: 0 0 0px 1000px #0a0a0a inset;
+    -moz-text-fill-color: #00ffff;
+}
+
+/* Cyber/Tech Neon Phone Input */
+.form-group input[type="text"]#phone {
+    background-color: #0a0a0a;
+    /* dark cyber bg */
+    color: #00ffff;
+    /* neon cyan text */
+    border: 2px solid #00ffff;
+    /* cyan border default */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+    /* soft cyan glow */
+}
+
+/* Placeholder styling */
+.form-group input[type="text"]#phone::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* Focus state = purple neon */
+.form-group input[type="text"]#phone:focus {
+    background-color: #111;
+    border-color: #f900e0;
+    /* purple neon border */
+    box-shadow: 0 0 25px #f900e0;
+    /* stronger purple glow */
+}
+
+/* Autofill fix (Chrome, Safari, Edge) */
+.form-group input[type="text"]#phone:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #0a0a0a inset;
+    /* keep dark bg */
+    -webkit-text-fill-color: #f900e0;
+    /* neon cyan text */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Autofill fix (Firefox) */
+.form-group input[type="text"]#phone:-moz-autofill {
+    box-shadow: 0 0 0px 1000px #0a0a0a inset;
+    -moz-text-fill-color: #00ffff;
+}
+
 .btn-submit {
     width: 100%;
     cursor: pointer;
