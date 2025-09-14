@@ -1560,10 +1560,10 @@ nav {
     /* subtle cyan glow */
 }
 
-/* Placeholder styling */
+/* Placeholder styling (Purple Neon) */
 .form-group input[type="text"]::placeholder {
-    color: rgba(0, 255, 255, 0.6);
-    /* neon cyan placeholder */
+    color: rgba(249, 0, 224, 1);
+    /* neon purple placeholder */
     font-style: italic;
 }
 
@@ -1603,7 +1603,7 @@ nav {
 
 /* Placeholder styling */
 .form-group textarea::placeholder {
-    color: rgba(0, 255, 255, 0.6);
+    color: rgba(249, 0, 224, 1);
     font-style: italic;
 }
 
@@ -1642,7 +1642,7 @@ nav {
 
 /* Placeholder styling */
 .form-group input[type="number"]::placeholder {
-    color: rgba(0, 255, 255, 0.6);
+    color: rgba(249, 0, 224, 1);
     /* faint cyan placeholder */
     font-style: italic;
 }
@@ -1683,7 +1683,7 @@ nav {
 
 /* Placeholder */
 .form-group input[type="email"]::placeholder {
-    color: rgba(0, 255, 255, 0.6);
+    color: rgba(249, 0, 224, 1);
     font-style: italic;
 }
 
@@ -1731,7 +1731,7 @@ nav {
 
 /* Placeholder styling */
 .form-group input[type="text"]#phone::placeholder {
-    color: rgba(0, 255, 255, 0.6);
+    color: rgba(249, 0, 224, 1);
     font-style: italic;
 }
 
@@ -1779,7 +1779,7 @@ nav {
 
 /* Placeholder styling */
 .form-group input[type="password"]::placeholder {
-    color: rgba(0, 255, 255, 0.6);
+    color: rgba(249, 0, 224, 1);
     /* cyan placeholder */
     font-style: italic;
 }
