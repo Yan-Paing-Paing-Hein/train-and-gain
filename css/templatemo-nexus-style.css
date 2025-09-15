@@ -1583,6 +1583,23 @@ nav {
     /* strong purple glow */
 }
 
+/* Handle autofill styles (Chrome, Safari, Edge) */
+.form-group input[type="text"]:-webkit-autofill {
+    /* keep dark bg */
+    -webkit-box-shadow: 0 0 0px 1000px #0a0a0a inset;
+    /* neon purple text */
+    -webkit-text-fill-color: #f900e0;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Firefox autofill */
+.form-group input[type="text"]:-moz-autofill {
+    /* keep dark bg */
+    box-shadow: 0 0 0px 1000px #0a0a0a inset;
+    /* neon purple text */
+    -moz-text-fill-color: #f900e0;
+}
+
 /* Cyber/Tech Neon Textarea (Blog Content) */
 .form-group textarea {
     background-color: #0a0a0a;
