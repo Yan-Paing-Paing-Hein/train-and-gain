@@ -2167,11 +2167,6 @@ nav {
     background: linear-gradient(var(--primary-pink), var(--primary-cyan));
 }
 
-
-
-
-
-
 /* Cyber/Tech Neon CRUD Table - Transparent Background */
 /* .crud-table-wrapper {
     margin-top: 30px;
@@ -2233,8 +2228,7 @@ nav {
     box-shadow: 0 0 10px #ff0055;
 } */
 
-
-/* Container with purple neon border */
+/* CRUD table with purple neon border */
 .crud-table-container {
     background: var(--card-bg);
     border: 3px solid #f900e0;
@@ -2269,8 +2263,9 @@ nav {
     font-size: 1rem;
     border-bottom: 2px solid #f900e0;
     /* purple neon underline */
-    color: #00ffff;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+    color: #f900e0;
+    /* text-shadow: 0 0 8px rgba(0, 255, 255, 0.8); */
+    text-shadow: 0 0 8px rgba(249, 0, 224, 1);
 }
 
 /* Table body rows */
@@ -2278,12 +2273,6 @@ nav {
     padding: 12px;
     border-bottom: 1px solid rgba(0, 255, 255, 0.3);
     transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Row hover effect */
-.crud-table tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.6);
-    box-shadow: inset 0 0 15px rgba(249, 0, 224, 0.6);
 }
 
 /* "View Detail" button */
@@ -2303,4 +2292,24 @@ nav {
     border-color: #f900e0;
     color: #f900e0;
     box-shadow: 0 0 15px #f900e0;
+    /* expand slightly */
+    transform: scale(1.05);
+}
+
+/* Table row hover expand effect */
+.crud-table tbody tr {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.crud-table tbody tr:hover {
+    /* subtle purple tint */
+    background-color: rgba(249, 0, 224, 0.15);
+    /* expand slightly */
+    transform: scale(1.03);
+    /* neon glow */
+    box-shadow: 0 0 15px rgba(249, 0, 224, 0.5);
+    z-index: 1;
+    /* so it layers above other rows */
+    position: relative;
 }
