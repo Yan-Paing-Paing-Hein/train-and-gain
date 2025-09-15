@@ -2173,7 +2173,7 @@ nav {
 
 
 /* Cyber/Tech Neon CRUD Table - Transparent Background */
-.crud-table-wrapper {
+/* .crud-table-wrapper {
     margin-top: 30px;
     overflow-x: auto;
 }
@@ -2182,9 +2182,9 @@ nav {
     width: 100%;
     border-collapse: collapse;
     background-color: transparent;
-    /* transparent instead of black */
+    transparent instead of black
     color: #00ffff;
-    /* neon cyan text */
+    neon cyan text
     font-size: 0.95rem;
 }
 
@@ -2197,13 +2197,13 @@ nav {
 
 .crud-table th {
     background-color: rgba(0, 0, 0, 0.3);
-    /* slight transparent overlay for readability */
+    slight transparent overlay for readability
     text-transform: uppercase;
 }
 
 .crud-table tr:hover {
     background-color: rgba(0, 255, 255, 0.05);
-    /* subtle cyan hover effect */
+    subtle cyan hover effect
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
 }
 
@@ -2231,4 +2231,76 @@ nav {
     background-color: #ff0055;
     color: #0a0a0a;
     box-shadow: 0 0 10px #ff0055;
+} */
+
+
+/* Container with purple neon border */
+.crud-table-container {
+    background: var(--card-bg);
+    border: 3px solid #f900e0;
+    /* purple neon border */
+    padding: 2rem;
+    margin: 2rem auto;
+    /* adds space top/bottom and centers horizontally */
+    max-width: 95%;
+    /* keeps it away from screen edges */
+    backdrop-filter: blur(10px);
+    clip-path: polygon(30px 0%, 100% 0%, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0% 100%, 0% 30px);
+    box-shadow: 0 0 30px rgba(249, 0, 224, 0.7);
+    /* purple glow */
+    overflow-x: auto;
+    /* mobile responsive */
+}
+
+/* Table structure */
+.crud-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #00ffff;
+    /* neon cyan text */
+    font-family: 'Orbitron', sans-serif;
+    /* fits cyber theme */
+}
+
+/* Table header */
+.crud-table thead th {
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: 2px solid #f900e0;
+    /* purple neon underline */
+    color: #00ffff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+/* Table body rows */
+.crud-table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Row hover effect */
+.crud-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 0 15px rgba(249, 0, 224, 0.6);
+}
+
+/* "View Detail" button */
+.btn-view {
+    background: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+}
+
+.btn-view:hover {
+    border-color: #f900e0;
+    color: #f900e0;
+    box-shadow: 0 0 15px #f900e0;
 }
