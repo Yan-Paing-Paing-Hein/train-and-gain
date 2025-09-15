@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexusFlow - The Future of Team Collaboration</title>
-    <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
+    <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
 TemplateMo 594 nexus flow
@@ -43,16 +43,15 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="nav-container">
             <a href="#top" class="logo">Train & Gain</a>
             <ul class="nav-links">
-
-                <li><a href="admin_home.html">Home</a></li>
-                <li><a href="blogpost.html">BlogPost</a></li>
-                <li><a href="coach.html">Coach</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="review.html">Review</a></li>
-                <li><a href="payment.html">Payment</a></li>
+                <li><a href="../admin_home.html">Home</a></li>
+                <li><a href="../blogpost/index.html">BlogPost</a></li>
+                <li><a href="../coach/index.html">Coach</a></li>
+                <li><a href="../customer/index.html">Customer</a></li>
+                <li><a href="../review/index.html">Review</a></li>
+                <li><a href="../payment/index.html">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="#" class="cyber-button">View Table Lists</a>
+                <a href="#" class="cyber-button">Access Terminal</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -90,17 +89,27 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">BlogPost CRUD</h2>
-                <p class="section-subtitle">Come train and come gain!</p>
+                <h2 class="section-title">Coach CRUD</h2>
+                <p class="section-subtitle">Send a transmission through the neural network</p>
             </div>
 
-
             <div class="contact-form-wrapper">
-                <form class="contact-form" method="POST" action="blogpost.php">
+                <div class="contact-form">
 
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <select id="category" name="category" required>
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter coach's name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile_picture">Profile Picture</label>
+                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialty">Specialty</label>
+                        <select id="specialty" name="specialty" required>
                             <option value="weight_loss">Weight Loss</option>
                             <option value="muscle_gain">Muscle Gain</option>
                             <option value="yoga">Yoga</option>
@@ -111,103 +120,39 @@ https://templatemo.com/tm-594-nexus-flow
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" name="title" placeholder="Enter your blog post title" required>
+                        <label for="experience">Experience (Years)</label>
+                        <input type="number" id="experience" name="experience" placeholder="e.g., 5" min="0" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="content">Content</label>
-                        <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..."
+                        <label for="bio">Bio / About</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Write something about the coach..."
                             required></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Upload Blog Image</label>
-                        <input type="file" id="image" name="image" accept="image/*" required>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="coach@example.com" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="publish_date">Publish Date</label>
-                        <input type="date" id="publish_date" name="publish_date" required>
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="e.g., +959123456789" required>
                     </div>
 
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status" required>
-                            <option value="draft">Draft</option>
-                            <option value="published">Published</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-primary btn-submit">Upload Blog Post</button>
-                </form>
+                    <button type="submit" class="btn-primary btn-submit">Create Coach</button>
+                </div>
             </div>
-
         </div>
     </section>
-
-
-
-    <!-- CRUD Table Section -->
-    <div class="crud-table-container">
-        <table class="crud-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Publish Date</th>
-                    <th>Status</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Fitness</td>
-                    <td>10-Minute Abs Workout</td>
-                    <td>2025-09-13</td>
-                    <td>Active</td>
-                    <td><button class="btn-view">View Detail</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Nutrition</td>
-                    <td>Top 5 Healthy Meals</td>
-                    <td>2025-09-10</td>
-                    <td>Inactive</td>
-                    <td><button class="btn-view">View Detail</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Nutrition</td>
-                    <td>Top 5 Healthy Meals</td>
-                    <td>2025-09-10</td>
-                    <td>Inactive</td>
-                    <td><button class="btn-view">View Detail</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Nutrition</td>
-                    <td>Top 5 Healthy Meals</td>
-                    <td>2025-09-10</td>
-                    <td>Inactive</td>
-                    <td><button class="btn-view">View Detail</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Nutrition</td>
-                    <td>Top 5 Healthy Meals</td>
-                    <td>2025-09-10</td>
-                    <td>Inactive</td>
-                    <td><button class="btn-view">View Detail</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-
 
     <!-- Footer -->
     <footer class="footer">
@@ -229,7 +174,7 @@ https://templatemo.com/tm-594-nexus-flow
         </div>
     </footer>
 
-    <script src="../js/templatemo-nexus-scripts.js"></script>
+    <script src="../../js/templatemo-nexus-scripts.js"></script>
 </body>
 
 </html>
