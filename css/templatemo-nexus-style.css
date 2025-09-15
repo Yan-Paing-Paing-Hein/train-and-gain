@@ -2184,67 +2184,6 @@ nav {
     background: linear-gradient(var(--primary-pink), var(--primary-cyan));
 }
 
-/* Cyber/Tech Neon CRUD Table - Transparent Background */
-/* .crud-table-wrapper {
-    margin-top: 30px;
-    overflow-x: auto;
-}
-
-.crud-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: transparent;
-    transparent instead of black
-    color: #00ffff;
-    neon cyan text
-    font-size: 0.95rem;
-}
-
-.crud-table th,
-.crud-table td {
-    border: 1px solid #00ffff;
-    padding: 10px;
-    text-align: left;
-}
-
-.crud-table th {
-    background-color: rgba(0, 0, 0, 0.3);
-    slight transparent overlay for readability
-    text-transform: uppercase;
-}
-
-.crud-table tr:hover {
-    background-color: rgba(0, 255, 255, 0.05);
-    subtle cyan hover effect
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-}
-
-.crud-table img {
-    border: 1px solid #00ffff;
-    border-radius: 4px;
-}
-
-.btn-action {
-    text-decoration: none;
-    color: #00ffff;
-    padding: 5px 10px;
-    border: 1px solid #00ffff;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-.btn-action.edit:hover {
-    background-color: #00ffff;
-    color: #0a0a0a;
-    box-shadow: 0 0 10px #00ffff;
-}
-
-.btn-action.delete:hover {
-    background-color: #ff0055;
-    color: #0a0a0a;
-    box-shadow: 0 0 10px #ff0055;
-} */
-
 /* CRUD table with purple neon border */
 .crud-table-container {
     background: var(--card-bg);
@@ -2292,27 +2231,6 @@ nav {
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* "View Detail" button */
-.btn-view {
-    background: transparent;
-    border: 2px solid #00ffff;
-    color: #00ffff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
-}
-
-.btn-view:hover {
-    border-color: #f900e0;
-    color: #f900e0;
-    box-shadow: 0 0 15px #f900e0;
-    /* expand slightly */
-    transform: scale(1.05);
-}
-
 /* Table row hover expand effect */
 .crud-table tbody tr {
     transition: all 0.3s ease;
@@ -2329,4 +2247,81 @@ nav {
     z-index: 1;
     /* so it layers above other rows */
     position: relative;
+}
+
+/* Profile Picture Style */
+.crud-table td img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* Circle shape */
+    object-fit: cover;
+    border: 2px solid #00ffff;
+    /* Neon cyan outline */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+/* Coach Status Labels */
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.status.active {
+    background: rgba(0, 255, 255, 0.2);
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.status.inactive {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
+}
+
+/* Blog Status Labels */
+.blog {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.blog.published {
+    background: rgba(0, 255, 255, 0.2);
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.blog.draft {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
+}
+
+/* View Button */
+.btn-view {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #00ffff;
+    color: #0a0a0a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.btn-view:hover {
+    background: #f900e0;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(249, 0, 224, 0.8);
+    /* expand slightly */
+    transform: scale(1.05);
 }
