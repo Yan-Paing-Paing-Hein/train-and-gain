@@ -1318,11 +1318,14 @@ nav {
 
 .contact-form {
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    border: 3px solid #f900e0;
+    /* border: 1px solid var(--border-color); */
+    /* neon purple border */
     padding: 3rem;
     backdrop-filter: blur(10px);
     clip-path: polygon(30px 0%, 100% 0%, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0% 100%, 0% 30px);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(249, 0, 224, 0.7);
+    /* purple neon glow */
 }
 
 .form-group {
@@ -1792,6 +1795,40 @@ nav {
     /* stronger purple glow */
     background-color: #111;
     /* slightly lighter dark bg */
+}
+
+/* Password wrapper for proper positioning */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Password input padding to make space for button */
+.password-wrapper input {
+    flex: 1;
+    padding-right: 90px;
+}
+
+/* Show/Hide Password Button */
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #111;
+    color: #00ffff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.toggle-password:hover {
+    background-color: #1a1a1a;
+    color: #f900e0;
+    box-shadow: 0 0 12px rgba(249, 0, 224, 0.8);
 }
 
 .btn-submit {

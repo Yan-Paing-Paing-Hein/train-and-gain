@@ -95,21 +95,6 @@ https://templatemo.com/tm-594-nexus-flow
 
             <div class="contact-form-wrapper">
                 <div class="contact-form">
-                    <!-- <div class="form-group">
-                        <label for="name">Coach ID</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your designation" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Coach Name </label>
-                        <input type="email" id="email" name="email" placeholder="your.id@nexusflow.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Specialization</label>
-                        <textarea id="message" name="message" rows="5"
-                            placeholder="Compose your message to the network..." required></textarea>
-                    </div> -->
 
                     <div class="form-group">
                         <label for="full_name">Full Name</label>
@@ -128,8 +113,11 @@ https://templatemo.com/tm-594-nexus-flow
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password"
-                            placeholder="Auto-generate or enter manually" required>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password"
+                                placeholder="Auto-generate or enter manually" required>
+                            <button type="button" id="togglePassword" class="toggle-password">Show</button>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -201,7 +189,7 @@ https://templatemo.com/tm-594-nexus-flow
                     </div>
 
 
-                    <button type="submit" class="btn-primary btn-submit">Transmit Message</button>
+                    <button type="submit" class="btn-primary btn-submit">Create Customer</button>
                 </div>
             </div>
         </div>
@@ -231,3 +219,16 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
+
+
+<!-- Password show/hide button -->
+<script>
+    const passwordField = document.getElementById("password");
+    const toggleBtn = document.getElementById("togglePassword");
+
+    toggleBtn.addEventListener("click", () => {
+        const isPassword = passwordField.type === "password";
+        passwordField.type = isPassword ? "text" : "password";
+        toggleBtn.textContent = isPassword ? "Hide" : "Show";
+    });
+</script>
