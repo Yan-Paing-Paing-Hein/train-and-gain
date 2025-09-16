@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../blogpost/create.php" class="cyber-button">Create Blogpost</a>
+                <a href="../blogpost/index.php" class="cyber-button">View All Lists</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -97,11 +97,30 @@ https://templatemo.com/tm-594-nexus-flow
 
 
         <!-- CRUD Table Section -->
-        <div class="crud-table-container">
+        <!-- <div class="crud-table-container">
             <table class="crud-table">
 
             </table>
+        </div> -->
+
+
+        <div class="features-container2">
+            <!-- <h2 class="section-title">So skibidi</h2> -->
+            <div class="diagonal-grid">
+                <div class="feature-row">
+                    <div class="feature-content glass">
+                        <div class="feature-icon2">🧠</div>
+                        <h3>Neural Processing</h3>
+                        <p>Advanced AI-driven interfaces that adapt to your consciousness patterns, creating personalized digital experiences that evolve with your neural pathways.</p>
+                    </div>
+                    <div class="feature-visual glass"></div>
+                </div>
+
+            </div>
         </div>
+
+
+
     </section>
 
 

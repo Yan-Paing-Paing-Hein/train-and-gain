@@ -2328,3 +2328,136 @@ nav {
     /* expand slightly */
     transform: scale(1.05);
 }
+
+/* For Detail Page */
+.features-container2 {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.diagonal-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.feature-row {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    position: relative;
+}
+
+.feature-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.feature-row:nth-child(1) .feature-visual {
+    background-image: url('images/templatemo-neural-01.jpg');
+}
+
+.feature-row:nth-child(2) .feature-visual {
+    background-image: url('images/templatemo-neural-02.jpg');
+}
+
+.feature-row:nth-child(3) .feature-visual {
+    background-image: url('images/templatemo-neural-03.jpg');
+}
+
+.feature-content {
+    flex: 1;
+    padding: 50px;
+    transform: skew(-5deg);
+    transition: all 0.4s ease;
+}
+
+.feature-content:hover {
+    transform: skew(-5deg) translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 255, 255, 0.2);
+}
+
+.feature-content h3 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.feature-content p {
+    font-size: 1.1rem;
+    color: #cccccc;
+    line-height: 1.8;
+}
+
+.feature-icon2 {
+    font-size: 4rem;
+    margin-bottom: 25px;
+    background: linear-gradient(45deg, #ff0080, #8000ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.feature-visual {
+    flex: 1;
+    height: 300px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.4s ease;
+}
+
+.feature-visual:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(224, 163, 255, 0.3);
+}
+
+.feature-visual::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(224, 163, 255, 0.1), rgba(255, 105, 180, 0.1));
+    z-index: 1;
+    backdrop-filter: blur(1px);
+    transition: all 0.4s ease;
+}
+
+.feature-visual:hover::before {
+    background: linear-gradient(45deg, rgba(224, 163, 255, 0.2), rgba(255, 105, 180, 0.2));
+}
+
+.feature-row:nth-child(1) .feature-visual {
+    background-image: url('images/templatemo-neural-01.jpg');
+}
+
+.feature-row:nth-child(2) .feature-visual {
+    background-image: url('images/templatemo-neural-02.jpg');
+}
+
+.feature-row:nth-child(3) .feature-visual {
+    background-image: url('images/templatemo-neural-03.jpg');
+}
+
+.features2 {
+    padding: 150px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.features2::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+    animation: rotate 20s linear infinite;
+    z-index: -1;
+}
