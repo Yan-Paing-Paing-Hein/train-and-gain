@@ -2370,19 +2370,20 @@ nav {
 
 .feature-content:hover {
     transform: skew(-5deg) translateY(-10px);
-    box-shadow: 0 30px 60px rgba(0, 255, 255, 0.2);
+    box-shadow: 0 30px 60px rgba(249, 0, 224, 0.5);
 }
 
 .feature-content h3 {
     font-size: 2.2rem;
     margin-bottom: 20px;
-    color: #ffffff;
+    color: #f900e0;
 }
 
 .feature-content p {
     font-size: 1.1rem;
-    color: #cccccc;
+    color: #00ffff;
     line-height: 1.8;
+    text-align: justify;
 }
 
 .feature-icon2 {
@@ -2402,6 +2403,7 @@ nav {
     border-radius: 20px;
     overflow: hidden;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid #00ffff;
 }
 
 .feature-visual img {
@@ -2417,14 +2419,11 @@ nav {
     /* container expands */
     transform: scale(1.05);
     /* optional neon glow */
-    box-shadow: 0 20px 40px rgba(224, 163, 255, 0.3);
+    /* box-shadow: 0 20px 40px rgba(224, 163, 255, 0.5); */
+    box-shadow: 0 20px 40px rgba(0, 255, 255, 0.5);
 }
 
 /* Optional: scale image a bit more for extra effect */
-.feature-visual:hover img {
-    transform: scale(1.02);
-}
-
 .feature-visual::before {
     content: '';
     position: absolute;
@@ -2434,12 +2433,8 @@ nav {
     bottom: 0;
     background: linear-gradient(45deg, rgba(224, 163, 255, 0.1), rgba(255, 105, 180, 0.1));
     z-index: 1;
-    backdrop-filter: blur(1px);
+    /* backdrop-filter: blur(1px); */
     transition: all 0.4s ease;
-}
-
-.feature-visual:hover::before {
-    background: linear-gradient(45deg, rgba(224, 163, 255, 0.2), rgba(255, 105, 180, 0.2));
 }
 
 .features2 {

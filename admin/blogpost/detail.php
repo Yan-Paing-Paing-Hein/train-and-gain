@@ -89,8 +89,8 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">BlogPost Table</h2>
-                <p class="section-subtitle">32 blogposts have been uploaded!</p>
+                <h2 class="section-title">ID.4 Blogpost</h2>
+                <!-- <p class="section-subtitle">32 blogposts have been uploaded!</p> -->
             </div>
         </div>
 
@@ -110,8 +110,8 @@ https://templatemo.com/tm-594-nexus-flow
                 <div class="feature-row">
                     <div class="feature-content glass">
                         <!-- <div class="feature-icon2"></div> -->
-                        <h3>10 Simple Ways to Lose Weight</h3>
-                        <p>Advanced AI-driven interfaces that adapt to your consciousness patterns, creating personalized digital experiences that evolve with your neural pathways.</p>
+                        <h3>Push-Up Power: Strengthen Your Body Anytime</h3>
+                        <p>Push-ups are one of the most effective bodyweight exercises, targeting the chest, shoulders, triceps, and core muscles simultaneously. They improve upper body strength, enhance posture, boost endurance, and can be done anywhere without any equipment. Regular push-ups not only build muscle but also increase overall functional fitness, making daily movements easier and reducing the risk of injury.</p>
                     </div>
                     <!-- <div class="feature-visual glass"></div> -->
                     <div class="feature-visual glass">
