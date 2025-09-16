@@ -94,16 +94,6 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
         </div>
 
-
-
-        <!-- CRUD Table Section -->
-        <!-- <div class="crud-table-container">
-            <table class="crud-table">
-
-            </table>
-        </div> -->
-
-
         <div class="features-container2">
             <!-- <h2 class="section-title">So skibidi</h2> -->
             <div class="diagonal-grid">
@@ -122,11 +112,18 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
         </div>
 
+        <br><br><br><br><br><br><br>
 
+        <div class="action-bar">
+            <div class="action-left">
+                <button class="btn-edit">Edit</button>
+            </div>
+            <div class="action-right">
+                <button class="btn-delete">Delete</button>
+            </div>
+        </div>
 
     </section>
-
-
 
 
 

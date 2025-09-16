@@ -2454,3 +2454,107 @@ nav {
     animation: rotate 20s linear infinite;
     z-index: -1;
 }
+
+.btn-edit {
+    /* default cyan neon */
+    background-color: #00ffff;
+    /* dark text for contrast */
+    color: #0a0a0a;
+    /* diagonal tilt */
+    font-weight: bold;
+    padding: 24px 72px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transform: skew(-15deg);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.btn-edit:hover {
+    /* purple neon on hover */
+    background-color: #f900e0;
+    border-color: #f900e0;
+    color: #0a0a0a;
+    box-shadow: 0 0 25px rgba(249, 0, 224, 0.9);
+    /* slight hover lift */
+    transform: skew(-15deg) translateY(-3px);
+}
+
+.btn-delete {
+    /* default: faded gray-red */
+    background-color: #b60000;
+    color: #e0e0e0;
+    font-weight: bold;
+    padding: 24px 72px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+    border: 2px solid #662222;
+    border-radius: 8px;
+    cursor: pointer;
+    transform: skew(-15deg);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 6px rgba(102, 34, 34, 0.6);
+}
+
+.btn-delete:hover {
+    /* hover: neon glowing red */
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: #0a0a0a;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.9),
+        0 0 45px rgba(255, 0, 0, 0.7);
+    transform: skew(-15deg) translateY(-3px);
+}
+
+/* Action bar: keeps buttons inline but doesn't affect the section layout */
+.action-bar {
+    width: 100%;
+    /* keeps it aligned with your page content */
+    max-width: 1200px;
+    /* space above, centered horizontally */
+    margin: 2rem auto 0;
+    /* horizontal padding to avoid touching edges */
+    padding: 0 1rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    /* left / right */
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* containers so you can control spacing for each button */
+.action-left,
+.action-right {
+    display: flex;
+    align-items: center;
+}
+
+/* keep buttons compact, visually consistent */
+.action-left .btn-edit,
+.action-right .btn-delete {
+    min-width: 160px;
+    /* adjust desired width */
+}
+
+/* Responsive: stack buttons on narrow screens */
+@media (max-width: 640px) {
+    .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-left,
+    .action-right {
+        justify-content: center;
+    }
+
+    .action-left .btn-edit,
+    .action-right .btn-delete {
+        width: 100%;
+        min-width: 0;
+    }
+}
