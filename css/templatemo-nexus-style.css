@@ -2316,6 +2316,9 @@ nav {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    display: inline-block;
+    /* remove underline for <a> */
+    text-decoration: none;
 }
 
 .btn-view:hover {

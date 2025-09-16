@@ -116,7 +116,10 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>10-Minute Abs Workout</td>
                         <td>2025-09-13</td>
                         <td><span class="blog published">Published</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <!-- <td><button class="btn-view">View Detail</button></td> -->
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>2</td>
@@ -124,7 +127,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog published">Published</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -132,7 +137,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog draft">Draft</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>4</td>
@@ -140,7 +147,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog published">Published</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>5</td>
@@ -148,7 +157,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog published">Published</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>6</td>
@@ -156,7 +167,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog draft">Draft</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>7</td>
@@ -164,7 +177,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog published">Published</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>8</td>
@@ -172,7 +187,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog published">Published</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>9</td>
@@ -180,7 +197,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog draft">Draft</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -188,7 +207,9 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Top 5 Healthy Meals</td>
                         <td>2025-09-10</td>
                         <td><span class="blog published">Published</span></td>
-                        <td><button class="btn-view">View Detail</button></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
