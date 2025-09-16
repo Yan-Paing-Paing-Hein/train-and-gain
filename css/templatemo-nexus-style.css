@@ -2353,23 +2353,19 @@ nav {
     flex-direction: row-reverse;
 }
 
-.feature-row:nth-child(1) .feature-visual {
-    background-image: url('images/templatemo-neural-01.jpg');
-}
-
-.feature-row:nth-child(2) .feature-visual {
-    background-image: url('images/templatemo-neural-02.jpg');
-}
-
-.feature-row:nth-child(3) .feature-visual {
-    background-image: url('images/templatemo-neural-03.jpg');
-}
-
 .feature-content {
     flex: 1;
     padding: 50px;
     transform: skew(-5deg);
     transition: all 0.4s ease;
+
+    /* Added styles */
+    /* neon purple border */
+    border: 1px solid #f900e0;
+    /* transparent background */
+    background: transparent;
+    /* purple glow */
+    box-shadow: 0 0 30px rgba(249, 0, 224, 0.6);
 }
 
 .feature-content:hover {
@@ -2398,21 +2394,35 @@ nav {
     -webkit-text-fill-color: transparent;
 }
 
+/* For Image Style */
 .feature-visual {
     flex: 1;
     height: 300px;
     position: relative;
     border-radius: 20px;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+.feature-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Scale container on hover */
 .feature-visual:hover {
+    /* container expands */
     transform: scale(1.05);
+    /* optional neon glow */
     box-shadow: 0 20px 40px rgba(224, 163, 255, 0.3);
+}
+
+/* Optional: scale image a bit more for extra effect */
+.feature-visual:hover img {
+    transform: scale(1.02);
 }
 
 .feature-visual::before {
@@ -2430,18 +2440,6 @@ nav {
 
 .feature-visual:hover::before {
     background: linear-gradient(45deg, rgba(224, 163, 255, 0.2), rgba(255, 105, 180, 0.2));
-}
-
-.feature-row:nth-child(1) .feature-visual {
-    background-image: url('images/templatemo-neural-01.jpg');
-}
-
-.feature-row:nth-child(2) .feature-visual {
-    background-image: url('images/templatemo-neural-02.jpg');
-}
-
-.feature-row:nth-child(3) .feature-visual {
-    background-image: url('images/templatemo-neural-03.jpg');
 }
 
 .features2 {

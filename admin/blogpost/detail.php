@@ -109,11 +109,14 @@ https://templatemo.com/tm-594-nexus-flow
             <div class="diagonal-grid">
                 <div class="feature-row">
                     <div class="feature-content glass">
-                        <div class="feature-icon2">🧠</div>
-                        <h3>Neural Processing</h3>
+                        <!-- <div class="feature-icon2"></div> -->
+                        <h3>10 Simple Ways to Lose Weight</h3>
                         <p>Advanced AI-driven interfaces that adapt to your consciousness patterns, creating personalized digital experiences that evolve with your neural pathways.</p>
                     </div>
-                    <div class="feature-visual glass"></div>
+                    <!-- <div class="feature-visual glass"></div> -->
+                    <div class="feature-visual glass">
+                        <img src="images/pushup.jpg" alt="Fitness Blog Image">
+                    </div>
                 </div>
 
             </div>
