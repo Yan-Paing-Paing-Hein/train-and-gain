@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../blogpost/index.php" class="cyber-button">View All Lists</a>
+                <a href="../blogpost/index.php" class="cyber-button">Blogpost Table</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -89,48 +89,64 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">ID.4 Blogpost</h2>
-                <!-- <p class="section-subtitle">32 blogposts have been uploaded!</p> -->
+                <h2 class="section-title">Edit Blogpost</h2>
+                <p class="section-subtitle">Come train and come gain!</p>
             </div>
-        </div>
 
-        <div class="features-container2">
-            <!-- <h2 class="section-title">So skibidi</h2> -->
-            <div class="diagonal-grid">
-                <div class="feature-row">
-                    <div class="feature-content glass">
-                        <!-- <div class="feature-icon2"></div> -->
-                        <h3>Push-Up Power: Strengthen Your Body Anytime</h3>
-                        <p>Push-ups are one of the most effective bodyweight exercises, targeting the chest, shoulders, triceps, and core muscles simultaneously. They improve upper body strength, enhance posture, boost endurance, and can be done anywhere without any equipment. Regular push-ups not only build muscle but also increase overall functional fitness, making daily movements easier and reducing the risk of injury.</p>
+
+            <div class="contact-form-wrapper">
+                <form class="contact-form" method="POST" action="blogpost.php">
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="weight_loss">Weight Loss</option>
+                            <option value="muscle_gain">Muscle Gain</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="strength_training">Strength Training</option>
+                            <option value="hiit">HIIT</option>
+                            <option value="endurance">Endurance</option>
+                        </select>
                     </div>
-                    <!-- <div class="feature-visual glass"></div> -->
-                    <div class="feature-visual glass">
-                        <img src="images/pushup.jpg" alt="Fitness Blog Image">
+
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" placeholder="Enter your blog post title" required>
                     </div>
-                </div>
 
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..."
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Upload Blog Image</label>
+                        <input type="file" id="image" name="image" accept="image/*" required>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publish_date">Publish Date</label>
+                        <input type="date" id="publish_date" name="publish_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
+
+                    <button href="../blogpost/index.php" type="submit" class="btn-primary btn-submit">Update Blog
+                        Post</button>
+
+                </form>
             </div>
+
         </div>
-
-        <br><br><br><br><br><br><br>
-
-        <div class="action-bar">
-
-            <div class="action-left">
-                <a href="../blogpost/edit.php">
-                    <button class="btn-edit">Edit</button>
-                </a>
-            </div>
-
-            <div class="action-right">
-                <button class="btn-delete">Delete</button>
-            </div>
-
-        </div>
-
     </section>
-
-
 
 
 
@@ -159,4 +175,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/blogpost/detail.php -->
+<!-- http://localhost/train&gain/admin/blogpost/create.php -->
