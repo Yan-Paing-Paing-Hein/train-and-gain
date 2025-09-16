@@ -43,15 +43,15 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="nav-container">
             <a href="#top" class="logo">Train & Gain</a>
             <ul class="nav-links">
-                <li><a href="../admin_home.html">Home</a></li>
-                <li><a href="../blogpost/index.html">BlogPost</a></li>
-                <li><a href="../coach/index.html">Coach</a></li>
-                <li><a href="../customer/index.html">Customer</a></li>
-                <li><a href="../review/index.html">Review</a></li>
-                <li><a href="../payment/index.html">Payment</a></li>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../coach/index.html" class="cyber-button">Coach Table</a>
+                <a href="#" class="cyber-button">Access Terminal</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -89,66 +89,29 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Create Coach</h2>
+                <h2 class="section-title">Review CRUD</h2>
                 <p class="section-subtitle">Send a transmission through the neural network</p>
             </div>
 
             <div class="contact-form-wrapper">
                 <div class="contact-form">
-
                     <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter coach's name" required>
+                        <label for="name">Coach ID</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your designation" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="profile_picture">Profile Picture</label>
-                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                        <label for="email">Coach Name </label>
+                        <input type="email" id="email" name="email" placeholder="your.id@nexusflow.com" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="specialty">Specialty</label>
-                        <select id="specialty" name="specialty" required>
-                            <option value="weight_loss">Weight Loss</option>
-                            <option value="muscle_gain">Muscle Gain</option>
-                            <option value="yoga">Yoga</option>
-                            <option value="strength_training">Strength Training</option>
-                            <option value="hiit">HIIT</option>
-                            <option value="endurance">Endurance</option>
-                        </select>
+                        <label for="message">Specialization</label>
+                        <textarea id="message" name="message" rows="5"
+                            placeholder="Compose your message to the network..." required></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="experience">Experience (Years)</label>
-                        <input type="number" id="experience" name="experience" placeholder="e.g., 5" min="0" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bio">Bio / About</label>
-                        <textarea id="bio" name="bio" rows="4" placeholder="Write something about the coach..."
-                            required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="coach@example.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" id="phone" name="phone" placeholder="e.g., +959123456789" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" name="status" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn-primary btn-submit">Create Coach</button>
+                    <button type="submit" class="btn-primary btn-submit">Transmit Message</button>
                 </div>
             </div>
         </div>
@@ -178,3 +141,5 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
+
+<!-- http://localhost/train&gain/admin/review/index.php -->

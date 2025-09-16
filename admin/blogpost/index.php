@@ -43,15 +43,15 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="nav-container">
             <a href="#top" class="logo">Train & Gain</a>
             <ul class="nav-links">
-                <li><a href="../admin_home.html">Home</a></li>
-                <li><a href="../blogpost/index.html">BlogPost</a></li>
-                <li><a href="../coach/index.html">Coach</a></li>
-                <li><a href="../customer/index.html">Customer</a></li>
-                <li><a href="../review/index.html">Review</a></li>
-                <li><a href="../payment/index.html">Payment</a></li>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../blogpost/create.html" class="cyber-button">Create Blogpost</a>
+                <a href="../blogpost/create.php" class="cyber-button">Create Blogpost</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -225,3 +225,5 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
+
+<!-- http://localhost/train&gain/admin/blogpost/index.php -->

@@ -43,15 +43,15 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="nav-container">
             <a href="#top" class="logo">Train & Gain</a>
             <ul class="nav-links">
-                <li><a href="../admin_home.html">Home</a></li>
-                <li><a href="../blogpost/index.html">BlogPost</a></li>
-                <li><a href="../coach/index.html">Coach</a></li>
-                <li><a href="../customer/index.html">Customer</a></li>
-                <li><a href="../review/index.html">Review</a></li>
-                <li><a href="../payment/index.html">Payment</a></li>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../blogpost/index.html" class="cyber-button">Blogpost Table</a>
+                <a href="../coach/index.php" class="cyber-button">Coach Table</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -89,17 +89,27 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Create Blogpost</h2>
-                <p class="section-subtitle">Come train and come gain!</p>
+                <h2 class="section-title">Create Coach</h2>
+                <p class="section-subtitle">Send a transmission through the neural network</p>
             </div>
 
-
             <div class="contact-form-wrapper">
-                <form class="contact-form" method="POST" action="blogpost.php">
+                <div class="contact-form">
 
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <select id="category" name="category" required>
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter coach's name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile_picture">Profile Picture</label>
+                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialty">Specialty</label>
+                        <select id="specialty" name="specialty" required>
                             <option value="weight_loss">Weight Loss</option>
                             <option value="muscle_gain">Muscle Gain</option>
                             <option value="yoga">Yoga</option>
@@ -110,45 +120,39 @@ https://templatemo.com/tm-594-nexus-flow
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" name="title" placeholder="Enter your blog post title" required>
+                        <label for="experience">Experience (Years)</label>
+                        <input type="number" id="experience" name="experience" placeholder="e.g., 5" min="0" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="content">Content</label>
-                        <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..."
+                        <label for="bio">Bio / About</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Write something about the coach..."
                             required></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Upload Blog Image</label>
-                        <input type="file" id="image" name="image" accept="image/*" required>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="coach@example.com" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="publish_date">Publish Date</label>
-                        <input type="date" id="publish_date" name="publish_date" required>
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="e.g., +959123456789" required>
                     </div>
 
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status" required>
-                            <option value="draft">Draft</option>
-                            <option value="published">Published</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
                         </select>
                     </div>
 
-                    <button href="../blogpost/index.html" type="submit" class="btn-primary btn-submit">Upload Blog
-                        Post</button>
-
-                </form>
+                    <button type="submit" class="btn-primary btn-submit">Create Coach</button>
+                </div>
             </div>
-
         </div>
     </section>
-
-
 
     <!-- Footer -->
     <footer class="footer">
@@ -174,3 +178,5 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
+
+<!-- http://localhost/train&gain/admin/coach/create.php -->

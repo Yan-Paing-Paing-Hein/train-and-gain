@@ -43,15 +43,15 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="nav-container">
             <a href="#top" class="logo">Train & Gain</a>
             <ul class="nav-links">
-                <li><a href="../admin_home.html">Home</a></li>
-                <li><a href="../blogpost/index.html">BlogPost</a></li>
-                <li><a href="../coach/index.html">Coach</a></li>
-                <li><a href="../customer/index.html">Customer</a></li>
-                <li><a href="../review/index.html">Review</a></li>
-                <li><a href="../payment/index.html">Payment</a></li>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="#" class="cyber-button">Access Terminal</a>
+                <a href="../blogpost/index.php" class="cyber-button">Blogpost Table</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -89,33 +89,66 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Review CRUD</h2>
-                <p class="section-subtitle">Send a transmission through the neural network</p>
+                <h2 class="section-title">Create Blogpost</h2>
+                <p class="section-subtitle">Come train and come gain!</p>
             </div>
+
 
             <div class="contact-form-wrapper">
-                <div class="contact-form">
+                <form class="contact-form" method="POST" action="blogpost.php">
+
                     <div class="form-group">
-                        <label for="name">Coach ID</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your designation" required>
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="weight_loss">Weight Loss</option>
+                            <option value="muscle_gain">Muscle Gain</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="strength_training">Strength Training</option>
+                            <option value="hiit">HIIT</option>
+                            <option value="endurance">Endurance</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Coach Name </label>
-                        <input type="email" id="email" name="email" placeholder="your.id@nexusflow.com" required>
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" placeholder="Enter your blog post title" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Specialization</label>
-                        <textarea id="message" name="message" rows="5"
-                            placeholder="Compose your message to the network..." required></textarea>
+                        <label for="content">Content</label>
+                        <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..."
+                            required></textarea>
                     </div>
 
-                    <button type="submit" class="btn-primary btn-submit">Transmit Message</button>
-                </div>
+                    <div class="form-group">
+                        <label for="image">Upload Blog Image</label>
+                        <input type="file" id="image" name="image" accept="image/*" required>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publish_date">Publish Date</label>
+                        <input type="date" id="publish_date" name="publish_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
+
+                    <button href="../blogpost/index.php" type="submit" class="btn-primary btn-submit">Upload Blog
+                        Post</button>
+
+                </form>
             </div>
+
         </div>
     </section>
+
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -141,3 +174,5 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
+
+<!-- http://localhost/train&gain/admin/blogpost/create.php -->
