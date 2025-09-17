@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../coach/create.php" class="cyber-button">Create Coach</a>
+                <a href="../coach/index.php" class="cyber-button">Coach Table</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -89,54 +89,68 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Coach Table</h2>
-                <p class="section-subtitle">7 fitness coaches have assigned!</p>
+                <h2 class="section-title">Edit Coach</h2>
+                <p class="section-subtitle">Send a transmission through the neural network</p>
             </div>
-        </div>
 
+            <div class="contact-form-wrapper">
+                <div class="contact-form">
 
-        <!-- CRUD Table Section -->
-        <div class="crud-table-container">
-            <table class="crud-table">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter coach's name" required>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="profile_picture">Profile Picture</label>
+                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                    </div>
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Profile Picture</th>
-                        <th>Specialty</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td><img src="/images/profile1.jpg" alt="Profile"></td>
-                        <td>Weight Loss</td>
-                        <td>john@example.com</td>
-                        <td><span class="status active">Active</span></td>
-                        <td>
-                            <a href="../coach/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Sarah Smith</td>
-                        <td><img src="/images/profile2.jpg" alt="Profile"></td>
-                        <td>Yoga</td>
-                        <td>sarah@example.com</td>
-                        <td><span class="status inactive">Inactive</span></td>
-                        <td>
-                            <a href="../coach/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                </tbody>
+                    <div class="form-group">
+                        <label for="specialty">Specialty</label>
+                        <select id="specialty" name="specialty" required>
+                            <option value="weight_loss">Weight Loss</option>
+                            <option value="muscle_gain">Muscle Gain</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="strength_training">Strength Training</option>
+                            <option value="hiit">HIIT</option>
+                            <option value="endurance">Endurance</option>
+                        </select>
+                    </div>
 
-            </table>
+                    <div class="form-group">
+                        <label for="experience">Experience (Years)</label>
+                        <input type="number" id="experience" name="experience" placeholder="e.g., 5" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Bio / About</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Write something about the coach..."
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="coach@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="e.g., +959123456789" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-submit">Update Coach</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -165,4 +179,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/coach/index.php -->
+<!-- http://localhost/train&gain/admin/coach/edit.php -->

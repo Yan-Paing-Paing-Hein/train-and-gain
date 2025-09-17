@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../blogpost/index.php" class="cyber-button">View All Lists</a>
+                <a href="../blogpost/index.php" class="cyber-button">View All Blogposts</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">

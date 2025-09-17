@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../coach/create.php" class="cyber-button">Create Coach</a>
+                <a href="../coach/index.php" class="cyber-button">View All Coaches</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -89,56 +89,33 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Coach Table</h2>
-                <p class="section-subtitle">7 fitness coaches have assigned!</p>
+                <h2 class="section-title">ID.6 Coach</h2>
+                <!-- <p class="section-subtitle">32 blogposts have been uploaded!</p> -->
             </div>
         </div>
 
 
-        <!-- CRUD Table Section -->
-        <div class="crud-table-container">
-            <table class="crud-table">
+        <br><br><br><br><br><br><br>
 
+        <div class="action-bar">
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Profile Picture</th>
-                        <th>Specialty</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td><img src="/images/profile1.jpg" alt="Profile"></td>
-                        <td>Weight Loss</td>
-                        <td>john@example.com</td>
-                        <td><span class="status active">Active</span></td>
-                        <td>
-                            <a href="../coach/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Sarah Smith</td>
-                        <td><img src="/images/profile2.jpg" alt="Profile"></td>
-                        <td>Yoga</td>
-                        <td>sarah@example.com</td>
-                        <td><span class="status inactive">Inactive</span></td>
-                        <td>
-                            <a href="../coach/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                </tbody>
+            <div class="action-left">
+                <a href="../coach/edit.php">
+                    <button class="btn-edit">Edit</button>
+                </a>
+            </div>
 
-            </table>
+            <div class="action-right">
+                <button class="btn-delete">Delete</button>
+            </div>
+
         </div>
+
     </section>
+
+
+
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -165,4 +142,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/coach/index.php -->
+<!-- http://localhost/train&gain/admin/coach/detail.php -->
