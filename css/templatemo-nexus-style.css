@@ -2622,6 +2622,31 @@ nav {
 
 /* Coach Detail */
 .section-title2 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary-cyan);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 80px;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.section-title2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
+    box-shadow: 0 0 20px var(--primary-cyan);
+}
+
+/* Might need back later ############# */
+/* .section-title2 {
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
@@ -2643,7 +2668,7 @@ nav {
     background: linear-gradient(90deg, #00ffff, #f900e0);
     border-radius: 2px;
     box-shadow: 0 0 15px #00ffff, 0 0 30px #f900e0;
-}
+} */
 
 /* Container */
 .about-container {
@@ -2759,4 +2784,87 @@ nav {
     text-transform: uppercase;
     color: #aaa;
     letter-spacing: 1px;
+}
+
+.about-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.about-header h3 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #f900e0;
+    text-shadow: 0 0 10px #f900e0;
+    margin: 0;
+}
+
+.about-tags {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Base style for tags */
+.about-tags span {
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-shadow: 0 0 6px #00ffff, 0 0 10px #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.about-tags span:hover {
+    transform: scale(1.05) translateY(-2px);
+    color: #f900e0;
+    border-color: #f900e0;
+    text-shadow: 0 0 8px #f900e0, 0 0 16px #f900e0;
+    box-shadow: 0 0 18px #f900e0;
+}
+
+/* Specialty tag (cyan neon) */
+.tag-specialty {
+    border-color: #00ffff;
+    color: #00ffff;
+    text-shadow: 0 0 6px #00ffff, 0 0 12px #00ffff;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+}
+
+/* Status Active */
+.tag-status.active {
+    border-color: #00ff66;
+    color: #00ff66;
+    text-shadow: 0 0 6px #00ff66, 0 0 12px #00ff66;
+    box-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+}
+
+.tag-status.active:hover {
+    border-color: #00ff66;
+    color: #00ff66;
+    text-shadow: 0 0 8px #00ff66, 0 0 16px #00ff66;
+    box-shadow: 0 0 18px #00ff66;
+}
+
+/* Status Inactive */
+.tag-status.inactive {
+    border-color: #ff0033;
+    color: #ff0033;
+    text-shadow: 0 0 6px #ff0033, 0 0 12px #ff0033;
+    box-shadow: 0 0 12px rgba(255, 0, 51, 0.6);
+}
+
+.tag-status.inactive:hover {
+    border-color: #ff0033;
+    color: #ff0033;
+    text-shadow: 0 0 8px #ff0033, 0 0 16px #ff0033;
+    box-shadow: 0 0 18px #ff0033;
 }

@@ -88,7 +88,7 @@ https://templatemo.com/tm-594-nexus-flow
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
 
-        <h2 class="section-title2">ID.6 - Muscle Gain</h2>
+        <h2 class="section-title2">ID.6 Coach</h2>
         <div class="about-container">
             <div class="about-image">
                 <div class="profile-img-wrapper">
@@ -97,11 +97,21 @@ https://templatemo.com/tm-594-nexus-flow
                     </div>
                 </div>
             </div>
+
             <div class="about-content">
-                <h3>Sam Sulek <span class="status active">Active</span></h3>
+                <div class="about-header">
+                    <h3>Sam Sulek</h3>
+                    <div class="about-tags">
+                        <span class="tag-specialty">Specialty: Weight Gain</span>
+                        <span class="tag-status active">Status: Active</span>
+                        <!-- <span class="tag-status inactive">Status: Inactive</span> -->
+                    </div>
+                </div>
+
                 <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
                     Sam Sulek (born February 7, 2002) is an American YouTuber, fitness influencer, and professional bodybuilder who gained fame in 2023 for his "Spring Bulk" YouTube series. He is known for his no-nonsense bodybuilding content, showing his workouts and journey to becoming an IFBB Pro, which he achieved at the 2025 Arnold Amateur finals. Sulek is also a popular social media personality, with a large following on YouTube and Instagram, and he sells his own merchandise.
                 </p>
+
                 <div class="about-stats">
                     <div class="stat-card">
                         <div class="stat-number2">5</div>
@@ -137,8 +147,6 @@ https://templatemo.com/tm-594-nexus-flow
         </div>
 
     </section>
-
-
 
 
 
