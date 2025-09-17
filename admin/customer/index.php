@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="#" class="cyber-button">Access Terminal</a>
+                <a href="../customer/create.php" class="cyber-button">Create Customer</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -83,115 +83,132 @@ https://templatemo.com/tm-594-nexus-flow
         </nav>
     </div>
 
-
-
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Customer CRUD</h2>
-                <p class="section-subtitle">Send a transmission through the neural network</p>
+                <h2 class="section-title">Customer Table</h2>
+                <p class="section-subtitle">35 customers have joined!</p>
             </div>
+        </div>
 
-            <div class="contact-form-wrapper">
-                <div class="contact-form">
-
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="John Doe" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="customer@example.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" id="phone" name="phone" placeholder="e.g., +959123456789" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="password" name="password"
-                                placeholder="Auto-generate or enter manually" required>
-                            <button type="button" id="togglePassword" class="toggle-password">Show</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="gender">Gender</label>
-                        <select id="gender" name="gender" required>
-                            <option value="">-- Select Gender --</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dob">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="height">Height (cm)</label>
-                        <input type="number" id="height" name="height" min="0" placeholder="e.g., 170">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="weight">Weight (kg)</label>
-                        <input type="number" id="weight" name="weight" min="0" placeholder="e.g., 65">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="goal">Fitness Goal</label>
-                        <select id="goal" name="goal" required>
-                            <option value="">-- Select Goal --</option>
-                            <option value="weight_loss">Weight Loss</option>
-                            <option value="muscle_gain">Muscle Gain</option>
-                            <option value="endurance">Endurance</option>
-                            <option value="yoga">Yoga</option>
-                            <option value="strength_training">Strength Training</option>
-                            <option value="hiit">HIIT</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="plan">Subscription Plan</label>
-                        <select id="plan" name="plan" required>
-                            <option value="">-- Select Plan --</option>
-                            <option value="free">Free</option>
-                            <option value="basic">Basic</option>
-                            <option value="premium">Premium</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="coach">Assigned Fitness Coach</label>
-                        <select id="coach" name="coach" required>
-                            <option value="">-- Assign Coach --</option>
-                            <!-- Populate dynamically from Coaches table -->
-                            <option value="1">Coach A</option>
-                            <option value="2">Coach B</option>
-                            <option value="3">Coach C</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" name="status" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                            <option value="banned">Banned</option>
-                        </select>
-                    </div>
-
-
-                    <button type="submit" class="btn-primary btn-submit">Create Customer</button>
-                </div>
-            </div>
+        <!-- CRUD Table Section -->
+        <div class="crud-table-container">
+            <table class="crud-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Publish Date</th>
+                        <th>Status</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Fitness</td>
+                        <td>10-Minute Abs Workout</td>
+                        <td>2025-09-13</td>
+                        <td><span class="blog published">Published</span></td>
+                        <!-- <td><button class="btn-view">View Detail</button></td> -->
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog published">Published</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog draft">Draft</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog published">Published</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog published">Published</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog draft">Draft</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog published">Published</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog published">Published</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog draft">Draft</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Nutrition</td>
+                        <td>Top 5 Healthy Meals</td>
+                        <td>2025-09-10</td>
+                        <td><span class="blog published">Published</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 

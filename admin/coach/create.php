@@ -90,7 +90,7 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">Create Coach</h2>
-                <p class="section-subtitle">Send a transmission through the neural network</p>
+                <p class="section-subtitle">Come train and come gain!</p>
             </div>
 
             <div class="contact-form-wrapper">
