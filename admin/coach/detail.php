@@ -87,15 +87,40 @@ https://templatemo.com/tm-594-nexus-flow
 
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <h2 class="section-title">ID.6 Coach</h2>
-                <!-- <p class="section-subtitle">32 blogposts have been uploaded!</p> -->
+
+        <h2 class="section-title2">ID.6 - Muscle Gain</h2>
+        <div class="about-container">
+            <div class="about-image">
+                <div class="profile-img-wrapper">
+                    <div class="profile-img">
+                        <img src="images/coach.jpg" alt="Image">
+                    </div>
+                </div>
+            </div>
+            <div class="about-content">
+                <h3>Sam Sulek <span class="status active">Active</span></h3>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                    Sam Sulek (born February 7, 2002) is an American YouTuber, fitness influencer, and professional bodybuilder who gained fame in 2023 for his "Spring Bulk" YouTube series. He is known for his no-nonsense bodybuilding content, showing his workouts and journey to becoming an IFBB Pro, which he achieved at the 2025 Arnold Amateur finals. Sulek is also a popular social media personality, with a large following on YouTube and Instagram, and he sells his own merchandise.
+                </p>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number2">5</div>
+                        <div class="stat-label2">Years Exp</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number2">samsulek</div>
+                        <div class="stat-label2">@gmail.com</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number2">+1 (617) 555-0145</div>
+                        <div class="stat-label2">Contact No.</div>
+                    </div>
+                </div>
             </div>
         </div>
 
 
-        <br><br><br><br><br><br><br>
+        <br><br><br><br><br>
 
         <div class="action-bar">
 

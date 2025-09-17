@@ -2558,3 +2558,144 @@ nav {
         min-width: 0;
     }
 }
+
+/* Coach Detail */
+.section-title2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+    position: relative;
+}
+
+.section-title2::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 4px;
+    margin: 12px auto 0;
+    background: linear-gradient(90deg, #00ffff, #f900e0);
+    border-radius: 2px;
+    box-shadow: 0 0 15px #00ffff, 0 0 30px #f900e0;
+}
+
+/* Container */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    /* Frosted glass effect */
+    color: #fff;
+    /* lighter transparency */
+    /* background: rgba(0, 0, 0, 0.1); */
+    /* blur whatever is behind */
+    backdrop-filter: blur(10px);
+    /* Safari support */
+    /* -webkit-backdrop-filter: blur(12px); */
+
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff;
+    transition: all 0.4s ease;
+}
+
+.about-container:hover {
+    border-color: #f900e0;
+    box-shadow: 0 0 25px #f900e0, 0 0 50px #f900e0;
+}
+
+/* Profile Image */
+.profile-img-wrapper {
+    border-radius: 16px;
+    padding: 5px;
+    background: linear-gradient(135deg, #00ffff, #f900e0);
+    box-shadow: 0 0 25px #00ffff;
+    transition: all 0.4s ease;
+}
+
+.profile-img-wrapper:hover {
+    background: linear-gradient(135deg, #f900e0, #00ffff);
+    box-shadow: 0 0 35px #f900e0, 0 0 60px #f900e0;
+    /* expand smoothly */
+    transform: scale(1.2);
+}
+
+.profile-img img {
+    border-radius: 12px;
+    display: block;
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* About Content */
+.about-content {
+    max-width: 600px;
+}
+
+.about-content h3 {
+    font-size: 2.2rem;
+    color: #f900e0;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #f900e0, 0 0 20px #f900e0;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #00ffff;
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+/* Stats Section */
+.about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #00ffff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px #00ffff;
+    transition: all 0.4s ease;
+}
+
+.stat-card:hover {
+    border-color: #f900e0;
+    box-shadow: 0 0 20px #f900e0, 0 0 40px #f900e0;
+    transform: scale(1.05);
+}
+
+.stat-number2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #00ffff;
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.stat-card:hover .stat-number2 {
+    color: #f900e0;
+    text-shadow: 0 0 10px #f900e0, 0 0 20px #f900e0;
+}
+
+.stat-label2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #aaa;
+    letter-spacing: 1px;
+}
