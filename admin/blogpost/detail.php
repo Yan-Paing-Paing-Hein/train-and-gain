@@ -102,6 +102,15 @@ https://templatemo.com/tm-594-nexus-flow
                         <!-- <div class="feature-icon2"></div> -->
                         <h3>Push-Up Power: Strengthen Your Body Anytime</h3>
                         <p>Push-ups are one of the most effective bodyweight exercises, targeting the chest, shoulders, triceps, and core muscles simultaneously. They improve upper body strength, enhance posture, boost endurance, and can be done anywhere without any equipment. Regular push-ups not only build muscle but also increase overall functional fitness, making daily movements easier and reducing the risk of injury.</p>
+
+                        <div class="blog-meta">
+                            <span class="blog-date">Published Date: 17/09/2025</span>
+                            <span class="blog-category">Category: Fitness</span>
+                            <!-- Add class depending on status -->
+                            <span class="blog-status published">Status: Published</span>
+                            <!-- Example alternative -->
+                            <!-- <span class="blog-status draft">Status: Draft</span> -->
+                        </div>
                     </div>
                     <!-- <div class="feature-visual glass"></div> -->
                     <div class="feature-visual glass">
