@@ -2201,18 +2201,13 @@ nav {
 .crud-table-container {
     background: var(--card-bg);
     border: 3px solid #f900e0;
-    /* purple neon border */
     padding: 2rem;
     margin: 2rem auto;
-    /* adds space top/bottom and centers horizontally */
     max-width: 95%;
-    /* keeps it away from screen edges */
     backdrop-filter: blur(10px);
     clip-path: polygon(30px 0%, 100% 0%, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0% 100%, 0% 30px);
     box-shadow: 0 0 30px rgba(249, 0, 224, 0.7);
-    /* purple glow */
     overflow-x: auto;
-    /* mobile responsive */
 }
 
 /* Table structure */
@@ -2891,4 +2886,17 @@ nav {
     color: #ff0033;
     text-shadow: 0 0 8px #ff0033, 0 0 16px #ff0033;
     box-shadow: 0 0 18px #ff0033;
+}
+
+/* For Customer Detail */
+.customer-detail-container {
+    background: var(--card-bg);
+    border: 3px solid #f900e0;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 60%;
+    backdrop-filter: blur(10px);
+    clip-path: polygon(30px 0%, 100% 0%, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0% 100%, 0% 30px);
+    box-shadow: 0 0 30px rgba(249, 0, 224, 0.7);
+    overflow-x: auto;
 }

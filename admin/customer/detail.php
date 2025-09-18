@@ -95,7 +95,7 @@ https://templatemo.com/tm-594-nexus-flow
 
 
         <!-- CRUD Table Section -->
-        <div class="crud-table-container">
+        <div class="customer-detail-container">
 
         </div>
 
