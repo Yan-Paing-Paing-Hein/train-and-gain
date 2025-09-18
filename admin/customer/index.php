@@ -98,115 +98,160 @@ https://templatemo.com/tm-594-nexus-flow
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Category</th>
-                        <th>Title</th>
-                        <th>Publish Date</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Gender</th>
+                        <th>Fitness Goal</th>
                         <th>Status</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>johndoe@gmail.com</td>
+                        <td>+1 (617) 555-0145</td>
+                        <td>Male</td>
+                        <td>Muscle Gain</td>
+                        <td><span class="status active">Active</span></td>
+                        <td>
+                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                        </td>
+                    </tr> -->
+
+
                     <tr>
                         <td>1</td>
-                        <td>Fitness</td>
-                        <td>10-Minute Abs Workout</td>
-                        <td>2025-09-13</td>
-                        <td><span class="blog published">Published</span></td>
-                        <!-- <td><button class="btn-view">View Detail</button></td> -->
+                        <td>John Doe</td>
+                        <td>johndoe@gmail.com</td>
+                        <td>+1 (617) 555-0145</td>
+                        <td>Male</td>
+                        <td>Muscle Gain</td>
+                        <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>2</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
+                        <td>Emma Stone</td>
+                        <td>emma.stone@gmail.com</td>
+                        <td>+1 (202) 555-0174</td>
+                        <td>Female</td>
+                        <td>Weight Loss</td>
+                        <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>3</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog draft">Draft</span></td>
+                        <td>Michael Smith</td>
+                        <td>m.smith@yahoo.com</td>
+                        <td>+44 20 7946 1234</td>
+                        <td>Male</td>
+                        <td>Endurance</td>
+                        <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>4</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
+                        <td>Sophia Johnson</td>
+                        <td>sophia.j@gmail.com</td>
+                        <td>+1 (303) 555-0190</td>
+                        <td>Female</td>
+                        <td>Yoga</td>
+                        <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>5</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
+                        <td>David Lee</td>
+                        <td>dlee@hotmail.com</td>
+                        <td>+1 (415) 555-0102</td>
+                        <td>Male</td>
+                        <td>Strength Training</td>
+                        <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>6</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog draft">Draft</span></td>
+                        <td>Olivia Brown</td>
+                        <td>olivia.brown@gmail.com</td>
+                        <td>+1 (646) 555-0125</td>
+                        <td>Female</td>
+                        <td>HIIT</td>
+                        <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>7</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
+                        <td>James Wilson</td>
+                        <td>jwilson@yahoo.com</td>
+                        <td>+61 2 5550 6789</td>
+                        <td>Male</td>
+                        <td>Muscle Gain</td>
+                        <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>8</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
+                        <td>Ava Martinez</td>
+                        <td>ava.martinez@gmail.com</td>
+                        <td>+1 (212) 555-0188</td>
+                        <td>Female</td>
+                        <td>Yoga</td>
+                        <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>9</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog draft">Draft</span></td>
+                        <td>William Davis</td>
+                        <td>will.davis@gmail.com</td>
+                        <td>+1 (305) 555-0156</td>
+                        <td>Male</td>
+                        <td>Weight Loss</td>
+                        <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                     <tr>
                         <td>10</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
+                        <td>Isabella Taylor</td>
+                        <td>isabella.taylor@gmail.com</td>
+                        <td>+1 (917) 555-0137</td>
+                        <td>Female</td>
+                        <td>Endurance</td>
+                        <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
+                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
+
                 </tbody>
             </table>
         </div>
@@ -236,18 +281,5 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
-
-
-<!-- Password show/hide button -->
-<script>
-    const passwordField = document.getElementById("password");
-    const toggleBtn = document.getElementById("togglePassword");
-
-    toggleBtn.addEventListener("click", () => {
-        const isPassword = passwordField.type === "password";
-        passwordField.type = isPassword ? "text" : "password";
-        toggleBtn.textContent = isPassword ? "Hide" : "Show";
-    });
-</script>
 
 <!-- http://localhost/train&gain/admin/customer/index.php -->

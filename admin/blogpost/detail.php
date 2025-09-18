@@ -123,7 +123,7 @@ https://templatemo.com/tm-594-nexus-flow
 
         <br><br><br><br><br><br><br>
 
-        <div class="action-bar">
+        <div class="action-bar fade-up">
 
             <div class="action-left">
                 <a href="../blogpost/edit.php">

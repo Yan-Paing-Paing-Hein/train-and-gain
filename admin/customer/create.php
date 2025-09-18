@@ -160,7 +160,7 @@ https://templatemo.com/tm-594-nexus-flow
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="plan">Subscription Plan</label>
                         <select id="plan" name="plan" required>
                             <option value="">-- Select Plan --</option>
@@ -168,7 +168,7 @@ https://templatemo.com/tm-594-nexus-flow
                             <option value="basic">Basic</option>
                             <option value="premium">Premium</option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label for="coach">Assigned Fitness Coach</label>
@@ -186,7 +186,6 @@ https://templatemo.com/tm-594-nexus-flow
                         <select id="status" name="status" required>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
-                            <option value="banned">Banned</option>
                         </select>
                     </div>
 

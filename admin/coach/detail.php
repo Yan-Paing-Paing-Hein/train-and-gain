@@ -102,7 +102,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <div class="about-header">
                     <h3>Sam Sulek</h3>
                     <div class="about-tags">
-                        <span class="tag-specialty">Specialty: Weight Gain</span>
+                        <span class="tag-specialty">Specialty: Muscle Gain</span>
                         <span class="tag-status active">Status: Active</span>
                         <!-- <span class="tag-status inactive">Status: Inactive</span> -->
                     </div>
