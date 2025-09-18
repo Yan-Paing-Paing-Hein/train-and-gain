@@ -2900,3 +2900,85 @@ nav {
     box-shadow: 0 0 30px rgba(249, 0, 224, 0.7);
     overflow-x: auto;
 }
+
+/* Title */
+.customer-detail-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #00ffff;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #f900e0;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* Table */
+.customer-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Table Headers */
+.customer-detail-table th {
+    text-align: left;
+    padding: 14px 20px;
+    background: rgba(249, 0, 224, 0.2);
+    border: 1px solid #f900e0;
+    color: #f900e0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+/* Table Data */
+.customer-detail-table td {
+    padding: 14px 20px;
+    border: 1px solid #00ffff;
+    background: rgba(0, 255, 255, 0.05);
+    color: #00ffff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+/* Row Hover Effect */
+.customer-detail-table tr:hover td {
+    background: rgba(0, 255, 255, 0.12);
+    color: #00ffff;
+    box-shadow: inset 0 0 15px #00ffff, inset 0 0 25px #f900e0;
+    animation: neonPulse 1s infinite alternate;
+}
+
+/* Status Badge */
+.customer-detail-status-active {
+    color: #00ff33;
+    font-weight: bold;
+    padding: 4px 10px;
+    border: 1px solid #00ff33;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00ff33;
+}
+
+.customer-detail-status-inactive {
+    color: #ff4d4d;
+    font-weight: bold;
+    padding: 4px 10px;
+    border: 1px solid #ff4d4d;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ff4d4d;
+}
+
+/* Neon Animation */
+@keyframes neonPulse {
+    from {
+        text-shadow: 0 0 5px #00ffff, 0 0 15px #00ffff;
+    }
+
+    to {
+        text-shadow: 0 0 10px #f900e0, 0 0 20px #f900e0;
+    }
+}

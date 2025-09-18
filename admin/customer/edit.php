@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusFlow - The Future of Team Collaboration</title>
+    <title>Edit Customer</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 

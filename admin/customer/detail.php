@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusFlow - The Future of Team Collaboration</title>
+    <title>Customer Detail</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -71,36 +71,78 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="#" class="cyber-button">Access Terminal</a>
+            <a href="../customer/index.php" class="cyber-button">View All Customers</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#stats">Stats</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
             </ul>
         </nav>
     </div>
 
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <h2 class="section-title">Customer Detail</h2>
-            </div>
-        </div>
 
-
-
-
-        <!-- CRUD Table Section -->
         <div class="customer-detail-container">
-
+            <h2 class="customer-detail-title">Customer Detail</h2>
+            <table class="customer-detail-table">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>001</td>
+                    </tr>
+                    <tr>
+                        <th>Full Name</th>
+                        <td>John Doe</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>johndoe@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>+1 (617) 555-0145</td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                        <td>••••••••</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth</th>
+                        <td>1995-08-12</td>
+                    </tr>
+                    <tr>
+                        <th>Height (cm)</th>
+                        <td>178</td>
+                    </tr>
+                    <tr>
+                        <th>Weight (kg)</th>
+                        <td>72</td>
+                    </tr>
+                    <tr>
+                        <th>Fitness Goal</th>
+                        <td>Muscle Gain</td>
+                    </tr>
+                    <tr>
+                        <th>Assigned Fitness Coach</th>
+                        <td>Sam Sulek</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td><span class="customer-detail-status-inactive">Inactive</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-
-
 
         <br><br><br><br><br>
 
@@ -117,7 +159,6 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
         </div>
-
 
     </section>
 
@@ -142,6 +183,34 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+
+    <script>
+        document.querySelectorAll(".customer-detail-table tr").forEach(row => {
+            row.addEventListener("mouseenter", () => {
+                row.style.transition = "transform 0.3s ease";
+                row.style.transform = "scale(1.02)";
+            });
+            row.addEventListener("mouseleave", () => {
+                row.style.transform = "scale(1)";
+            });
+        });
+    </script>
+
+
+    <script>
+        document.querySelectorAll(".customer-detail-table tr").forEach((row, i) => {
+            row.style.opacity = 0;
+            row.style.transform = "translateX(-20px)";
+            setTimeout(() => {
+                row.style.transition = "all 0.6s ease";
+                row.style.opacity = 1;
+                row.style.transform = "translateX(0)";
+            }, i * 200);
+        });
+    </script>
+
+
 </body>
 
 </html>
