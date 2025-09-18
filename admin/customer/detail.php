@@ -87,9 +87,35 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Customer Table</h2>
-                <p class="section-subtitle">35 customers have joined!</p>
+                <h2 class="section-title">Customer Detail</h2>
             </div>
+        </div>
+
+
+
+
+        <!-- CRUD Table Section -->
+        <div class="crud-table-container">
+
+        </div>
+
+
+
+
+        <br><br><br><br><br>
+
+        <div class="action-bar fade-up">
+
+            <div class="action-left">
+                <a href="../customer/edit.php">
+                    <button class="btn-edit">Edit</button>
+                </a>
+            </div>
+
+            <div class="action-right">
+                <button class="btn-delete">Delete</button>
+            </div>
+
         </div>
 
 
