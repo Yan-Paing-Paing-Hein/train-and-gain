@@ -88,8 +88,8 @@ https://templatemo.com/tm-594-nexus-flow
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
 
-        <h2 class="section-title2">ID.6 Coach</h2>
-        <div class="about-container">
+        <h2 class="section-title2 fade-up">ID.6 Coach</h2>
+        <div class="about-container fade-up">
             <div class="about-image">
                 <div class="profile-img-wrapper">
                     <div class="profile-img">
@@ -128,11 +128,13 @@ https://templatemo.com/tm-594-nexus-flow
                 </div>
             </div>
         </div>
+        <br><br><br>
+
 
 
         <br><br><br><br><br>
 
-        <div class="action-bar">
+        <div class="action-bar fade-up">
 
             <div class="action-left">
                 <a href="../coach/edit.php">
@@ -171,6 +173,31 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+
+
+    <!-- For fade-up scroll -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fadeEls = document.querySelectorAll(".fade-up");
+
+            const observer = new IntersectionObserver(
+                (entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.2
+                }
+            );
+
+            fadeEls.forEach(el => observer.observe(el));
+        });
+    </script>
+
 </body>
 
 </html>

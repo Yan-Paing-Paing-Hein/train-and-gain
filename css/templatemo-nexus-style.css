@@ -2062,11 +2062,24 @@ nav {
     }
 }
 
-/* Scroll animations */
-.fade-up {
+/* Scroll animations (Original) */
+/* .fade-up {
     opacity: 0;
     transform: translateY(50px);
     transition: all 0.8s ease;
+} */
+
+/* Base state */
+.fade-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Active state (when visible) */
+.fade-up.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .fade-up.visible {
