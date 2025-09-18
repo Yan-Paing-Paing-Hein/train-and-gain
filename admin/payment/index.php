@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusFlow - The Future of Team Collaboration</title>
+    <title>Payment Index</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../payment/index.php">Payment</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="#" class="cyber-button">Access Terminal</a>
+                <a href="../payment/create.php" class="cyber-button">Create Payment</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -71,14 +71,16 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="#" class="cyber-button">Access Terminal</a>
+            <a href="../payment/create.php" class="cyber-button">Create Payment</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#stats">Stats</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
             </ul>
         </nav>
     </div>
@@ -89,102 +91,14 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Payment CRUD</h2>
-                <p class="section-subtitle">Send a transmission through the neural network</p>
+                <h2 class="section-title">Payment Table</h2>
+                <p class="section-subtitle">35 payments have been received!</p>
             </div>
 
-            <div class="contact-form-wrapper">
-                <div class="contact-form">
 
 
-                    <!-- 1. Payment ID (auto-generated, readonly) -->
-                    <div class="form-group">
-                        <label for="payment_id">Payment ID</label>
-                        <input type="text" id="payment_id" name="payment_id" value="AUTO123456" readonly>
-                    </div>
-
-                    <!-- 2. Customer (dropdown linked to customer table) -->
-                    <div class="form-group">
-                        <label for="customer">Customer</label>
-                        <select id="customer" name="customer" required>
-                            <option value="">-- Select Customer --</option>
-                            <option value="1">John Doe</option>
-                            <option value="2">Jane Smith</option>
-                            <option value="3">Michael Lee</option>
-                            <!-- Dynamically load from DB -->
-                        </select>
-                    </div>
-
-                    <!-- 3. Subscription Plan -->
-                    <div class="form-group">
-                        <label for="subscription_plan">Subscription Plan</label>
-                        <select id="subscription_plan" name="subscription_plan" required>
-                            <option value="">-- Select Plan --</option>
-                            <option value="free">Free</option>
-                            <option value="basic">Basic</option>
-                            <option value="premium">Premium</option>
-                        </select>
-                    </div>
-
-                    <!-- 4. Amount Paid -->
-                    <div class="form-group">
-                        <label for="amount_paid">Amount Paid</label>
-                        <input type="number" id="amount_paid" name="amount_paid" placeholder="Enter amount" min="0" required>
-                    </div>
-
-                    <!-- 5. Payment Method -->
-                    <div class="form-group">
-                        <label for="payment_method">Payment Method</label>
-                        <select id="payment_method" name="payment_method" required>
-                            <option value="">-- Select Method --</option>
-                            <option value="credit_card">Credit Card</option>
-                            <option value="paypal">PayPal</option>
-                            <option value="bank_transfer">Bank Transfer</option>
-                            <option value="mobile_pay">Mobile Pay</option>
-                        </select>
-                    </div>
-
-                    <!-- 6. Transaction ID / Reference -->
-                    <div class="form-group">
-                        <label for="transaction_id">Transaction ID / Reference No.</label>
-                        <input type="text" id="transaction_id" name="transaction_id" placeholder="Enter reference no."
-                            required>
-                    </div>
-
-                    <!-- 7. Payment Date -->
-                    <div class="form-group">
-                        <label for="payment_date">Payment Date</label>
-                        <input type="date" id="payment_date" name="payment_date" required>
-                    </div>
-
-                    <!-- 8. Payment Status -->
-                    <div class="form-group">
-                        <label for="payment_status">Payment Status</label>
-                        <select id="payment_status" name="payment_status" required>
-                            <option value="">-- Select Status --</option>
-                            <option value="paid">Paid</option>
-                            <option value="pending">Pending</option>
-                            <option value="failed">Failed</option>
-                            <option value="refunded">Refunded</option>
-                        </select>
-                    </div>
-
-                    <!-- 9. Next Billing Date -->
-                    <div class="form-group">
-                        <label for="next_billing_date">Next Billing Date</label>
-                        <input type="date" id="next_billing_date" name="next_billing_date">
-                    </div>
-
-                    <!-- 10. Notes -->
-                    <div class="form-group">
-                        <label for="notes">Notes</label>
-                        <textarea id="notes" name="notes" rows="3" placeholder="Optional remarks..."></textarea>
-                    </div>
 
 
-                    <button type="submit" class="btn-primary btn-submit">Save Payment</button>
-                </div>
-            </div>
         </div>
     </section>
 
