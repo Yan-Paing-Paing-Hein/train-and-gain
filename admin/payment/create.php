@@ -100,10 +100,10 @@ https://templatemo.com/tm-594-nexus-flow
 
 
                     <!-- 1. Payment ID (auto-generated, readonly) -->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="payment_id">Payment ID</label>
                         <input type="text" id="payment_id" name="payment_id" value="AUTO123456" readonly>
-                    </div>
+                    </div> -->
 
                     <!-- 2. Customer (dropdown linked to customer table) -->
                     <div class="form-group">
@@ -146,21 +146,18 @@ https://templatemo.com/tm-594-nexus-flow
                         </select>
                     </div>
 
-                    <!-- 6. Transaction ID / Reference -->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="transaction_id">Transaction ID / Reference No.</label>
                         <input type="text" id="transaction_id" name="transaction_id" placeholder="Enter reference no."
                             required>
-                    </div>
+                    </div> -->
 
-                    <!-- 7. Payment Date -->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="payment_date">Payment Date</label>
                         <input type="date" id="payment_date" name="payment_date" required>
-                    </div>
+                    </div> -->
 
-                    <!-- 8. Payment Status -->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="payment_status">Payment Status</label>
                         <select id="payment_status" name="payment_status" required>
                             <option value="">-- Select Status --</option>
@@ -169,15 +166,13 @@ https://templatemo.com/tm-594-nexus-flow
                             <option value="failed">Failed</option>
                             <option value="refunded">Refunded</option>
                         </select>
-                    </div>
+                    </div> -->
 
-                    <!-- 9. Next Billing Date -->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="next_billing_date">Next Billing Date</label>
                         <input type="date" id="next_billing_date" name="next_billing_date">
-                    </div>
+                    </div> -->
 
-                    <!-- 10. Notes -->
                     <!-- <div class="form-group">
                         <label for="notes">Notes</label>
                         <textarea id="notes" name="notes" rows="3" placeholder="Optional remarks..."></textarea>

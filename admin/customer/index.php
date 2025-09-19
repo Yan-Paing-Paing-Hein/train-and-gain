@@ -110,19 +110,6 @@ https://templatemo.com/tm-594-nexus-flow
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>johndoe@gmail.com</td>
-                        <td>+1 (617) 555-0145</td>
-                        <td>Male</td>
-                        <td>Muscle Gain</td>
-                        <td><span class="status active">Active</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr> -->
-
 
                     <tr>
                         <td>1</td>

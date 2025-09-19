@@ -98,6 +98,57 @@ https://templatemo.com/tm-594-nexus-flow
 
 
 
+            <!-- CRUD Table Section -->
+            <div class="payment-crud-container">
+                <table class="payment-crud">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Amount Paid</th>
+                            <th>Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>250$</td>
+                            <td>PayPal</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Emma Stone</td>
+                            <td>250$</td>
+                            <td>PayPal</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Michael Smith</td>
+                            <td>250$</td>
+                            <td>PayPal</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Sophia Johnson</td>
+                            <td>250$</td>
+                            <td>PayPal</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>David Lee</td>
+                            <td>250$</td>
+                            <td>PayPal</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
 
         </div>
     </section>
