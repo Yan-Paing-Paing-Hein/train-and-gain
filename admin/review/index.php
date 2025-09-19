@@ -47,11 +47,11 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
                 <li><a href="../customer/index.php">Customer</a></li>
-                <li><a href="../review/index.php">Review</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
+                <li><a href="../review/index.php">Review</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="#" class="cyber-button">Access Terminal</a>
+                <a href="#" class="cyber-button">Review</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -71,14 +71,16 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="#" class="cyber-button">Access Terminal</a>
+            <a href="#" class="cyber-button">Review</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#stats">Stats</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
+                <li><a href="../review/index.php">Review</a></li>
             </ul>
         </nav>
     </div>
@@ -93,27 +95,12 @@ https://templatemo.com/tm-594-nexus-flow
                 <p class="section-subtitle">Send a transmission through the neural network</p>
             </div>
 
-            <div class="contact-form-wrapper">
-                <div class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Coach ID</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your designation" required>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="email">Coach Name </label>
-                        <input type="email" id="email" name="email" placeholder="your.id@nexusflow.com" required>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="message">Specialization</label>
-                        <textarea id="message" name="message" rows="5"
-                            placeholder="Compose your message to the network..." required></textarea>
-                    </div>
 
-                    <button type="submit" class="btn-primary btn-submit">Transmit Message</button>
-                </div>
-            </div>
+
+
+
         </div>
     </section>
 
