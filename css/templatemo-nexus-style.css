@@ -356,6 +356,7 @@ nav {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
 }
@@ -662,6 +663,9 @@ nav {
         justify-content: center;
         margin: 0 2rem;
         max-width: none;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .nav-links a {
