@@ -51,7 +51,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="#" class="cyber-button">Review</a>
+                <a href="#" class="cyber-button">Mark as read</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -71,7 +71,7 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="#" class="cyber-button">Review</a>
+            <a href="#" class="cyber-button">Mark as read</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
@@ -89,19 +89,109 @@ https://templatemo.com/tm-594-nexus-flow
 
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <h2 class="section-title">Review CRUD</h2>
-                <p class="section-subtitle">Send a transmission through the neural network</p>
+
+
+
+        <div class="contact-container fade-up">
+            <div class="about-container">
+
+                <div class="about-content">
+                    <div class="about-header">
+                        <h3>Emily Carter</h3>
+                        <div class="about-tags">
+                            <span class="tag-specialty">ID: 001</span>
+                            <span class="tag-specialty">Fitness Goal: Weight Loss</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">“Train&Gain completely changed my approach to fitness. The personalized workout plans are easy to follow, and I’ve already lost 5kg in two months without feeling overwhelmed. The progress tracker keeps me motivated every day.”</p>
+                </div>
             </div>
-
-
-
-
-
-
-
         </div>
+        <br><br><br>
+
+
+
+        <div class="contact-container fade-up">
+            <div class="about-container">
+
+                <div class="about-content">
+                    <div class="about-header">
+                        <h3>Daniel Hughes</h3>
+                        <div class="about-tags">
+                            <span class="tag-specialty">ID: 002</span>
+                            <span class="tag-specialty">Fitness Goal: Muscle Gain</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">“I’ve tried many workout programs before, but Train&Gain is the first that actually adapts to my needs. My coach gave me a structured routine and diet plan, and I can already see noticeable gains in just six weeks.”</p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+
+
+
+        <div class="contact-container fade-up">
+            <div class="about-container">
+
+                <div class="about-content">
+                    <div class="about-header">
+                        <h3>Priya Nair</h3>
+                        <div class="about-tags">
+                            <span class="tag-specialty">ID: 003</span>
+                            <span class="tag-specialty">Fitness Goal: Yoga</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">“As someone new to yoga, I was nervous to start. Train&Gain made it simple with beginner-friendly sessions that grow more challenging over time. I feel calmer, more flexible, and healthier since joining.”</p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+
+
+
+        <div class="contact-container fade-up">
+            <div class="about-container">
+
+                <div class="about-content">
+                    <div class="about-header">
+                        <h3>Michael Johnson</h3>
+                        <div class="about-tags">
+                            <span class="tag-specialty">ID: 004</span>
+                            <span class="tag-specialty">Fitness Goal: Strength Training</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">“What I love most about Train&Gain is how professional the coaches are. My strength has improved significantly, and I can finally do heavy lifts with proper form thanks to the detailed instructions.”</p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+
+
+
+        <div class="contact-container fade-up">
+            <div class="about-container">
+
+                <div class="about-content">
+                    <div class="about-header">
+                        <h3>Sofia Martinez</h3>
+                        <div class="about-tags">
+                            <span class="tag-specialty">ID: 005</span>
+                            <span class="tag-specialty">Fitness Goal: HIIT</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">“The HIIT programs on Train&Gain are short but powerful. I no longer waste hours at the gym — 20 minutes of guided workouts push me harder than anything else. I feel fitter and have way more energy throughout the day.”</p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+
+
+
     </section>
 
     <!-- Footer -->
