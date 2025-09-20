@@ -1,3 +1,17 @@
+<?php
+// Include database connection
+include '../../db_connect.php';
+
+// Fetch blogposts
+$sql = "SELECT id, category, title, publish_date, status FROM blogpost ORDER BY id ASC";
+$result = $conn->query($sql);
+
+// Save the row count
+$totalPosts = ($result) ? $result->num_rows : 0;
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,19 +106,19 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">BlogPost Table</h2>
-                <p class="section-subtitle">32 blogposts have been uploaded!</p>
+                <p class="section-subtitle">
+                    <?php if ($totalPosts > 0): ?>
+                        <?php echo $totalPosts; ?>
+                        blogpost<?php echo ($totalPosts > 1 ? 's' : ''); ?>
+                        <?php echo ($totalPosts > 1 ? 'have' : 'has'); ?> been uploaded!
+                    <?php else: ?>
+                        No blogpost has been uploaded yet!
+                    <?php endif; ?>
+                </p>
             </div>
         </div>
 
 
-        <?php
-        // Include database connection
-        include '../../db_connect.php';
-
-        // Fetch blogposts
-        $sql = "SELECT id, category, title, publish_date, status FROM blogpost ORDER BY id ASC";
-        $result = $conn->query($sql);
-        ?>
 
         <div class="crud-table-container">
             <table class="crud-table">
@@ -140,7 +154,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" style="text-align:center;">No blogposts found.</td>
+                            <td colspan="6" style="text-align:center;">No blogpost found.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
