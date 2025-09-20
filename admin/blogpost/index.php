@@ -102,7 +102,7 @@ https://templatemo.com/tm-594-nexus-flow
         include '../../db_connect.php';
 
         // Fetch blogposts
-        $sql = "SELECT id, category, title, publish_date, status FROM blogpost ORDER BY publish_date DESC";
+        $sql = "SELECT id, category, title, publish_date, status FROM blogpost ORDER BY id ASC";
         $result = $conn->query($sql);
         ?>
 
@@ -146,8 +146,6 @@ https://templatemo.com/tm-594-nexus-flow
                 </tbody>
             </table>
         </div>
-
-
     </section>
 
 

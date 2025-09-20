@@ -1,3 +1,52 @@
+<?php
+include '../../db_connect.php';
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $category     = $_POST['category'];
+    $title        = $_POST['title'];
+    $content      = $_POST['content'];
+    $publish_date = $_POST['publish_date'];
+    $status       = $_POST['status'];
+
+    // Handle image upload
+    $imagePath = "";
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $targetDir = "uploads/";
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        $fileName   = time() . "_" . basename($_FILES["image"]["name"]);
+        $targetFile = $targetDir . $fileName;
+
+        $allowedTypes = ["jpg", "jpeg", "png", "gif"];
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        if (in_array($fileType, $allowedTypes) && $_FILES["image"]["size"] <= 2000000) {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                $imagePath = $targetFile;
+            }
+        }
+    }
+
+    // Insert into database
+    $stmt = $conn->prepare("INSERT INTO blogpost (category, title, content, blog_image, publish_date, status) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $category, $title, $content, $imagePath, $publish_date, $status);
+
+    if ($stmt->execute()) {
+        header("Location: index.php?success=1");
+        exit;
+    } else {
+        echo "<p style='color:red;text-align:center;'>Error: " . $stmt->error . "</p>";
+    }
+
+    $stmt->close();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,19 +144,18 @@ https://templatemo.com/tm-594-nexus-flow
                 <p class="section-subtitle">Come train and come gain!</p>
             </div>
 
-
             <div class="contact-form-wrapper">
-                <form class="contact-form" method="POST" action="blogpost.php">
+                <form class="contact-form" method="POST" action="create.php" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="category">Category</label>
                         <select id="category" name="category" required>
-                            <option value="weight_loss">Weight Loss</option>
-                            <option value="muscle_gain">Muscle Gain</option>
-                            <option value="yoga">Yoga</option>
-                            <option value="strength_training">Strength Training</option>
-                            <option value="hiit">HIIT</option>
-                            <option value="endurance">Endurance</option>
+                            <option value="Weight Loss">Weight Loss</option>
+                            <option value="Muscle Gain">Muscle Gain</option>
+                            <option value="Yoga">Yoga</option>
+                            <option value="Strength Training">Strength Training</option>
+                            <option value="HIIT">HIIT</option>
+                            <option value="Endurance">Endurance</option>
                         </select>
                     </div>
 
@@ -118,8 +166,7 @@ https://templatemo.com/tm-594-nexus-flow
 
                     <div class="form-group">
                         <label for="content">Content</label>
-                        <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..."
-                            required></textarea>
+                        <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..." required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -136,13 +183,12 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status" required>
-                            <option value="draft">Draft</option>
-                            <option value="published">Published</option>
+                            <option value="Draft">Draft</option>
+                            <option value="Published">Published</option>
                         </select>
                     </div>
 
-                    <button href="../blogpost/index.php" type="submit" class="btn-primary btn-submit">Upload Blog
-                        Post</button>
+                    <button type="submit">Upload Blog Post</button>
 
                 </form>
             </div>
