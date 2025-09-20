@@ -97,8 +97,15 @@ https://templatemo.com/tm-594-nexus-flow
         </div>
 
 
+        <?php
+        // Include database connection
+        include '../../db_connect.php';
 
-        <!-- CRUD Table Section -->
+        // Fetch blogposts
+        $sql = "SELECT id, category, title, publish_date, status FROM blogpost ORDER BY publish_date DESC";
+        $result = $conn->query($sql);
+        ?>
+
         <div class="crud-table-container">
             <table class="crud-table">
                 <thead>
@@ -112,115 +119,36 @@ https://templatemo.com/tm-594-nexus-flow
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Fitness</td>
-                        <td>10-Minute Abs Workout</td>
-                        <td>2025-09-13</td>
-                        <td><span class="blog published">Published</span></td>
-                        <!-- <td><button class="btn-view">View Detail</button></td> -->
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog draft">Draft</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog draft">Draft</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog draft">Draft</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Nutrition</td>
-                        <td>Top 5 Healthy Meals</td>
-                        <td>2025-09-10</td>
-                        <td><span class="blog published">Published</span></td>
-                        <td>
-                            <a href="../blogpost/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo htmlspecialchars($row['category']); ?></td>
+                                <td><?php echo htmlspecialchars($row['title']); ?></td>
+                                <td><?php echo $row['publish_date']; ?></td>
+                                <td>
+                                    <?php if ($row['status'] === 'Published'): ?>
+                                        <span class="blog published">Published</span>
+                                    <?php else: ?>
+                                        <span class="blog draft">Draft</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <a href="../blogpost/detail.php?id=<?php echo $row['id']; ?>" class="btn-view">View Detail</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" style="text-align:center;">No blogposts found.</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
+
+
     </section>
-
-
-
-
 
 
 
