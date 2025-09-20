@@ -89,39 +89,85 @@ https://templatemo.com/tm-594-nexus-flow
 
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
-        <div class="contact-container">
+        <!-- <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">ID.4 Blogpost</h2>
-                <!-- <p class="section-subtitle">32 blogposts have been uploaded!</p> -->
             </div>
         </div>
 
         <div class="features-container2">
-            <!-- <h2 class="section-title">So skibidi</h2> -->
+
             <div class="diagonal-grid">
                 <div class="feature-row">
                     <div class="feature-content glass">
-                        <!-- <div class="feature-icon2"></div> -->
+
                         <h3>Push-Up Power: Strengthen Your Body Anytime</h3>
                         <p>Push-ups are one of the most effective bodyweight exercises, targeting the chest, shoulders, triceps, and core muscles simultaneously. They improve upper body strength, enhance posture, boost endurance, and can be done anywhere without any equipment. Regular push-ups not only build muscle but also increase overall functional fitness, making daily movements easier and reducing the risk of injury.</p>
 
                         <div class="blog-meta">
                             <span class="blog-date">Published Date: 17/09/2025</span>
                             <span class="blog-category">Category: Fitness</span>
-                            <!-- Add class depending on status -->
                             <span class="blog-status published">Status: Published</span>
-                            <!-- Example alternative -->
-                            <!-- <span class="blog-status draft">Status: Draft</span> -->
                         </div>
                     </div>
-                    <!-- <div class="feature-visual glass"></div> -->
+
                     <div class="feature-visual glass">
                         <img src="images/pushup.jpg" alt="Fitness Blog Image">
                     </div>
                 </div>
-
             </div>
-        </div>
+        </div> -->
+
+
+        <?php
+        // Include DB connection
+        include '../../db_connect.php';
+
+        // Get blogpost id from URL
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+        // Fetch blogpost by id
+        $sql = "SELECT * FROM blogpost WHERE id = $id LIMIT 1";
+        $result = $conn->query($sql);
+        $blog = $result->fetch_assoc();
+        ?>
+
+        <?php if ($blog): ?>
+            <div class="contact-container">
+                <div class="section-header">
+                    <h2 class="section-title">ID.<?php echo $blog['id']; ?> Blogpost</h2>
+                </div>
+            </div>
+
+            <div class="features-container2">
+                <div class="diagonal-grid">
+                    <div class="feature-row">
+                        <div class="feature-content glass">
+
+                            <h3><?php echo htmlspecialchars($blog['title']); ?></h3>
+                            <p><?php echo nl2br(htmlspecialchars($blog['content'])); ?></p>
+
+                            <div class="blog-meta">
+                                <span class="blog-date">Published Date: <?php echo $blog['publish_date']; ?></span>
+                                <span class="blog-category">Category: <?php echo htmlspecialchars($blog['category']); ?></span>
+                                <?php if ($blog['status'] === 'Published'): ?>
+                                    <span class="blog-status published">Status: Published</span>
+                                <?php else: ?>
+                                    <span class="blog-status draft">Status: Draft</span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <div class="feature-visual glass">
+                            <img src="<?php echo htmlspecialchars($blog['blog_image']); ?>" alt="Blog Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <p style="text-align:center; color:#f900e0;">Blogpost not found.</p>
+        <?php endif; ?>
+
 
         <br><br><br><br><br><br><br>
 
