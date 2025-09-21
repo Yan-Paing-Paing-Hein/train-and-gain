@@ -188,7 +188,7 @@ https://templatemo.com/tm-594-nexus-flow
                         </select>
                     </div>
 
-                    <button type="submit">Upload Blog Post</button>
+                    <button type="submit" class="btn-create btn-upload">Create Blogpost</button>
 
                 </form>
             </div>
