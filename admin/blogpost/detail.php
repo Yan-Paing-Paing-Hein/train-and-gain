@@ -151,10 +151,9 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
             <div class="action-right">
-                <a href="delete.php?id=<?php echo $blog['id']; ?>"
-                    onclick="return confirm('Are you sure you want to delete this blogpost? This action cannot be undone.');">
-                    <button type="button" class="btn-delete">Delete</button>
-                </a>
+                <button type="button" class="btn-delete" onclick="openDeleteModal(<?php echo $blog['id']; ?>)">
+                    Delete
+                </button>
             </div>
 
         </div>
@@ -184,6 +183,31 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+    <!-- Delete Confirmation Box Pop Up -->
+    <script>
+        function openDeleteModal(id) {
+            document.getElementById("deleteLink").href = "delete.php?id=" + id;
+            document.getElementById("deleteModal").style.display = "flex";
+        }
+
+        function closeDeleteModal() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+    </script>
+
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this blogpost? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeDeleteModal()">Cancel</button>
+                <a id="deleteLink" href="#">
+                    <button class="btn-confirm">Delete</button>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
