@@ -1,3 +1,74 @@
+<?php
+include '../../db_connect.php';
+
+// Get blogpost ID from query string
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    die("<p style='color:red;text-align:center;'>Invalid blogpost ID.</p>");
+}
+
+$id = intval($_GET['id']);
+
+// Fetch existing blogpost
+$stmt = $conn->prepare("SELECT * FROM blogpost WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$blogpost = $result->fetch_assoc();
+
+if (!$blogpost) {
+    die("<p style='color:red;text-align:center;'>Blogpost not found.</p>");
+}
+$stmt->close();
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $category     = $_POST['category'];
+    $title        = $_POST['title'];
+    $content      = $_POST['content'];
+    $publish_date = $_POST['publish_date'];
+    $status       = $_POST['status'];
+
+    // Image handling
+    $imagePath = $blogpost['blog_image']; // keep old image by default
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $targetDir = "uploads/";
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        $fileName   = time() . "_" . basename($_FILES["image"]["name"]);
+        $targetFile = $targetDir . $fileName;
+
+        $allowedTypes = ["jpg", "jpeg", "png", "gif"];
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        if (in_array($fileType, $allowedTypes) && $_FILES["image"]["size"] <= 2000000) {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                $imagePath = $targetFile;
+            }
+        }
+    }
+
+    // Update query
+    $stmt = $conn->prepare("UPDATE blogpost SET category=?, title=?, content=?, blog_image=?, publish_date=?, status=? WHERE id=?");
+    $stmt->bind_param("ssssssi", $category, $title, $content, $imagePath, $publish_date, $status, $id);
+
+    if ($stmt->execute()) {
+        header("Location: index.php?updated=1");
+        exit;
+    } else {
+        echo "<p style='color:red;text-align:center;'>Error: " . $stmt->error . "</p>";
+    }
+
+    $stmt->close();
+}
+
+// Image handling
+// I just deleted back your current image handling code
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,53 +167,55 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
 
+
             <div class="contact-form-wrapper">
-                <form class="contact-form" method="POST" action="blogpost.php">
+                <form class="contact-form" method="POST" action="edit.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="category">Category</label>
                         <select id="category" name="category" required>
-                            <option value="weight_loss">Weight Loss</option>
-                            <option value="muscle_gain">Muscle Gain</option>
-                            <option value="yoga">Yoga</option>
-                            <option value="strength_training">Strength Training</option>
-                            <option value="hiit">HIIT</option>
-                            <option value="endurance">Endurance</option>
+                            <option value="Weight Loss" <?php if ($blogpost['category'] == "Weight Loss") echo "selected"; ?>>Weight Loss</option>
+                            <option value="Muscle Gain" <?php if ($blogpost['category'] == "Muscle Gain") echo "selected"; ?>>Muscle Gain</option>
+                            <option value="Yoga" <?php if ($blogpost['category'] == "Yoga") echo "selected"; ?>>Yoga</option>
+                            <option value="Strength Training" <?php if ($blogpost['category'] == "Strength Training") echo "selected"; ?>>Strength Training</option>
+                            <option value="HIIT" <?php if ($blogpost['category'] == "HIIT") echo "selected"; ?>>HIIT</option>
+                            <option value="Endurance" <?php if ($blogpost['category'] == "Endurance") echo "selected"; ?>>Endurance</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" id="title" name="title" placeholder="Enter your blog post title" required>
+                        <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($blogpost['title']); ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="content">Content</label>
-                        <textarea id="content" name="content" rows="5" placeholder="Write your blog post content..."
-                            required></textarea>
+                        <textarea id="content" name="content" rows="5" required><?php echo htmlspecialchars($blogpost['content']); ?></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Upload Blog Image</label>
-                        <input type="file" id="image" name="image" accept="image/*" required>
+                        <label for="image">Upload Blog Image (Leave empty to keep current)</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+                        <?php if (!empty($blogpost['blog_image'])): ?>
+                            <p>Current Image: <img src="<?php echo $blogpost['blog_image']; ?>" alt="Current Image" style="max-height:100px;"></p>
+                        <?php endif; ?>
                         <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="publish_date">Publish Date</label>
-                        <input type="date" id="publish_date" name="publish_date" required>
+                        <input type="date" id="publish_date" name="publish_date" value="<?php echo $blogpost['publish_date']; ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status" required>
-                            <option value="draft">Draft</option>
-                            <option value="published">Published</option>
+                            <option value="Draft" <?php if ($blogpost['status'] == "Draft") echo "selected"; ?>>Draft</option>
+                            <option value="Published" <?php if ($blogpost['status'] == "Published") echo "selected"; ?>>Published</option>
                         </select>
                     </div>
 
-                    <button href="../blogpost/index.php" type="submit" class="btn-primary btn-submit">Update Blog
-                        Post</button>
+                    <button type="submit" class="btn-create btn-upload">Update Blogpost</button>
 
                 </form>
             </div>

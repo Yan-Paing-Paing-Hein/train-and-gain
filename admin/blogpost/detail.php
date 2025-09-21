@@ -146,8 +146,8 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="action-bar fade-up">
 
             <div class="action-left">
-                <a href="../blogpost/edit.php">
-                    <button class="btn-edit">Edit</button>
+                <a href="../blogpost/edit.php?id=<?php echo $blog['id']; ?>">
+                    <button type="button" class="btn-edit">Edit</button>
                 </a>
             </div>
 
