@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $allowedTypes = ["jpg", "jpeg", "png", "gif"];
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if (in_array($fileType, $allowedTypes) && $_FILES["image"]["size"] <= 2000000) {
+        if (in_array($fileType, $allowedTypes) && $_FILES["image"]["size"] <= 50000000) {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
                 $imagePath = $targetFile;
             }
@@ -172,7 +172,7 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="image">Upload Blog Image</label>
                         <input type="file" id="image" name="image" accept="image/*" required>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 50MB.</small>
                     </div>
 
                     <div class="form-group">

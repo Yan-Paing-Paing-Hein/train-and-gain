@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
         if (!in_array($fileExt, $allowedTypes)) {
             echo "<p style='color:red;text-align:center;'>Invalid image format. Allowed: JPG, PNG, GIF.</p>";
-        } elseif ($_FILES['image']['size'] > 2000000) {
-            echo "<p style='color:red;text-align:center;'>Image too large. Max size: 2MB.</p>";
+        } elseif ($_FILES['image']['size'] > 50000000) {
+            echo "<p style='color:red;text-align:center;'>Image too large. Max size: 50MB.</p>";
         } else {
             // Sanitize filename and prepare target paths
             $safeName = preg_replace('/[^A-Za-z0-9_.-]/', '_', $originalName);
@@ -233,7 +233,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <?php if (!empty($blogpost['blog_image'])): ?>
                             <p>Current Image: <img src="<?php echo $blogpost['blog_image']; ?>" alt="Current Image" style="max-height:100px;"></p>
                         <?php endif; ?>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                        <small>Allowed formats: JPG, PNG, GIF. Max size: 50MB.</small>
                     </div>
 
                     <div class="form-group">
