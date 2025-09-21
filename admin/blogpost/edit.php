@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssssi", $category, $title, $content, $imagePath, $publish_date, $status, $id);
 
     if ($stmt->execute()) {
-        header("Location: index.php?updated=1");
+        header("Location: index.php");
         exit;
     } else {
         echo "<p style='color:red;text-align:center;'>Error: " . $stmt->error . "</p>";
@@ -284,4 +284,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/blogpost/create.php -->
+<!-- http://localhost/train&gain/admin/blogpost/edit.php -->

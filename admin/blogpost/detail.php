@@ -140,7 +140,6 @@ https://templatemo.com/tm-594-nexus-flow
             <p style="text-align:center; color:#f900e0;">Blogpost not found.</p>
         <?php endif; ?>
 
-
         <br><br><br><br><br><br><br>
 
         <div class="action-bar fade-up">
@@ -152,7 +151,10 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
             <div class="action-right">
-                <button class="btn-delete">Delete</button>
+                <a href="delete.php?id=<?php echo $blog['id']; ?>"
+                    onclick="return confirm('Are you sure you want to delete this blogpost? This action cannot be undone.');">
+                    <button type="button" class="btn-delete">Delete</button>
+                </a>
             </div>
 
         </div>
