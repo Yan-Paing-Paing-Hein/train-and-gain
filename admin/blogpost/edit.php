@@ -28,23 +28,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $publish_date = $_POST['publish_date'];
     $status       = $_POST['status'];
 
-    // Image handling
-    $imagePath = $blogpost['blog_image']; // keep old image by default
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $targetDir = "uploads/";
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0777, true);
+    // Image handling (robust: uses absolute paths and deletes old file after successful upload)
+    $imagePath = $blogpost['blog_image']; // keep DB-stored relative path by default (e.g. "uploads/old.jpg")
+
+    if (isset($_FILES['image']) && isset($_FILES['image']['error']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        // Relative upload dir (stored in DB / used in HTML) and absolute filesystem dir
+        $uploadsDirRel = 'uploads/';                       // relative path stored in DB and used as img src
+        $uploadsDirAbs = __DIR__ . '/' . $uploadsDirRel;   // absolute filesystem path to uploads folder
+
+        // Ensure uploads folder exists
+        if (!is_dir($uploadsDirAbs)) {
+            mkdir($uploadsDirAbs, 0777, true);
         }
 
-        $fileName   = time() . "_" . basename($_FILES["image"]["name"]);
-        $targetFile = $targetDir . $fileName;
+        // Original filename and extension
+        $originalName = basename($_FILES['image']['name']);
+        $fileExt = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
 
-        $allowedTypes = ["jpg", "jpeg", "png", "gif"];
-        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        // Validate file type & size
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($fileExt, $allowedTypes)) {
+            echo "<p style='color:red;text-align:center;'>Invalid image format. Allowed: JPG, PNG, GIF.</p>";
+        } elseif ($_FILES['image']['size'] > 2000000) {
+            echo "<p style='color:red;text-align:center;'>Image too large. Max size: 2MB.</p>";
+        } else {
+            // Sanitize filename and prepare target paths
+            $safeName = preg_replace('/[^A-Za-z0-9_.-]/', '_', $originalName);
+            $fileName = time() . '_' . $safeName;
+            $targetFileAbs = $uploadsDirAbs . $fileName;   // absolute path where file will be saved
+            $targetFileRel = $uploadsDirRel . $fileName;   // relative path saved to DB and used in img src
 
-        if (in_array($fileType, $allowedTypes) && $_FILES["image"]["size"] <= 2000000) {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-                $imagePath = $targetFile;
+            // Move uploaded file
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFileAbs)) {
+                // Delete old image if it exists and is not the same file
+                if (!empty($blogpost['blog_image'])) {
+                    $oldRel = $blogpost['blog_image']; // could be relative (uploads/old.jpg) or absolute
+                    // Build absolute path for old file safely:
+                    if (preg_match('#^(?:[A-Za-z]:\\\\|/)#', $oldRel)) {
+                        // Absolute path (starts with C:\ or /)
+                        $oldAbs = $oldRel;
+                    } else {
+                        // Treat as relative to this script folder (admin/blogpost)
+                        $oldAbs = __DIR__ . '/' . ltrim($oldRel, '/');
+                    }
+
+                    // Ensure we don't accidentally unlink current uploading file and that file exists
+                    if (file_exists($oldAbs) && is_file($oldAbs) && realpath($oldAbs) !== realpath($targetFileAbs)) {
+                        @unlink($oldAbs); // suppress warning; will fail silently if permission issue
+                    }
+                }
+
+                // Use the new relative path for DB update
+                $imagePath = $targetFileRel;
+            } else {
+                echo "<p style='color:red;text-align:center;'>Failed to move uploaded file.</p>";
             }
         }
     }
@@ -62,9 +99,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
 }
-
-// Image handling
-// I just deleted back your current image handling code
 
 
 ?>
