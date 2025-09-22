@@ -230,10 +230,18 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="image">Upload Blog Image (Leave empty to keep current)</label>
                         <input type="file" id="image" name="image" accept="image/*">
+
                         <?php if (!empty($blogpost['blog_image'])): ?>
-                            <p>Current Image: <img src="<?php echo $blogpost['blog_image']; ?>" alt="Current Image" style="max-height:100px;"></p>
+                            <div class="current-image-box">
+                                <p class="current-image-label">Current Image</p>
+                                <img src="<?php echo $blogpost['blog_image']; ?>"
+                                    alt="Current Image"
+                                    class="current-image-thumb"
+                                    onclick="openImageModal(this.src)">
+                            </div>
                         <?php endif; ?>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 50MB.</small>
+
+                        <small>Allowed formats: JPG, PNG, JPEG, GIF. Max size: 50MB.</small>
                     </div>
 
                     <div class="form-group">
@@ -280,6 +288,65 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+    <script>
+        function openImageModal(src) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+
+            if (modal && modal.parentNode !== document.body) {
+                document.body.appendChild(modal);
+            }
+
+            modalImg.src = src;
+            modal.style.display = "flex";
+
+            // Force reflow to restart animation
+            modal.classList.remove("show");
+            void modal.offsetWidth;
+            modal.classList.add("show");
+
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
+
+            modal.addEventListener('click', function onOverlayClick(e) {
+                if (e.target === modal) {
+                    modal.removeEventListener('click', onOverlayClick);
+                    closeImageModal();
+                }
+            }, {
+                once: true
+            });
+
+            document.addEventListener('keydown', escHandler);
+
+            function escHandler(e) {
+                if (e.key === 'Escape') {
+                    document.removeEventListener('keydown', escHandler);
+                    closeImageModal();
+                }
+            }
+        }
+
+        function closeImageModal() {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            if (!modal) return;
+
+            modal.style.display = "none";
+            modalImg.src = "";
+
+            // Restore scrolling
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+        }
+    </script>
+
+    <!-- Image Modal (hidden by default) -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-btn" onclick="closeImageModal()">&times;</span>
+        <img class="image-modal-content" id="modalImage" alt="Full size image">
+    </div>
 </body>
 
 </html>

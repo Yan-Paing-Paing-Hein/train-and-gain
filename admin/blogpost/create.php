@@ -150,6 +150,7 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="category">Category</label>
                         <select id="category" name="category" required>
+                            <option value="" disabled selected>-- Select a Category --</option>
                             <option value="Weight Loss">Weight Loss</option>
                             <option value="Muscle Gain">Muscle Gain</option>
                             <option value="Yoga">Yoga</option>
@@ -172,7 +173,7 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="image">Upload Blog Image</label>
                         <input type="file" id="image" name="image" accept="image/*" required>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 50MB.</small>
+                        <small>Allowed formats: JPG, PNG, JPEG, GIF. Max size: 50MB.</small>
                     </div>
 
                     <div class="form-group">
@@ -183,6 +184,7 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status" required>
+                            <option value="" disabled selected>-- Select Status --</option>
                             <option value="Draft">Draft</option>
                             <option value="Published">Published</option>
                         </select>
