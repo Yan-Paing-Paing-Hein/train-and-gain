@@ -137,7 +137,7 @@ https://templatemo.com/tm-594-nexus-flow
                 </div>
             </div>
         <?php else: ?>
-            <p style="text-align:center; color:#f900e0;">Blogpost not found.</p>
+            <h1 style="text-align:center; color:#f900e0;">Blogpost not found.</h1>
         <?php endif; ?>
 
         <br><br><br><br><br><br><br>

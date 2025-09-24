@@ -90,62 +90,83 @@ https://templatemo.com/tm-594-nexus-flow
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
 
-        <h2 class="section-title2 fade-up">ID.6 Coach</h2>
-        <div class="about-container fade-up">
-            <div class="about-image">
-                <div class="profile-img-wrapper">
-                    <div class="profile-img">
-                        <img src="images/coach.jpg" alt="Image">
+        <?php
+        // Include DB connection
+        include '../../db_connect.php';
+
+        // Get coach id from URL
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+        // Fetch coach by id
+        $sql = "SELECT * FROM coach WHERE id = $id LIMIT 1";
+        $result = $conn->query($sql);
+        $coach = $result->fetch_assoc();
+        ?>
+
+        <?php if ($coach): ?>
+
+            <h2 class="section-title2 fade-up">ID.<?php echo $coach['id']; ?> Coach</h2>
+            <div class="about-container fade-up">
+                <div class="about-image">
+                    <div class="profile-img-wrapper">
+                        <div class="profile-img">
+                            <img src="<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Profile Picture">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-header">
+                        <h3><?php echo htmlspecialchars($coach['full_name']); ?></h3>
+                        <div class="about-tags">
+                            <span class="tag-specialty">Specialty: <?php echo htmlspecialchars($coach['specialty']); ?></span>
+                            <?php if ($coach['status'] === 'Active'): ?>
+                                <span class="tag-status active">Status: Active</span>
+                            <?php else: ?>
+                                <span class="tag-status inactive">Status: Inactive</span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                        <?php echo nl2br(htmlspecialchars($coach['about'])); ?>
+                    </p>
+
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number2"><?php echo (int) $coach['experience']; ?></div>
+                            <div class="stat-label2">Years Exp</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number2"><?php echo htmlspecialchars(str_replace('@gmail.com', '', $coach['email'])); ?></div>
+                            <div class="stat-label2">@gmail.com</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number2"><?php echo htmlspecialchars($coach['phone_number']); ?></div>
+                            <div class="stat-label2">Contact No.</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="about-content">
-                <div class="about-header">
-                    <h3>Sam Sulek</h3>
-                    <div class="about-tags">
-                        <span class="tag-specialty">Specialty: Muscle Gain</span>
-                        <span class="tag-status active">Status: Active</span>
-                        <!-- <span class="tag-status inactive">Status: Inactive</span> -->
-                    </div>
-                </div>
+        <?php else: ?>
+            <h1 style="text-align:center; color:#f900e0;">Coach not found.</h1>
+        <?php endif; ?>
 
-                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
-                    Sam Sulek (born February 7, 2002) is an American YouTuber, fitness influencer, and professional bodybuilder who gained fame in 2023 for his "Spring Bulk" YouTube series. He is known for his no-nonsense bodybuilding content, showing his workouts and journey to becoming an IFBB Pro, which he achieved at the 2025 Arnold Amateur finals. Sulek is also a popular social media personality, with a large following on YouTube and Instagram, and he sells his own merchandise.
-                </p>
-
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <div class="stat-number2">5</div>
-                        <div class="stat-label2">Years Exp</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number2">samsulek</div>
-                        <div class="stat-label2">@gmail.com</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number2">+1 (617) 555-0145</div>
-                        <div class="stat-label2">Contact No.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br><br><br>
-
-
-
-        <br><br><br><br><br>
+        <br><br><br><br><br><br><br>
 
         <div class="action-bar fade-up">
 
             <div class="action-left">
-                <a href="../coach/edit.php">
-                    <button class="btn-edit">Edit</button>
+                <a href="../coach/edit.php?id=<?php echo $coach['id']; ?>">
+                    <button type="button" class="btn-edit">Edit</button>
                 </a>
             </div>
 
             <div class="action-right">
-                <button class="btn-delete">Delete</button>
+                <button type="button" class="btn-delete" onclick="openDeleteModal(<?php echo $coach['id']; ?>)">
+                    Delete
+                </button>
             </div>
 
         </div>
@@ -176,8 +197,6 @@ https://templatemo.com/tm-594-nexus-flow
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
 
-
-
     <!-- For fade-up scroll -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -199,6 +218,31 @@ https://templatemo.com/tm-594-nexus-flow
             fadeEls.forEach(el => observer.observe(el));
         });
     </script>
+
+    <!-- Delete Confirmation Box Pop Up -->
+    <script>
+        function openDeleteModal(id) {
+            document.getElementById("deleteLink").href = "delete.php?id=" + id;
+            document.getElementById("deleteModal").style.display = "flex";
+        }
+
+        function closeDeleteModal() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+    </script>
+
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this coach? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeDeleteModal()">Cancel</button>
+                <a id="deleteLink" href="#">
+                    <button class="btn-confirm">Delete</button>
+                </a>
+            </div>
+        </div>
+    </div>
 
 </body>
 
