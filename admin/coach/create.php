@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $allowedTypes = ["jpg", "jpeg", "png", "gif"];
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if (in_array($fileType, $allowedTypes) && $_FILES["profile_picture"]["size"] <= 2000000) {
+        if (in_array($fileType, $allowedTypes) && $_FILES["profile_picture"]["size"] <= 50000000) {
             if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFile)) {
                 $imagePath = $targetDir . $fileName; // relative path for DB
             }
@@ -161,7 +161,7 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="profile_picture">Profile Picture</label>
                         <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                        <small>Allowed formats: JPG, PNG, JPEG, GIF. Max size: 50MB.</small>
                     </div>
 
                     <div class="form-group">

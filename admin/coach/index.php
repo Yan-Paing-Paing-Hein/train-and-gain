@@ -5,6 +5,9 @@ include '../../db_connect.php';
 // Fetch all coaches
 $sql = "SELECT id, full_name, profile_picture, specialty, email, status FROM coach ORDER BY id ASC";
 $result = $conn->query($sql);
+
+// Save the row count
+$totalCoaches = ($result) ? $result->num_rows : 0;
 ?>
 
 
@@ -103,7 +106,15 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">Coach Table</h2>
-                <p class="section-subtitle">7 fitness coaches have assigned!</p>
+                <p class="section-subtitle">
+                    <?php if ($totalCoaches > 0): ?>
+                        <?php echo $totalCoaches; ?>
+                        coach<?php echo ($totalCoaches > 1 ? 'es' : ''); ?>
+                        <?php echo ($totalCoaches > 1 ? 'have' : 'has'); ?> assigned!
+                    <?php else: ?>
+                        No coach has assigned yet!
+                    <?php endif; ?>
+                </p>
             </div>
         </div>
 
