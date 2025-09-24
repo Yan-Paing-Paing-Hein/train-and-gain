@@ -1,3 +1,56 @@
+<?php
+include '../../db_connect.php';
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $full_name   = $_POST['name'];
+    $specialty   = $_POST['specialty'];
+    $experience  = $_POST['experience'];
+    $about       = $_POST['bio'];
+    $email       = $_POST['email'];
+    $phone       = $_POST['phone'];
+    $status      = $_POST['status'];
+
+
+
+    // Handle image upload
+    $imagePath = "";
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
+        $targetDir = "profiles/"; // store in admin/coach/profiles/
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        $fileName   = time() . "_" . basename($_FILES["profile_picture"]["name"]);
+        $targetFile = $targetDir . $fileName;
+
+        $allowedTypes = ["jpg", "jpeg", "png", "gif"];
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        if (in_array($fileType, $allowedTypes) && $_FILES["profile_picture"]["size"] <= 2000000) {
+            if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFile)) {
+                $imagePath = $targetDir . $fileName; // relative path for DB
+            }
+        }
+    }
+
+    // Insert into database
+    $stmt = $conn->prepare("INSERT INTO coach (full_name, profile_picture, specialty, experience, about, email, phone_number, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssss", $full_name, $imagePath, $specialty, $experience, $about, $email, $phone, $status);
+
+    if ($stmt->execute()) {
+        header("Location: index.php");
+        exit;
+    } else {
+        echo "<p style='color:red;text-align:center;'>Error: " . $stmt->error . "</p>";
+    }
+
+    $stmt->close();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,8 +148,10 @@ https://templatemo.com/tm-594-nexus-flow
                 <p class="section-subtitle">Come train and come gain!</p>
             </div>
 
+
+
             <div class="contact-form-wrapper">
-                <div class="contact-form">
+                <form class="contact-form" method="POST" action="create.php" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="name">Full Name</label>
@@ -112,12 +167,13 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="specialty">Specialty</label>
                         <select id="specialty" name="specialty" required>
-                            <option value="weight_loss">Weight Loss</option>
-                            <option value="muscle_gain">Muscle Gain</option>
-                            <option value="yoga">Yoga</option>
-                            <option value="strength_training">Strength Training</option>
-                            <option value="hiit">HIIT</option>
-                            <option value="endurance">Endurance</option>
+                            <option value="" disabled selected>-- Select a Specialty --</option>
+                            <option value="Weight Loss">Weight Loss</option>
+                            <option value="Muscle Gain">Muscle Gain</option>
+                            <option value="Yoga">Yoga</option>
+                            <option value="Strength Training">Strength Training</option>
+                            <option value="HIIT">HIIT</option>
+                            <option value="Endurance">Endurance</option>
                         </select>
                     </div>
 
@@ -128,8 +184,7 @@ https://templatemo.com/tm-594-nexus-flow
 
                     <div class="form-group">
                         <label for="bio">Bio / About</label>
-                        <textarea id="bio" name="bio" rows="4" placeholder="Write something about the coach..."
-                            required></textarea>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Write something about the coach..." required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -145,14 +200,16 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="" disabled selected>-- Select Status --</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-primary btn-submit">Create Coach</button>
-                </div>
+                    <button type="submit" class="btn-create btn-upload">Create Coach</button>
+                </form>
             </div>
+
         </div>
     </section>
 

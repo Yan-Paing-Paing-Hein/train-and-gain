@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssss", $category, $title, $content, $imagePath, $publish_date, $status);
 
     if ($stmt->execute()) {
-        header("Location: index.php?success=1");
+        header("Location: index.php");
         exit;
     } else {
         echo "<p style='color:red;text-align:center;'>Error: " . $stmt->error . "</p>";

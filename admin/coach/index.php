@@ -1,3 +1,14 @@
+<?php
+// Include database connection
+include '../../db_connect.php';
+
+// Fetch all coaches
+$sql = "SELECT id, full_name, profile_picture, specialty, email, status FROM coach ORDER BY id ASC";
+$result = $conn->query($sql);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,11 +108,9 @@ https://templatemo.com/tm-594-nexus-flow
         </div>
 
 
-        <!-- CRUD Table Section -->
+
         <div class="crud-table-container">
             <table class="crud-table">
-
-
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -114,30 +123,34 @@ https://templatemo.com/tm-594-nexus-flow
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td><img src="/images/profile1.jpg" alt="Profile"></td>
-                        <td>Weight Loss</td>
-                        <td>john@example.com</td>
-                        <td><span class="status active">Active</span></td>
-                        <td>
-                            <a href="../coach/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Sarah Smith</td>
-                        <td><img src="/images/profile2.jpg" alt="Profile"></td>
-                        <td>Yoga</td>
-                        <td>sarah@example.com</td>
-                        <td><span class="status inactive">Inactive</span></td>
-                        <td>
-                            <a href="../coach/detail.php" class="btn-view">View Detail</a>
-                        </td>
-                    </tr>
+                    <?php if ($result && $result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo htmlspecialchars($row['full_name']); ?></td>
+                                <td>
+                                    <img src="<?php echo htmlspecialchars($row['profile_picture']); ?>" alt="Profile" width="80" height="80">
+                                </td>
+                                <td><?php echo htmlspecialchars($row['specialty']); ?></td>
+                                <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                <td>
+                                    <?php if ($row['status'] === 'Active'): ?>
+                                        <span class="status active">Active</span>
+                                    <?php else: ?>
+                                        <span class="status inactive">Inactive</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <a href="../coach/detail.php?id=<?php echo $row['id']; ?>" class="btn-view">View Detail</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="7" style="text-align:center;">No coach found.</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
-
             </table>
         </div>
     </section>
