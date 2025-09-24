@@ -1,3 +1,102 @@
+<?php
+include '../../db_connect.php';
+
+// Get coach ID from query string
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    die("<p style='color:red;text-align:center;'>Invalid coach ID.</p>");
+}
+
+$id = intval($_GET['id']);
+
+// Fetch existing coach
+$stmt = $conn->prepare("SELECT * FROM coach WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$coach = $result->fetch_assoc();
+
+if (!$coach) {
+    die("<p style='color:red;text-align:center;'>Coach not found.</p>");
+}
+$stmt->close();
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $full_name     = $_POST['full_name'];
+    $specialty     = $_POST['specialty'];
+    $experience    = $_POST['experience'];
+    $about         = $_POST['about'];
+    $email         = $_POST['email'];
+    $phone_number  = $_POST['phone_number'];
+    $status        = $_POST['status'];
+
+    // Image handling
+    $imagePath = $coach['profile_picture']; // keep old image by default
+
+    if (isset($_FILES['profile_picture']) && isset($_FILES['profile_picture']['error']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+        $uploadsDirRel = 'profiles/';                     // relative path saved to DB
+        $uploadsDirAbs = __DIR__ . '/' . $uploadsDirRel;  // absolute path on server
+
+        if (!is_dir($uploadsDirAbs)) {
+            mkdir($uploadsDirAbs, 0777, true);
+        }
+
+        $originalName = basename($_FILES['profile_picture']['name']);
+        $fileExt = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($fileExt, $allowedTypes)) {
+            echo "<p style='color:red;text-align:center;'>Invalid image format. Allowed: JPG, PNG, GIF.</p>";
+        } elseif ($_FILES['profile_picture']['size'] > 50000000) {
+            echo "<p style='color:red;text-align:center;'>Image too large. Max size: 50MB.</p>";
+        } else {
+            $safeName = preg_replace('/[^A-Za-z0-9_.-]/', '_', $originalName);
+            $fileName = time() . '_' . $safeName;
+            $targetFileAbs = $uploadsDirAbs . $fileName;
+            $targetFileRel = $uploadsDirRel . $fileName;
+
+            if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetFileAbs)) {
+                // Delete old image
+                if (!empty($coach['profile_picture'])) {
+                    $oldRel = $coach['profile_picture'];
+
+                    if (preg_match('#^(?:[A-Za-z]:\\\\|/)#', $oldRel)) {
+                        $oldAbs = $oldRel;
+                    } else {
+                        $oldAbs = __DIR__ . '/' . ltrim($oldRel, '/');
+                    }
+
+                    if (file_exists($oldAbs) && is_file($oldAbs) && realpath($oldAbs) !== realpath($targetFileAbs)) {
+                        @unlink($oldAbs);
+                    }
+                }
+
+                $imagePath = $targetFileRel;
+            } else {
+                echo "<p style='color:red;text-align:center;'>Failed to move uploaded file.</p>";
+            }
+        }
+    }
+
+    // Update query
+    $stmt = $conn->prepare("UPDATE coach 
+        SET full_name=?, profile_picture=?, specialty=?, experience=?, about=?, email=?, phone_number=?, status=? 
+        WHERE id=?");
+    $stmt->bind_param("sssissssi", $full_name, $imagePath, $specialty, $experience, $about, $email, $phone_number, $status, $id);
+
+    if ($stmt->execute()) {
+        header("Location: index.php");
+        exit;
+    } else {
+        echo "<p style='color:red;text-align:center;'>Error: " . $stmt->error . "</p>";
+    }
+
+    $stmt->close();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,65 +195,77 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
             <div class="contact-form-wrapper">
-                <div class="contact-form">
+                <form class="contact-form" method="POST" action="edit.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter coach's name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="profile_picture">Profile Picture</label>
-                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
-                        <small>Allowed formats: JPG, PNG, GIF. Max size: 2MB.</small>
+                        <label for="full_name">Full Name</label>
+                        <input type="text" id="full_name" name="full_name" value="<?php echo htmlspecialchars($coach['full_name']); ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="specialty">Specialty</label>
                         <select id="specialty" name="specialty" required>
-                            <option value="weight_loss">Weight Loss</option>
-                            <option value="muscle_gain">Muscle Gain</option>
-                            <option value="yoga">Yoga</option>
-                            <option value="strength_training">Strength Training</option>
-                            <option value="hiit">HIIT</option>
-                            <option value="endurance">Endurance</option>
+                            <option value="Weight Loss" <?php if ($coach['specialty'] == "Weight Loss") echo "selected"; ?>>Weight Loss</option>
+                            <option value="Muscle Gain" <?php if ($coach['specialty'] == "Muscle Gain") echo "selected"; ?>>Muscle Gain</option>
+                            <option value="Yoga" <?php if ($coach['specialty'] == "Yoga") echo "selected"; ?>>Yoga</option>
+                            <option value="Strength Training" <?php if ($coach['specialty'] == "Strength Training") echo "selected"; ?>>Strength Training</option>
+                            <option value="HIIT" <?php if ($coach['specialty'] == "HIIT") echo "selected"; ?>>HIIT</option>
+                            <option value="Endurance" <?php if ($coach['specialty'] == "Endurance") echo "selected"; ?>>Endurance</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="experience">Experience (Years)</label>
-                        <input type="number" id="experience" name="experience" placeholder="e.g., 5" min="0" required>
+                        <input type="number" id="experience" name="experience" value="<?php echo htmlspecialchars($coach['experience']); ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="bio">Bio / About</label>
-                        <textarea id="bio" name="bio" rows="4" placeholder="Write something about the coach..."
-                            required></textarea>
+                        <label for="about">About</label>
+                        <textarea id="about" name="about" rows="5" required><?php echo htmlspecialchars($coach['about']); ?></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="coach@example.com" required>
+                        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($coach['email']); ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" id="phone" name="phone" placeholder="e.g., +959123456789" required>
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($coach['phone_number']); ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile_picture">Upload Profile Picture (Leave empty to keep current)</label>
+                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+
+                        <?php if (!empty($coach['profile_picture'])): ?>
+                            <div class="current-image-box">
+                                <p class="current-image-label">Current Profile Picture</p>
+                                <img src="<?php echo $coach['profile_picture']; ?>"
+                                    alt="Current Image"
+                                    class="current-image-thumb"
+                                    onclick="openImageModal(this.src)">
+                            </div>
+                        <?php endif; ?>
+
+                        <small>Allowed formats: JPG, PNG, JPEG, GIF. Max size: 50MB.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="Active" <?php if ($coach['status'] == "Active") echo "selected"; ?>>Active</option>
+                            <option value="Inactive" <?php if ($coach['status'] == "Inactive") echo "selected"; ?>>Inactive</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-primary btn-submit">Update Coach</button>
-                </div>
+                    <button type="submit" class="btn-create btn-upload">Update Coach</button>
+                </form>
             </div>
         </div>
     </section>
+
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -177,6 +288,65 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+    <script>
+        function openImageModal(src) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+
+            if (modal && modal.parentNode !== document.body) {
+                document.body.appendChild(modal);
+            }
+
+            modalImg.src = src;
+            modal.style.display = "flex";
+
+            // Force reflow to restart animation
+            modal.classList.remove("show");
+            void modal.offsetWidth;
+            modal.classList.add("show");
+
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
+
+            modal.addEventListener('click', function onOverlayClick(e) {
+                if (e.target === modal) {
+                    modal.removeEventListener('click', onOverlayClick);
+                    closeImageModal();
+                }
+            }, {
+                once: true
+            });
+
+            document.addEventListener('keydown', escHandler);
+
+            function escHandler(e) {
+                if (e.key === 'Escape') {
+                    document.removeEventListener('keydown', escHandler);
+                    closeImageModal();
+                }
+            }
+        }
+
+        function closeImageModal() {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            if (!modal) return;
+
+            modal.style.display = "none";
+            modalImg.src = "";
+
+            // Restore scrolling
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+        }
+    </script>
+
+    <!-- Image Modal (hidden by default) -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-btn" onclick="closeImageModal()">&times;</span>
+        <img class="image-modal-content" id="modalImage" alt="Full size image">
+    </div>
 </body>
 
 </html>
