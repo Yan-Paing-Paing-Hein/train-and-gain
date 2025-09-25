@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Detail</title>
+    <title>Client Detail</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -46,12 +46,12 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../customer/index.php" class="cyber-button">View All Customers</a>
+                <a href="../client/index.php" class="cyber-button">View All Clients</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -71,14 +71,14 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="../customer/index.php" class="cyber-button">View All Customers</a>
+            <a href="../client/index.php" class="cyber-button">View All Clients</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
@@ -88,9 +88,9 @@ https://templatemo.com/tm-594-nexus-flow
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
 
-        <div class="customer-detail-container">
-            <h2 class="customer-detail-title">Customer Detail</h2>
-            <table class="customer-detail-table">
+        <div class="client-detail-container">
+            <h2 class="client-detail-title">Client Detail</h2>
+            <table class="client-detail-table">
                 <tbody>
                     <tr>
                         <th>ID</th>
@@ -138,7 +138,7 @@ https://templatemo.com/tm-594-nexus-flow
                     </tr>
                     <tr>
                         <th>Status</th>
-                        <td><span class="customer-detail-status-inactive">Inactive</span></td>
+                        <td><span class="client-detail-status-inactive">Inactive</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -149,7 +149,7 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="action-bar fade-up">
 
             <div class="action-left">
-                <a href="../customer/edit.php">
+                <a href="../client/edit.php">
                     <button class="btn-edit">Edit</button>
                 </a>
             </div>
@@ -186,7 +186,7 @@ https://templatemo.com/tm-594-nexus-flow
 
 
     <script>
-        document.querySelectorAll(".customer-detail-table tr").forEach(row => {
+        document.querySelectorAll(".client-detail-table tr").forEach(row => {
             row.addEventListener("mouseenter", () => {
                 row.style.transition = "transform 0.3s ease";
                 row.style.transform = "scale(1.02)";
@@ -199,7 +199,7 @@ https://templatemo.com/tm-594-nexus-flow
 
 
     <script>
-        document.querySelectorAll(".customer-detail-table tr").forEach((row, i) => {
+        document.querySelectorAll(".client-detail-table tr").forEach((row, i) => {
             row.style.opacity = 0;
             row.style.transform = "translateX(-20px)";
             setTimeout(() => {
@@ -215,4 +215,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/customer/detail.php -->
+<!-- http://localhost/train&gain/admin/client/detail.php -->

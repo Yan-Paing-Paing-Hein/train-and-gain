@@ -2953,8 +2953,8 @@ nav {
     box-shadow: 0 0 18px #ff0033;
 }
 
-/* For Customer Detail */
-.customer-detail-container {
+/* For Client Detail */
+.client-detail-container {
     background: var(--card-bg);
     border: 3px solid #f900e0;
     padding: 2rem;
@@ -2967,7 +2967,7 @@ nav {
 }
 
 /* Title */
-.customer-detail-title {
+.client-detail-title {
     text-align: center;
     font-size: 2rem;
     color: #00ffff;
@@ -2978,7 +2978,7 @@ nav {
 }
 
 /* Table */
-.customer-detail-table {
+.client-detail-table {
     width: 100%;
     border-collapse: collapse;
     font-family: 'Orbitron', sans-serif;
@@ -2989,7 +2989,7 @@ nav {
 }
 
 /* Table Headers */
-.customer-detail-table th {
+.client-detail-table th {
     text-align: left;
     padding: 14px 20px;
     background: rgba(249, 0, 224, 0.2);
@@ -3001,7 +3001,7 @@ nav {
 }
 
 /* Table Data */
-.customer-detail-table td {
+.client-detail-table td {
     padding: 14px 20px;
     border: 1px solid #00ffff;
     background: rgba(0, 255, 255, 0.05);
@@ -3011,7 +3011,7 @@ nav {
 }
 
 /* Row Hover Effect */
-.customer-detail-table tr:hover td {
+.client-detail-table tr:hover td {
     background: rgba(0, 255, 255, 0.12);
     color: #00ffff;
     box-shadow: inset 0 0 15px #00ffff, inset 0 0 25px #f900e0;
@@ -3019,7 +3019,7 @@ nav {
 }
 
 /* Status Badge */
-.customer-detail-status-active {
+.client-detail-status-active {
     color: #00ff33;
     font-weight: bold;
     padding: 4px 10px;
@@ -3028,7 +3028,7 @@ nav {
     box-shadow: 0 0 10px #00ff33;
 }
 
-.customer-detail-status-inactive {
+.client-detail-status-inactive {
     color: #ff4d4d;
     font-weight: bold;
     padding: 4px 10px;

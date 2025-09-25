@@ -46,7 +46,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
@@ -78,7 +78,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
@@ -105,11 +105,11 @@ https://templatemo.com/tm-594-nexus-flow
                         <input type="text" id="payment_id" name="payment_id" value="AUTO123456" readonly>
                     </div> -->
 
-                    <!-- 2. Customer (dropdown linked to customer table) -->
+                    <!-- 2. Client (dropdown linked to client table) -->
                     <div class="form-group">
-                        <label for="customer">Customer</label>
-                        <select id="customer" name="customer" required>
-                            <option value="">-- Select Customer --</option>
+                        <label for="client">Client</label>
+                        <select id="client" name="client" required>
+                            <option value="">-- Select Client --</option>
                             <option value="1">John Doe</option>
                             <option value="2">Jane Smith</option>
                             <option value="3">Michael Lee</option>

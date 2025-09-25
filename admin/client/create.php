@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Customer</title>
+    <title>Create Client</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -46,12 +46,12 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../customer/index.php" class="cyber-button">Customer Table</a>
+                <a href="../client/index.php" class="cyber-button">Client Table</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -71,14 +71,14 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="../customer/index.php" class="cyber-button">Customer Table</a>
+            <a href="../client/index.php" class="cyber-button">Client Table</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
@@ -91,7 +91,7 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Edit Customer</h2>
+                <h2 class="section-title">Create Client</h2>
                 <p class="section-subtitle">Come train and come gain!</p>
             </div>
 
@@ -105,7 +105,7 @@ https://templatemo.com/tm-594-nexus-flow
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="customer@example.com" required>
+                        <input type="email" id="email" name="email" placeholder="client@example.com" required>
                     </div>
 
                     <div class="form-group">
@@ -189,7 +189,7 @@ https://templatemo.com/tm-594-nexus-flow
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-primary btn-submit">Update Customer</button>
+                    <button type="submit" class="btn-primary btn-submit">Create Client</button>
                 </div>
             </div>
         </div>
@@ -233,4 +233,4 @@ https://templatemo.com/tm-594-nexus-flow
     });
 </script>
 
-<!-- http://localhost/train&gain/admin/customer/edit.php -->
+<!-- http://localhost/train&gain/admin/client/create.php -->

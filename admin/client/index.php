@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Index</title>
+    <title>Client Index</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -46,12 +46,12 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../customer/create.php" class="cyber-button">Create Customer</a>
+                <a href="../client/create.php" class="cyber-button">Create Client</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -71,14 +71,14 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="#" class="cyber-button">Create Customer</a>
+            <a href="#" class="cyber-button">Create Client</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
                 <li><a href="../admin_home.php">Home</a></li>
                 <li><a href="../blogpost/index.php">BlogPost</a></li>
                 <li><a href="../coach/index.php">Coach</a></li>
-                <li><a href="../customer/index.php">Customer</a></li>
+                <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
@@ -89,8 +89,8 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Customer Table</h2>
-                <p class="section-subtitle">35 customers have joined!</p>
+                <h2 class="section-title">Client Table</h2>
+                <p class="section-subtitle">35 clients have joined!</p>
             </div>
         </div>
 
@@ -120,7 +120,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Muscle Gain</td>
                         <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -133,7 +133,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Weight Loss</td>
                         <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -146,7 +146,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Endurance</td>
                         <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -159,7 +159,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Yoga</td>
                         <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -172,7 +172,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Strength Training</td>
                         <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -185,7 +185,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>HIIT</td>
                         <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -198,7 +198,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Muscle Gain</td>
                         <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -211,7 +211,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Yoga</td>
                         <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -224,7 +224,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Weight Loss</td>
                         <td><span class="status inactive">Inactive</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -237,7 +237,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <td>Endurance</td>
                         <td><span class="status active">Active</span></td>
                         <td>
-                            <a href="../customer/detail.php" class="btn-view">View Detail</a>
+                            <a href="../client/detail.php" class="btn-view">View Detail</a>
                         </td>
                     </tr>
 
@@ -271,4 +271,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/customer/index.php -->
+<!-- http://localhost/train&gain/admin/client/index.php -->
