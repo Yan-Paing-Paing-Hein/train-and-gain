@@ -2,14 +2,31 @@
 // Include database connection
 include '../db_connect.php';
 
-// Fetch only Published blogposts
+// Number of posts per page
+$postsPerPage = 10;
+
+// Get current page from URL, default = 1
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+
+// Calculate offset
+$offset = ($page - 1) * $postsPerPage;
+
+// Fetch total number of published posts
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM blogpost WHERE status = 'Published'");
+$totalPosts = $totalResult->fetch_assoc()['total'];
+
+// Calculate total pages
+$totalPages = ceil($totalPosts / $postsPerPage);
+
+// Fetch only Published blogposts with LIMIT + OFFSET
 $sql = "SELECT id, category, title, content, blog_image, publish_date, status 
         FROM blogpost 
         WHERE status = 'Published'
-        ORDER BY id DESC"; // Show latest first
+        ORDER BY id DESC 
+        LIMIT $postsPerPage OFFSET $offset";
 $result = $conn->query($sql);
 
-$postIndex = 0; // Counter for alternating layout
+$postIndex = $offset; // counter for alternating layout
 ?>
 
 
@@ -117,11 +134,7 @@ https://templatemo.com/tm-594-nexus-flow
                                     <div class="blog-meta">
                                         <span class="blog-date">Published Date: <?php echo $blog['publish_date']; ?></span>
                                         <span class="blog-category">Category: <?php echo htmlspecialchars($blog['category']); ?></span>
-                                        <?php if ($blog['status'] === 'Published'): ?>
-                                            <span class="blog-status published">Status: Published</span>
-                                        <?php else: ?>
-                                            <span class="blog-status draft">Status: Draft</span>
-                                        <?php endif; ?>
+                                        <span class="blog-status published">Status: Published</span>
                                     </div>
                                 </div>
 
@@ -142,11 +155,7 @@ https://templatemo.com/tm-594-nexus-flow
                                     <div class="blog-meta">
                                         <span class="blog-date">Published Date: <?php echo $blog['publish_date']; ?></span>
                                         <span class="blog-category">Category: <?php echo htmlspecialchars($blog['category']); ?></span>
-                                        <?php if ($blog['status'] === 'Published'): ?>
-                                            <span class="blog-status published">Status: Published</span>
-                                        <?php else: ?>
-                                            <span class="blog-status draft">Status: Draft</span>
-                                        <?php endif; ?>
+                                        <span class="blog-status published">Status: Published</span>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -157,7 +166,28 @@ https://templatemo.com/tm-594-nexus-flow
 
             </section>
 
+
         <?php endwhile; ?>
+
+        <!-- Pagination -->
+        <div class="pagination" style="text-align:center; margin:20px;">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>" class="btn-prev">Previous</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php if ($i == $page): ?>
+                    <strong>[<?php echo $i; ?>]</strong>
+                <?php else: ?>
+                    <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?php echo $page + 1; ?>" class="btn-next">Next</a>
+            <?php endif; ?>
+        </div>
+
     <?php else: ?>
         <h1 style="text-align:center; color:#f900e0;">No blogposts found.</h1>
     <?php endif; ?>

@@ -3299,3 +3299,69 @@ nav {
 .image-modal.show .image-modal-content {
     animation: popIn 0.35s ease-out forwards;
 }
+
+/* Cyber-Tech Neon Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.pagination a,
+.pagination strong {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #00ffff;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+}
+
+.pagination a:hover {
+    color: #f900e0;
+    border-color: #f900e0;
+    box-shadow: 0 0 5px #f900e0, 0 0 10px #f900e0, 0 0 20px #f900e0;
+    text-shadow: 0 0 5px #f900e0, 0 0 10px #f900e0;
+    transform: scale(1.1);
+}
+
+.pagination strong {
+    background-color: #00ffff;
+    color: #000000;
+    box-shadow: 0 0 8px #00ffff, 0 0 15px #00ffff, 0 0 25px #00ffff;
+    transition: all 0.3s ease;
+}
+
+.pagination strong:hover {
+    transform: scale(1.05);
+}
+
+.pagination a:hover::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    border-radius: 8px;
+    box-shadow: 0 0 8px #f900e0, 0 0 15px #f900e0, 0 0 25px #f900e0;
+    opacity: 0.5;
+    animation: neonPulse 1.2s infinite alternate;
+}
+
+@keyframes neonPulse {
+    0% {
+        opacity: 0.3;
+        box-shadow: 0 0 5px #f900e0, 0 0 10px #f900e0;
+    }
+
+    100% {
+        opacity: 0.6;
+        box-shadow: 0 0 8px #f900e0, 0 0 15px #f900e0;
+    }
+}
