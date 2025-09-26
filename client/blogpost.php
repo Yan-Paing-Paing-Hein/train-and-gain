@@ -37,7 +37,7 @@ $postIndex = $offset; // counter for alternating layout
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogpost Detail</title>
+    <title>Blogpost Contents</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -77,6 +77,7 @@ https://templatemo.com/tm-594-nexus-flow
             <a href="#top" class="logo">Train & Gain</a>
             <ul class="nav-links">
                 <li><a href="../client/blogpost.php">BlogPost</a></li>
+                <li><a href="../client/coach.php">Coach</a></li>
             </ul>
             <!-- <div class="nav-bottom">
                 <a href="../blogpost/index.php" class="cyber-button">View All Blogposts</a>
