@@ -3,7 +3,7 @@
 include '../db_connect.php';
 
 // Fetch all coaches
-$sql = "SELECT * FROM coach ORDER BY id ASC";
+$sql = "SELECT * FROM coach WHERE status = 'Active' ORDER BY id ASC";
 $result = $conn->query($sql);
 ?>
 
@@ -99,7 +99,8 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="about-image">
                         <div class="profile-img-wrapper">
                             <div class="profile-img">
-                                <img src="<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Profile Picture">
+                                <img src="../admin/coach/profiles/<?php echo htmlspecialchars(basename($coach['profile_picture'])); ?>"
+                                    alt="Profile Picture">
                             </div>
                         </div>
                     </div>
@@ -109,11 +110,6 @@ https://templatemo.com/tm-594-nexus-flow
                             <h3><?php echo htmlspecialchars($coach['full_name']); ?></h3>
                             <div class="about-tags">
                                 <span class="tag-specialty">Specialty: <?php echo htmlspecialchars($coach['specialty']); ?></span>
-                                <?php if ($coach['status'] === 'Active'): ?>
-                                    <span class="tag-status active">Status: Active</span>
-                                <?php else: ?>
-                                    <span class="tag-status inactive">Status: Inactive</span>
-                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -199,3 +195,5 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
+
+<!-- http://localhost/train&gain/client/coach.php -->

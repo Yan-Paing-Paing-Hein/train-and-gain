@@ -160,7 +160,7 @@ $postIndex = $offset; // counter for alternating layout
                                         <div class="blog-meta">
                                             <span class="blog-date">Published Date: <?php echo $blog['publish_date']; ?></span>
                                             <span class="blog-category">Category: <?php echo htmlspecialchars($blog['category']); ?></span>
-                                            <span class="blog-status published">Status: Published</span>
+                                            <!-- <span class="blog-status published">Status: Published</span> -->
                                         </div>
                                     </div>
                                     <div class="feature-visual glass">
@@ -177,7 +177,7 @@ $postIndex = $offset; // counter for alternating layout
                                         <div class="blog-meta">
                                             <span class="blog-date">Published Date: <?php echo $blog['publish_date']; ?></span>
                                             <span class="blog-category">Category: <?php echo htmlspecialchars($blog['category']); ?></span>
-                                            <span class="blog-status published">Status: Published</span>
+                                            <!-- <span class="blog-status published">Status: Published</span> -->
                                         </div>
                                     </div>
                                 <?php endif; ?>
