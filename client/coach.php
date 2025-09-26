@@ -13,7 +13,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Coaches</title>
+    <title>Our coaches</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -55,9 +55,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/blogpost.php">BlogPost</a></li>
                 <li><a href="../client/coach.php">Coach</a></li>
             </ul>
-            <div class="nav-bottom">
-                <a href="../coach/index.php" class="cyber-button">View All Coaches</a>
-            </div>
+
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
                     <span></span>
@@ -142,7 +140,7 @@ https://templatemo.com/tm-594-nexus-flow
 
             <?php endwhile; ?>
         <?php else: ?>
-            <h1 style="text-align:center; color:#f900e0;">No coaches available right now.</h1>
+            <h1 style="text-align:center; color:#f900e0;">No coach available right now.</h1>
         <?php endif; ?>
     </section>
 
@@ -186,9 +184,18 @@ https://templatemo.com/tm-594-nexus-flow
                 }
             );
 
-            fadeEls.forEach(el => observer.observe(el));
+            fadeEls.forEach(el => {
+                observer.observe(el);
+
+                // If already visible on load → show immediately
+                if (el.getBoundingClientRect().top < window.innerHeight) {
+                    el.classList.add("show");
+                    observer.unobserve(el);
+                }
+            });
         });
     </script>
+
 </body>
 
 </html>
