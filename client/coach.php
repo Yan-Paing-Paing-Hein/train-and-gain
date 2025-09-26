@@ -2,8 +2,24 @@
 // Include DB connection
 include '../db_connect.php';
 
-// Fetch all coaches
-$sql = "SELECT * FROM coach WHERE status = 'Active' ORDER BY id ASC";
+// Number of coaches per page
+$coachesPerPage = 10;
+
+// Get current page from URL, default = 1
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+
+// Calculate offset
+$offset = ($page - 1) * $coachesPerPage;
+
+// Fetch total number of active coaches
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM coach WHERE status = 'Active'");
+$totalCoaches = $totalResult->fetch_assoc()['total'];
+
+// Calculate total pages
+$totalPages = ceil($totalCoaches / $coachesPerPage);
+
+// Fetch coaches with LIMIT + OFFSET
+$sql = "SELECT * FROM coach WHERE status = 'Active' ORDER BY id ASC LIMIT $coachesPerPage OFFSET $offset";
 $result = $conn->query($sql);
 ?>
 
@@ -135,6 +151,26 @@ https://templatemo.com/tm-594-nexus-flow
                 </div>
 
             <?php endwhile; ?>
+
+            <!-- Pagination -->
+            <div class="pagination" style="text-align:center; margin:20px;">
+                <?php if ($page > 1): ?>
+                    <a href="?page=<?php echo $page - 1; ?>" class="btn-prev">Previous</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <?php if ($i == $page): ?>
+                        <strong>[<?php echo $i; ?>]</strong>
+                    <?php else: ?>
+                        <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <a href="?page=<?php echo $page + 1; ?>" class="btn-next">Next</a>
+                <?php endif; ?>
+            </div>
+
         <?php else: ?>
             <h1 style="text-align:center; color:#f900e0;">No coach available right now.</h1>
         <?php endif; ?>

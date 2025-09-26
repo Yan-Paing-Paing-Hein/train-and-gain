@@ -202,11 +202,13 @@ $postIndex = $offset; // counter for alternating layout
                         <a href="?page=<?php echo $page + 1; ?>" class="btn-next">Next</a>
                     <?php endif; ?>
                 </div>
+
             <?php else: ?>
                 <h1 class="fade-up" style="text-align:center; color:#f900e0;">
                     No blogpost available right now.
                 </h1>
             <?php endif; ?>
+
         </div>
     </section>
 
