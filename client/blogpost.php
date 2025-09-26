@@ -117,7 +117,11 @@ https://templatemo.com/tm-594-nexus-flow
 
     <?php if ($result && $result->num_rows > 0): ?>
         <?php while ($blog = $result->fetch_assoc()): ?>
-            <?php $postIndex++; ?>
+            <?php
+            $postIndex++;
+            // Ensure only filename is used
+            $blogImagePath = '../admin/blogpost/uploads/' . basename($blog['blog_image']);
+            ?>
             <!-- Contact Section -->
             <section class="contact fade-up" id="contact">
 
@@ -139,13 +143,13 @@ https://templatemo.com/tm-594-nexus-flow
                                 </div>
 
                                 <div class="feature-visual glass">
-                                    <img src="<?php echo htmlspecialchars($blog['blog_image']); ?>" alt="Blog Image">
+                                    <img src="<?php echo htmlspecialchars($blogImagePath); ?>" alt="Blog Image">
                                 </div>
 
                             <?php else: ?>
                                 <!-- Even Post: Image Left, Content Right -->
                                 <div class="feature-visual glass">
-                                    <img src="<?php echo htmlspecialchars($blog['blog_image']); ?>" alt="Blog Image">
+                                    <img src="<?php echo htmlspecialchars($blogImagePath); ?>" alt="Blog Image">
                                 </div>
 
                                 <div class="feature-content glass">
@@ -165,7 +169,6 @@ https://templatemo.com/tm-594-nexus-flow
                 </div>
 
             </section>
-
 
         <?php endwhile; ?>
 
