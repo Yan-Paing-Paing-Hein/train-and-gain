@@ -3351,10 +3351,10 @@ nav {
     border-radius: 8px;
     box-shadow: 0 0 8px #f900e0, 0 0 15px #f900e0, 0 0 25px #f900e0;
     opacity: 0.5;
-    animation: neonPulse 1.2s infinite alternate;
+    animation: neonPulse2 1.2s infinite alternate;
 }
 
-@keyframes neonPulse {
+@keyframes neonPulse2 {
     0% {
         opacity: 0.3;
         box-shadow: 0 0 5px #f900e0, 0 0 10px #f900e0;
