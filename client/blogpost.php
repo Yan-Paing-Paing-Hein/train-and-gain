@@ -107,8 +107,10 @@ $postIndex = $offset; // counter for alternating layout
             <ul class="nav-links">
                 <li><a href="../client/blogpost.php">BlogPost</a></li>
                 <li><a href="../client/coach.php">Coach</a></li>
-                <li><a href="../client/register.php">Register</a></li>
             </ul>
+            <div class="nav-bottom">
+                <a href="../client/register.php" class="cyber-button">Register</a>
+            </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
                     <span></span>

@@ -45,7 +45,6 @@ https://templatemo.com/tm-594-nexus-flow
             <ul class="nav-links">
                 <li><a href="../client/blogpost.php">BlogPost</a></li>
                 <li><a href="../client/coach.php">Coach</a></li>
-                <li><a href="../client/register.php">Register</a></li>
             </ul>
             <!-- <div class="nav-bottom">
                 <a href="../blogpost/index.php" class="cyber-button">Blogpost Table</a>
@@ -93,19 +92,35 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
             <div class="contact-form-wrapper">
-                <form class="contact-form" method="" action="" enctype="multipart/form-data">
+                <form class="contact-form" method="POST" action="register_action.php" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="name">User Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter user name" required>
+                    </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="client@example.com" required>
+                        <input type="email" id="email" name="email" placeholder="useremail@gmail.com" required>
                     </div>
 
+                    <!-- Password -->
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="password-wrapper">
                             <input type="password" id="password" name="password"
-                                placeholder="Auto-generate or enter manually" required>
+                                placeholder="Enter password manually" required>
                             <button type="button" id="togglePassword" class="toggle-password">Show</button>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="confirm_password" name="confirm_password"
+                                placeholder="Re-enter your password" required>
+                            <button type="button" id="toggleConfirmPassword" class="toggle-password">Show</button>
                         </div>
                     </div>
 
@@ -143,6 +158,7 @@ https://templatemo.com/tm-594-nexus-flow
 
     <!-- Password show/hide button -->
     <script>
+        // First password
         const passwordField = document.getElementById("password");
         const toggleBtn = document.getElementById("togglePassword");
 
@@ -150,6 +166,16 @@ https://templatemo.com/tm-594-nexus-flow
             const isPassword = passwordField.type === "password";
             passwordField.type = isPassword ? "text" : "password";
             toggleBtn.textContent = isPassword ? "Hide" : "Show";
+        });
+
+        // Confirm password
+        const confirmPasswordField = document.getElementById("confirm_password");
+        const toggleConfirmBtn = document.getElementById("toggleConfirmPassword");
+
+        toggleConfirmBtn.addEventListener("click", () => {
+            const isPassword = confirmPasswordField.type === "password";
+            confirmPasswordField.type = isPassword ? "text" : "password";
+            toggleConfirmBtn.textContent = isPassword ? "Hide" : "Show";
         });
     </script>
 </body>
