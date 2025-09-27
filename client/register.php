@@ -124,6 +124,18 @@ https://templatemo.com/tm-594-nexus-flow
                         </div>
                     </div>
 
+                    <?php if (isset($_GET['error'])): ?>
+                        <div class="error-message" style="color: red; text-align: center; margin-bottom: 15px;">
+                            <?php echo htmlspecialchars($_GET['error']); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($_GET['success'])): ?>
+                        <div class="success-message" style="color: green; text-align: center; margin-bottom: 15px;">
+                            <?php echo htmlspecialchars($_GET['success']); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <button type="submit" class="btn-create btn-upload">Register</button>
 
                 </form>
