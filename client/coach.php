@@ -70,6 +70,7 @@ https://templatemo.com/tm-594-nexus-flow
             <ul class="nav-links">
                 <li><a href="../client/blogpost.php">BlogPost</a></li>
                 <li><a href="../client/coach.php">Coach</a></li>
+                <li><a href="../client/register.php">Register</a></li>
             </ul>
 
             <button class="mobile-menu-button" id="mobileMenuBtn">
