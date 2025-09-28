@@ -92,12 +92,14 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
             <div class="contact-form-wrapper">
-                <form class="contact-form" method="POST" action="login_action.php" enctype="multipart/form-data">
+                <form class="contact-form" method="POST" action="login_action.php">
 
                     <!-- Email -->
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="useremail@gmail.com" required>
+                        <input type="email" id="email" name="email"
+                            placeholder="useremail@gmail.com"
+                            required autocomplete="email">
                     </div>
 
                     <!-- Password -->
@@ -105,7 +107,8 @@ https://templatemo.com/tm-594-nexus-flow
                         <label for="password">Password</label>
                         <div class="password-wrapper">
                             <input type="password" id="password" name="password"
-                                placeholder="Enter password manually" required>
+                                placeholder="Enter your password"
+                                required autocomplete="current-password">
                             <button type="button" id="togglePassword" class="toggle-password">Show</button>
                         </div>
                     </div>

@@ -36,8 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $name, $email, $hashedPassword);
 
     if ($stmt->execute()) {
-        // Registration success → redirect to login
-        header("Location: login.php");
+        // Registration success → redirect to dashboard
+        header("Location: dashboard.php");
         exit();
     } else {
         header("Location: register_form.php?error=Something went wrong. Please try again.");

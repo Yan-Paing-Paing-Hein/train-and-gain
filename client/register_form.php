@@ -87,7 +87,7 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Register to shape your body</h2>
+                <h2 class="section-title">Register a new account</h2>
                 <p class="section-subtitle">Come train and come gain!</p>
             </div>
 
