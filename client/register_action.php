@@ -1,4 +1,7 @@
 <?php
+// Start session at the very beginning
+session_start();
+
 // Include DB connection
 require_once("../db_connect.php");
 
@@ -36,7 +39,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $name, $email, $hashedPassword);
 
     if ($stmt->execute()) {
-        // Registration success → redirect to dashboard
+        // Registration success → auto-login
+        $newUserId = $stmt->insert_id; // get newly created user ID
+
+        $_SESSION['client_id']    = $newUserId;
+        $_SESSION['client_name']  = $name;
+        $_SESSION['client_email'] = $email;
+
+        // Optional: regenerate session ID
+        session_regenerate_id(true);
+
+        // Redirect to dashboard
         header("Location: dashboard.php");
         exit();
     } else {

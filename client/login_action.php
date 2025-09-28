@@ -34,12 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // Wrong password
-            header("Location: login_form.php?error=Invalid email or password.");
+            header("Location: login_form.php?error=Invalid email or password!");
             exit();
         }
     } else {
         // Email not found
-        header("Location: login_form.php?error=Invalid email or password.");
+        header("Location: login_form.php?error=Invalid email or password!");
         exit();
     }
 
