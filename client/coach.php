@@ -72,7 +72,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/coach.php">Coach</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../client/register.php" class="cyber-button">Register</a>
+                <a href="../client/register_form.php" class="cyber-button">Register</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">

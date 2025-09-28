@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 1. Validate password match
     if ($password !== $confirm_password) {
-        header("Location: register.php?error=Passwords do not match!");
+        header("Location: register_form.php?error=Passwords do not match!");
         exit();
     }
 
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($check->num_rows > 0) {
         $check->close();
-        header("Location: register.php?error=This email is already registered. Please log in.");
+        header("Location: register_form.php?error=This email is already registered. Please log in.");
         exit();
     }
     $check->close();
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: login.php");
         exit();
     } else {
-        header("Location: register.php?error=Something went wrong. Please try again.");
+        header("Location: register_form.php?error=Something went wrong. Please try again.");
         exit();
     }
 
