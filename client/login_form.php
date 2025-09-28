@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Form</title>
+    <title>Login Form</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
@@ -47,7 +47,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/coach.php">Coach</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../client/login_form.php" class="cyber-button">Login</a>
+                <a href="../client/register_form.php" class="cyber-button">Register</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -87,18 +87,14 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Register to shape your body</h2>
+                <h2 class="section-title">Login to your account</h2>
                 <p class="section-subtitle">Come train and come gain!</p>
             </div>
 
             <div class="contact-form-wrapper">
-                <form class="contact-form" method="POST" action="register_action.php" enctype="multipart/form-data">
+                <form class="contact-form" method="POST" action="login_action.php" enctype="multipart/form-data">
 
-                    <div class="form-group">
-                        <label for="name">User Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter user name" required>
-                    </div>
-
+                    <!-- Email -->
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="useremail@gmail.com" required>
@@ -114,16 +110,6 @@ https://templatemo.com/tm-594-nexus-flow
                         </div>
                     </div>
 
-                    <!-- Confirm Password -->
-                    <div class="form-group">
-                        <label for="confirm_password">Confirm Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="confirm_password" name="confirm_password"
-                                placeholder="Re-enter your password" required>
-                            <button type="button" id="toggleConfirmPassword" class="toggle-password">Show</button>
-                        </div>
-                    </div>
-
                     <?php if (isset($_GET['error'])): ?>
                         <div class="error-message" style="color: red; text-align: center; margin-bottom: 15px;">
                             <?php echo htmlspecialchars($_GET['error']); ?>
@@ -136,7 +122,7 @@ https://templatemo.com/tm-594-nexus-flow
                         </div>
                     <?php endif; ?>
 
-                    <button type="submit" class="btn-create btn-upload">Register</button>
+                    <button type="submit" class="btn-create btn-upload">Login</button>
 
                 </form>
             </div>
@@ -179,19 +165,9 @@ https://templatemo.com/tm-594-nexus-flow
             passwordField.type = isPassword ? "text" : "password";
             toggleBtn.textContent = isPassword ? "Hide" : "Show";
         });
-
-        // Confirm password
-        const confirmPasswordField = document.getElementById("confirm_password");
-        const toggleConfirmBtn = document.getElementById("toggleConfirmPassword");
-
-        toggleConfirmBtn.addEventListener("click", () => {
-            const isPassword = confirmPasswordField.type === "password";
-            confirmPasswordField.type = isPassword ? "text" : "password";
-            toggleConfirmBtn.textContent = isPassword ? "Hide" : "Show";
-        });
     </script>
 </body>
 
 </html>
 
-<!-- http://localhost/train&gain/client/register_form.php -->
+<!-- http://localhost/train&gain/client/login_form.php -->
