@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Include database connection
 include '../db_connect.php';
 
@@ -109,8 +111,16 @@ $postIndex = $offset; // counter for alternating layout
                 <li><a href="../client/coach.php">Coach</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../client/register_form.php" class="cyber-button">Register</a>
-                <a href="../client/login_form.php" class="cyber-button">Login</a>
+
+                <?php if (isset($_SESSION['client_id'])): ?>
+                    <!-- Show these if logged in -->
+                    <a href="../client/dashboard.php" class="cyber-button">Dashboard</a>
+                    <a href="../client/logout.php" class="cyber-button">Logout</a>
+                <?php else: ?>
+                    <!-- Show these if not logged in -->
+                    <a href="../client/register_form.php" class="cyber-button">Register</a>
+                    <a href="../client/login_form.php" class="cyber-button">Login</a>
+                <?php endif; ?>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
