@@ -116,6 +116,10 @@ https://templatemo.com/tm-594-nexus-flow
                     <?php if (isset($_GET['error'])): ?>
                         <div class="error-message" style="color: red; text-align: center; margin-bottom: 15px;">
                             <?php echo htmlspecialchars($_GET['error']); ?>
+                            <br>
+                            <a href="forgot_password.php" style="color:#00ffff; text-decoration: underline; font-size: 0.9em;">
+                                Forgot your password?
+                            </a>
                         </div>
                     <?php endif; ?>
 
