@@ -13,10 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
-        // Generate token
+        // 1. Check if user already has a pending request
+        $stmtCheck = $conn->prepare("
+            SELECT id FROM password_resets 
+            WHERE client_id = ? AND is_used = 0
+        ");
+        $stmtCheck->bind_param("i", $user['id']);
+        $stmtCheck->execute();
+        $checkResult = $stmtCheck->get_result();
+
+        if ($checkResult->num_rows > 0) {
+            // Already has an unused reset request
+            header("Location: forgot_password.php?error=You already have a pending reset request. Please wait for admin.");
+            exit();
+        }
+        $stmtCheck->close();
+
+        // 2. Otherwise → generate new token and insert
         $token = bin2hex(random_bytes(32));
 
-        // Insert into password_resets
         $stmt2 = $conn->prepare("INSERT INTO password_resets (client_id, token) VALUES (?, ?)");
         $stmt2->bind_param("is", $user['id'], $token);
         $stmt2->execute();

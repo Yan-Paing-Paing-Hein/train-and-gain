@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $confirm_password = $_POST['confirm_password'];
 
     if ($password !== $confirm_password) {
-        header("Location: reset_password.php?token=" . urlencode($token) . "&error=Passwords do not match.");
+        header("Location: reset_password.php?token=" . urlencode($token) . "&error=Passwords do not match!");
         exit();
     }
 
