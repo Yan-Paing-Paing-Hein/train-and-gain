@@ -39,26 +39,182 @@ if (time() - strtotime($reset['requested_at']) > 3600) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password</title>
+    <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
+    <!--
+
+TemplateMo 594 nexus flow
+
+https://templatemo.com/tm-594-nexus-flow
+
+-->
 </head>
 
-<body>
-    <h2>Reset Your Password</h2>
+<body id="top">
+    <!-- Enhanced Background Elements -->
+    <div class="cyber-bg">
+        <div class="cyber-gradient"></div>
+        <div class="matrix-rain" id="matrixRain"></div>
+    </div>
 
-    <?php if (isset($_GET['error'])): ?>
-        <p style="color:red;"><?php echo htmlspecialchars($_GET['error']); ?></p>
-    <?php endif; ?>
+    <div class="particles" id="particlesContainer"></div>
 
-    <form action="reset_password_action.php" method="POST">
-        <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+    <div class="data-streams" id="dataStreams"></div>
 
-        <label for="password">New Password:</label><br>
-        <input type="password" name="password" id="password" required><br><br>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
 
-        <label for="confirm_password">Confirm New Password:</label><br>
-        <input type="password" name="confirm_password" id="confirm_password" required><br><br>
+    <div class="grid-overlay">
+        <div class="grid-lines"></div>
+        <div class="grid-glow"></div>
+    </div>
 
-        <button type="submit">Reset Password</button>
-    </form>
+    <div class="scanlines"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#top" class="logo">Train & Gain</a>
+            <ul class="nav-links">
+                <li><a href="../client/blogpost.php">BlogPost</a></li>
+                <li><a href="../client/coach.php">Coach</a></li>
+            </ul>
+            <div class="nav-bottom">
+                <a href="../client/register_form.php" class="cyber-button">Register</a>
+                <a href="../client/login_form.php" class="cyber-button">Login</a>
+            </div>
+            <button class="mobile-menu-button" id="mobileMenuBtn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="#top" class="mobile-menu-logo">Train & Gain</a>
+            <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
+        </div>
+        <div class="mobile-menu-cta">
+            <a href="#" class="cyber-button">Blogpost Table</a>
+        </div>
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="../admin_home.php">Home</a></li>
+                <li><a href="../blogpost/index.php">BlogPost</a></li>
+                <li><a href="../coach/index.php">Coach</a></li>
+                <li><a href="../client/index.php">Client</a></li>
+                <li><a href="../payment/index.php">Payment</a></li>
+                <li><a href="../review/index.php">Review</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+
+    <!-- Contact Section -->
+    <section class="contact fade-up" id="contact">
+        <div class="contact-container">
+            <div class="section-header">
+                <h2 class="section-title">Reset Your Password</h2>
+                <!-- <p class="section-subtitle">Enter your registered email</p> -->
+            </div>
+
+            <div class="contact-form-wrapper">
+
+
+                <p style="color:red;"></p>
+
+
+                <form class="contact-form" action="reset_password_action.php" method="POST">
+                    <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">New Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password"
+                                placeholder="Enter password manually" required>
+                            <button type="button" id="togglePassword" class="toggle-password">Show</button>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm New Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="confirm_password" name="confirm_password"
+                                placeholder="Re-enter your password" required>
+                            <button type="button" id="toggleConfirmPassword" class="toggle-password">Show</button>
+                        </div>
+                    </div>
+
+                    <?php if (isset($_GET['error'])): ?>
+                        <div class="error-message" style="color: red; text-align: center; margin-bottom: 15px;">
+                            <?php echo htmlspecialchars($_GET['error']); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <button type="submit" class="btn-create btn-upload">Reset Password</button>
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Terms of Service</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Documentation</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Contact Support</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NexusFlow Systems. All realities reserved.</p>
+                <p class="footer-credit">Brought to you by <a href="https://templatemo.com" target="_blank"
+                        rel="noopener nofollow">TemplateMo</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/templatemo-nexus-scripts.js"></script>
+
+    <!-- Password show/hide button -->
+    <script>
+        // First password
+        const passwordField = document.getElementById("password");
+        const toggleBtn = document.getElementById("togglePassword");
+
+        toggleBtn.addEventListener("click", () => {
+            const isPassword = passwordField.type === "password";
+            passwordField.type = isPassword ? "text" : "password";
+            toggleBtn.textContent = isPassword ? "Hide" : "Show";
+        });
+
+        // Confirm password
+        const confirmPasswordField = document.getElementById("confirm_password");
+        const toggleConfirmBtn = document.getElementById("toggleConfirmPassword");
+
+        toggleConfirmBtn.addEventListener("click", () => {
+            const isPassword = confirmPasswordField.type === "password";
+            confirmPasswordField.type = isPassword ? "text" : "password";
+            toggleConfirmBtn.textContent = isPassword ? "Hide" : "Show";
+        });
+    </script>
 </body>
 
 </html>

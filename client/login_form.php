@@ -124,7 +124,7 @@ https://templatemo.com/tm-594-nexus-flow
                     <?php endif; ?>
 
                     <?php if (isset($_GET['success'])): ?>
-                        <div class="success-message" style="color: green; text-align: center; margin-bottom: 15px;">
+                        <div class="success-message" style="color: #00ff33; text-align: center; margin-bottom: 15px;">
                             <?php echo htmlspecialchars($_GET['success']); ?>
                         </div>
                     <?php endif; ?>
