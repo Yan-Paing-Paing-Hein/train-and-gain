@@ -58,7 +58,7 @@ https://templatemo.com/tm-594-nexus-flow
             </ul>
             <div class="nav-bottom">
                 <a href="../client/dashboard.php" class="cyber-button">Dashboard</a>
-                <a href="../client/logout.php" class="cyber-button">Logout</a>
+                <a href="../client/logout.php" class="cyber-button">Log out</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">

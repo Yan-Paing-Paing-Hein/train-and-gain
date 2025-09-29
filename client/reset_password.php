@@ -2,7 +2,7 @@
 require_once("../db_connect.php");
 
 if (!isset($_GET['token'])) {
-    die("Invalid request.");
+    die("<h1>Invalid request!</h1>");
 }
 
 $token = $_GET['token'];
@@ -19,16 +19,16 @@ $reset = $result->fetch_assoc();
 $stmt->close();
 
 if (!$reset) {
-    die("Invalid or expired token.");
+    die("<h1>Invalid or expired token!</h1>");
 }
 
 if ($reset['is_used'] == 1) {
-    die("This reset link has already been used.");
+    die("<h1>This reset link has already been used!</h1>");
 }
 
 // Optional: 1-hour expiry
 if (time() - strtotime($reset['requested_at']) > 3600) {
-    die("This reset link has expired. Please request a new one.");
+    die("<h1>This reset link has expired. Please request a new one.</h1>");
 }
 ?>
 
@@ -82,7 +82,7 @@ https://templatemo.com/tm-594-nexus-flow
             </ul>
             <div class="nav-bottom">
                 <a href="../client/register_form.php" class="cyber-button">Register</a>
-                <a href="../client/login_form.php" class="cyber-button">Login</a>
+                <a href="../client/login_form.php" class="cyber-button">Log in</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">

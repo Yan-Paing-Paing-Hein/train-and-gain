@@ -4,8 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Log in Form</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        .forgot-link {
+            color: #00ffff;
+            /* Neon cyan by default */
+            text-decoration: underline;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+        }
+
+        .forgot-link:hover {
+            color: #f900e0;
+            /* Switch to neon purple */
+            transform: scale(1.1);
+            text-shadow: 0 0 8px #f900e0, 0 0 16px #f900e0, 0 0 24px #f900e0;
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -87,7 +105,7 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Login to your account</h2>
+                <h2 class="section-title">Log in to your account</h2>
                 <p class="section-subtitle">Come train and come gain!</p>
             </div>
 
@@ -117,7 +135,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <div class="error-message" style="color: red; text-align: center; margin-bottom: 15px;">
                             <?php echo htmlspecialchars($_GET['error']); ?>
                             <br>
-                            <a href="forgot_password.php" style="color:#00ffff; text-decoration: underline; font-size: 0.9em;">
+                            <a href="forgot_password.php" class="forgot-link">
                                 Forgot your password?
                             </a>
                         </div>
@@ -129,7 +147,7 @@ https://templatemo.com/tm-594-nexus-flow
                         </div>
                     <?php endif; ?>
 
-                    <button type="submit" class="btn-create btn-upload">Login</button>
+                    <button type="submit" class="btn-create btn-upload">Log in</button>
 
                 </form>
             </div>
