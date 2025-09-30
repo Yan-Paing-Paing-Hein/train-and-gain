@@ -104,23 +104,41 @@ https://templatemo.com/tm-594-nexus-flow
 
 
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Step 1: Fill Survey Form</h3>
-                    <p>Tell us about your body stats and fitness goals.</p>
-                    <a href="survey.php">Fill Survey</a>
+            <div class="features-grid2">
+                <div class="feature-card2">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Step 1: Fill Survey Form</h3>
+                            <p>Tell us about your body stats and fitness goals.</p>
+                        </div>
+                        <div class="card-back">
+                            <a href="survey.php" class="cyber-button">Fill Survey</a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card">
-                    <h3>Step 2: Choose Workout Plan & Coach</h3>
-                    <p>Select one of the 6 workout plans. Each plan will show available coaches.</p>
-                    <a href="plans.php">Choose Plan</a>
+                <div class="feature-card2">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Step 2: Choose Workout Plan & Coach</h3>
+                            <p>Select one of the 6 workout plans. Each plan will show available coaches.</p>
+                        </div>
+                        <div class="card-back">
+                            <a href="plans.php" class="cyber-button">Choose Plan</a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card">
-                    <h3>Step 3: Make Payment</h3>
-                    <p>Complete your payment to activate your account.</p>
-                    <a href="payment.php">Make Payment</a>
+                <div class="feature-card2">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Step 3: Make Payment</h3>
+                            <p>Complete your payment to activate your account.</p>
+                        </div>
+                        <div class="card-back">
+                            <a href="payment.php" class="cyber-button">Make Payment</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -152,6 +170,22 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll(".feature-card2");
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add("animate");
+                    // remove class after animation so hover still works
+                    setTimeout(() => {
+                        card.classList.remove("animate");
+                    }, 1000); // equal to animation duration
+                }, index * 300); // 1s delay per card
+            });
+        });
+    </script>
+
 </body>
 
 </html>
