@@ -14,8 +14,8 @@ if (!isset($_SESSION['client_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Form</title>
-    <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
+    <title>Dashboard</title>
+    <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 
 TemplateMo 594 nexus flow
@@ -53,12 +53,12 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="nav-container">
             <a href="#top" class="logo">Train & Gain</a>
             <ul class="nav-links">
-                <li><a href="../client/blogpost.php">BlogPost</a></li>
-                <li><a href="../client/coach.php">Coach</a></li>
+                <li><a href="../../client/blogpost.php">BlogPost</a></li>
+                <li><a href="../../client/coach.php">Coach</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../client/dashboard.php" class="cyber-button">Dashboard</a>
-                <a href="../client/logout.php" class="cyber-button">Log out</a>
+                <a href="../dashboard/home.php" class="cyber-button">Dashboard</a>
+                <a href="../../client/logout.php" class="cyber-button">Log out</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
@@ -129,7 +129,7 @@ https://templatemo.com/tm-594-nexus-flow
         </div>
     </footer>
 
-    <script src="../js/templatemo-nexus-scripts.js"></script>
+    <script src="../../js/templatemo-nexus-scripts.js"></script>
 </body>
 
 </html>

@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_regenerate_id(true);
 
         // Redirect to dashboard
-        header("Location: dashboard.php");
+        header("Location: dashboard/home.php");
         exit();
     } else {
         header("Location: register_form.php?error=Something went wrong. Please try again.");

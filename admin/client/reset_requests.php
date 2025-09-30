@@ -16,7 +16,7 @@ $result = $conn->query("
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Index</title>
+    <title>Reset Requests</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <!--
 

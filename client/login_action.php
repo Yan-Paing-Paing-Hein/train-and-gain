@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_regenerate_id(true);
 
             // 3. Redirect to dashboard
-            header("Location: dashboard.php");
+            header("Location: dashboard/home.php");
             exit();
         } else {
             // Wrong password

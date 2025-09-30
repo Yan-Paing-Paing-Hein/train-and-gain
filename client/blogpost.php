@@ -114,7 +114,7 @@ $postIndex = $offset; // counter for alternating layout
 
                 <?php if (isset($_SESSION['client_id'])): ?>
                     <!-- Show these if logged in -->
-                    <a href="../client/dashboard.php" class="cyber-button">Dashboard</a>
+                    <a href="../client/dashboard/home.php" class="cyber-button">Dashboard</a>
                     <a href="../client/logout.php" class="cyber-button">Log out</a>
                 <?php else: ?>
                     <!-- Show these if not logged in -->
