@@ -142,6 +142,7 @@ https://templatemo.com/tm-594-nexus-flow
                 </div>
             </div>
 
+
             <!-- <h1 class="section-subtitle">You are currently <strong style="color:red;">Inactive</strong>. Please complete the steps above to activate your account.</h1> -->
 
         </div>
@@ -177,11 +178,8 @@ https://templatemo.com/tm-594-nexus-flow
             cards.forEach((card, index) => {
                 setTimeout(() => {
                     card.classList.add("animate");
-                    // remove class after animation so hover still works
-                    setTimeout(() => {
-                        card.classList.remove("animate");
-                    }, 1000); // equal to animation duration
-                }, index * 300); // 1s delay per card
+                    setTimeout(() => card.classList.remove("animate"), 1000); // remove after animation ends
+                }, index * 300); // stagger
             });
         });
     </script>
@@ -190,4 +188,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/client/dashboard.php -->
+<!-- http://localhost/train&gain/client/dashboard/home.php -->

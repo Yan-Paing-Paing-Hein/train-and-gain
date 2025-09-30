@@ -3366,12 +3366,12 @@ nav {
     }
 }
 
+/* Grid */
 .features-grid2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 3rem;
     perspective: 1000px;
-    /* for 3D flip */
 }
 
 /* Card container */
@@ -3379,48 +3379,60 @@ nav {
     position: relative;
     height: 280px;
     perspective: 1000px;
+    overflow: visible;
 }
 
-/* Flip inner wrapper */
+/* Flipper wrapper - only handles the rotation */
 .feature-card2 .card-inner {
-    /* border: 3px solid #f900e0; */
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.8s;
+    transition: transform 0.8s ease;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    will-change: transform;
+    transform-origin: center;
 }
 
 /* Flip on hover */
 .feature-card2:hover .card-inner {
-    /* border: 3px solid #f900e0; */
     transform: rotateY(180deg);
 }
 
-/* Front & Back faces */
+/* Shared face styles */
 .card-front,
 .card-back {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     padding: 3rem;
-    backface-visibility: hidden;
-    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
-    clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+    border: 1.5px solid #f900e0;
+    clip-path: polygon(20px 0%,
+            100% 0%,
+            100% calc(100% - 20px),
+            calc(100% - 20px) 100%,
+            0% 100%,
+            0% 20px);
+    border-radius: 6px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
     transition: all 0.4s ease;
 }
 
-/* Hover glow effect */
+/* subtle hover glow background (keeps your earlier behavior) */
 .card-front::before,
 .card-back::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink));
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -3432,23 +3444,38 @@ nav {
     opacity: 0.1;
 }
 
+/* Front face (visible before flip) */
 .card-front {
-    transform: rotateY(0deg);
+    transform: rotateY(0deg) translateZ(1px);
+    z-index: 3;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
+/* Back face (visible after flip) */
 .card-back {
-    transform: rotateY(180deg);
-    display: flex;
+    transform: rotateY(180deg) translateZ(1px);
+    z-index: 1;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* Typography */
+/* When flipped, ensure back sits above the front */
+.feature-card2:hover .card-front {
+    z-index: 1;
+}
+
+.feature-card2:hover .card-back {
+    z-index: 4;
+}
+
+/* Typography colors + justification */
 .feature-card2 h3 {
     font-size: 1.5rem;
     font-weight: 700;
     color: #f900e0;
-    /* neon purple */
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -3457,12 +3484,11 @@ nav {
 
 .feature-card2 p {
     color: #00ffff;
-    /* neon cyan */
     line-height: 1.8;
     text-align: justify;
 }
 
-/* Flip animation keyframes */
+/* Auto flip animation (used by your JS: .animate class) */
 @keyframes flip-sequence {
     0% {
         transform: rotateY(0deg);
@@ -3477,7 +3503,6 @@ nav {
     }
 }
 
-/* Add animated state */
 .feature-card2.animate .card-inner {
     animation: flip-sequence 1s ease-in-out forwards;
 }
