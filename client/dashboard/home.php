@@ -98,7 +98,7 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Welcome, <?php echo htmlspecialchars($_SESSION['client_name']); ?>!</h2>
+                <h2 class="section-title3">Welcome, <?php echo htmlspecialchars($_SESSION['client_name']); ?>!</h2>
                 <p class="section-subtitle">Get Started with Train&Gain</p>
             </div>
 
@@ -171,6 +171,21 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const title = document.querySelector(".section-title3");
+            const text = title.textContent.trim();
+            title.textContent = ""; // clear original text
+
+            text.split("").forEach((char, i) => {
+                const span = document.createElement("span");
+                span.textContent = char === " " ? "\u00A0" : char; // preserve spaces
+                span.style.setProperty("--delay", `${i * 0.05}s`);
+                title.appendChild(span);
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
