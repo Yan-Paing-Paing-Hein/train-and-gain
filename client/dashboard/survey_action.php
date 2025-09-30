@@ -9,6 +9,7 @@ if (!isset($_SESSION['client_id'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $client_id      = $_SESSION['client_id'];
+    $action         = $_POST['action']; // 'insert' or 'update'
     $phone          = trim($_POST['phone']);
     $gender         = $_POST['gender'];
     $dob            = $_POST['dob'];
@@ -18,35 +19,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $diet_preference = $_POST['diet_other'] ?: $_POST['diet_preference'];
     $free_time      = json_encode($_POST['free_time']);
 
-    // Handle file upload
-    $uploadDir = "../../uploads/profile_pictures/";
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
+    // File upload
+    $profile_picture = null;
+    if (!empty($_FILES["profile_picture"]["name"])) {
+        $uploadDir = "../../uploads/profile_pictures/";
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        $fileName = time() . "_" . basename($_FILES["profile_picture"]["name"]);
+        $targetFile = $uploadDir . $fileName;
+        if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFile)) {
+            $profile_picture = "uploads/profile_pictures/" . $fileName;
+        }
     }
-    $fileName = time() . "_" . basename($_FILES["profile_picture"]["name"]);
-    $targetFile = $uploadDir . $fileName;
 
-    if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFile)) {
-        $profile_picture = "uploads/profile_pictures/" . $fileName; // save relative path
-    } else {
-        die("Error uploading file");
-    }
+    if ($action === 'insert') {
+        // INSERT
+        $stmt = $conn->prepare("INSERT INTO client_survey 
+            (client_id, phone, gender, dob, height_cm, weight_kg, profile_picture, medical_notes, diet_preference, free_time) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("isssiissss", $client_id, $phone, $gender, $dob, $height_cm, $weight_kg, $profile_picture, $medical_notes, $diet_preference, $free_time);
+        $stmt->execute();
+        $stmt->close();
 
-    // Insert into client_survey
-    $stmt = $conn->prepare("INSERT INTO client_survey 
-        (client_id, phone, gender, dob, height_cm, weight_kg, profile_picture, medical_notes, diet_preference, free_time) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssiissss", $client_id, $phone, $gender, $dob, $height_cm, $weight_kg, $profile_picture, $medical_notes, $diet_preference, $free_time);
-
-    if ($stmt->execute()) {
-        // Update process table
+        // Mark survey as completed
         $update = $conn->prepare("UPDATE client_process SET survey_completed = 1 WHERE client_id = ?");
         $update->bind_param("i", $client_id);
         $update->execute();
+        $update->close();
 
         header("Location: home.php?success=Survey submitted successfully!");
         exit();
-    } else {
-        die("Database error: " . $stmt->error);
+    } elseif ($action === 'update') {
+        // UPDATE existing row
+        if ($profile_picture) {
+            $stmt = $conn->prepare("UPDATE client_survey 
+                SET phone=?, gender=?, dob=?, height_cm=?, weight_kg=?, profile_picture=?, medical_notes=?, diet_preference=?, free_time=? 
+                WHERE client_id=?");
+            $stmt->bind_param("sssiissssi", $phone, $gender, $dob, $height_cm, $weight_kg, $profile_picture, $medical_notes, $diet_preference, $free_time, $client_id);
+        } else {
+            // keep old picture
+            $stmt = $conn->prepare("UPDATE client_survey 
+                SET phone=?, gender=?, dob=?, height_cm=?, weight_kg=?, medical_notes=?, diet_preference=?, free_time=? 
+                WHERE client_id=?");
+            $stmt->bind_param("sssiisssi", $phone, $gender, $dob, $height_cm, $weight_kg, $medical_notes, $diet_preference, $free_time, $client_id);
+        }
+        $stmt->execute();
+        $stmt->close();
+
+        header("Location: home.php?success=Survey updated successfully!");
+        exit();
     }
 }
