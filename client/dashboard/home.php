@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['client_id'])) {
-    header("Location: login_form.php?error=Please log in first.");
+    header("Location: ../login_form.php?error=Please log in first.");
     exit();
 }
 ?>
@@ -99,10 +99,32 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">Welcome, <?php echo htmlspecialchars($_SESSION['client_name']); ?>!</h2>
-                <p class="section-subtitle">Come train and come gain!</p>
+                <p class="section-subtitle">Get Started with Train&Gain</p>
             </div>
 
 
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Step 1: Fill Survey Form</h3>
+                    <p>Tell us about your body stats and fitness goals.</p>
+                    <a href="survey.php">Fill Survey</a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Step 2: Choose Workout Plan & Coach</h3>
+                    <p>Select one of the 6 workout plans. Each plan will show available coaches.</p>
+                    <a href="plans.php">Choose Plan</a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Step 3: Make Payment</h3>
+                    <p>Complete your payment to activate your account.</p>
+                    <a href="payment.php">Make Payment</a>
+                </div>
+            </div>
+
+            <!-- <h1 class="section-subtitle">You are currently <strong style="color:red;">Inactive</strong>. Please complete the steps above to activate your account.</h1> -->
 
         </div>
     </section>
