@@ -16,7 +16,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $height_cm       = $_POST['height_cm'];
     $weight_kg       = $_POST['weight_kg'];
     $medical_notes   = $_POST['medical_notes'] ?? null;
-    $diet_preference = $_POST['diet_other'] ?: $_POST['diet_preference'];
+    $diet_pref_dropdown = $_POST['diet_preference'] ?? '';
+    $diet_pref_other    = trim($_POST['diet_other'] ?? '');
+    if ($diet_pref_dropdown && $diet_pref_other) {
+        $diet_preference = $diet_pref_dropdown . " | " . $diet_pref_other;
+    } else {
+        $diet_preference = $diet_pref_dropdown ?: $diet_pref_other;
+    }
     $free_time       = json_encode($_POST['free_time']);
 
     // File upload (to profiles folder)

@@ -57,17 +57,26 @@ $stmt->close();
     <textarea name="medical_notes"><?php echo $survey['medical_notes'] ?? ''; ?></textarea><br>
 
     <label>Diet Preference:</label>
+    <?php
+    $prefs = ['None', 'Vegetarian', 'Vegan', 'Keto', 'Halal'];
+    $storedPref = $survey['diet_preference'] ?? '';
+    $dropdownValue = $storedPref;
+    $otherValue = "";
+
+    // If combined format exists (Dropdown | Other)
+    if (strpos($storedPref, '|') !== false) {
+        [$dropdownValue, $otherValue] = array_map('trim', explode('|', $storedPref, 2));
+    }
+    ?>
     <select name="diet_preference">
-        <?php
-        $prefs = ['None', 'Vegetarian', 'Vegan', 'Keto', 'Halal', 'Other'];
-        foreach ($prefs as $p) {
-            $selected = ($survey['diet_preference'] ?? '') === $p ? 'selected' : '';
-            echo "<option value='$p' $selected>$p</option>";
-        }
-        ?>
+        <?php foreach ($prefs as $p): ?>
+            <option value="<?php echo $p; ?>" <?php if ($dropdownValue === $p) echo 'selected'; ?>>
+                <?php echo $p; ?>
+            </option>
+        <?php endforeach; ?>
     </select>
     <input type="text" name="diet_other" placeholder="If Other, specify"
-        value="<?php echo (!in_array($survey['diet_preference'] ?? '', $prefs) ? htmlspecialchars($survey['diet_preference']) : ''); ?>"><br>
+        value="<?php echo htmlspecialchars($otherValue); ?>"><br>
 
     <h3>Weekly Free Time (hours per day)</h3>
     <?php
