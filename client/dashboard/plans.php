@@ -22,20 +22,6 @@ if (!$process || $process['survey_completed'] == 0) {
     die("<h1 style='text-align:center; margin-top:50px;'>Please complete Step 1 first.</h1>");
 }
 
-?>
-
-
-
-<?php
-session_start();
-require_once("../../db_connect.php");
-
-// Step restriction check
-if (!isset($_SESSION['client_id'])) {
-    header("Location: ../login_form.php?error=Please log in first.");
-    exit();
-}
-$client_id = $_SESSION['client_id'];
 
 $stmt = $conn->prepare("SELECT survey_completed FROM client_process WHERE client_id=?");
 $stmt->bind_param("i", $client_id);

@@ -26,7 +26,7 @@ $coaches = $stmt->get_result();
     <div class="coach-grid">
         <?php while ($coach = $coaches->fetch_assoc()): ?>
             <div class="coach-card">
-                <img src="../../<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Coach">
+                <img src="../../admin/coach/<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Coach">
                 <h3><?php echo htmlspecialchars($coach['full_name']); ?></h3>
                 <p><?php echo htmlspecialchars($coach['about']); ?></p>
                 <form method="POST" action="save_plan.php">
