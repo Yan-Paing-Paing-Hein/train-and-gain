@@ -155,12 +155,22 @@ https://templatemo.com/tm-594-nexus-flow
                     </div>
 
                     <div class="form-group">
-                        <label>Profile Picture</label>
+                        <label for="profile_picture">Profile Picture</label>
+
                         <?php if (!empty($survey['profile_picture'])): ?>
-                            <img src="../../<?php echo htmlspecialchars($survey['profile_picture']); ?>" alt="Profile" width="100"><br>
-                            <small>Upload new to replace:</small><br>
+                            <div class="current-image-box">
+                                <p class="current-image-label">Current Profile Picture</p>
+                                <img src="../../<?php echo htmlspecialchars($survey['profile_picture']); ?>"
+                                    alt="Current Image"
+                                    class="current-image-thumb"
+                                    onclick="openImageModal(this.src)">
+                                <br>
+                                <small>Upload new to replace:</small><br>
+                            </div>
                         <?php endif; ?>
-                        <input type="file" name="profile_picture" accept="image/*" <?php echo $survey ? '' : 'required'; ?>>
+                        <br>
+                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*"
+                            <?php echo $survey ? '' : 'required'; ?>>
                         <small>Allowed formats: JPG, PNG, JPEG, GIF. Max size: 50MB.</small>
                     </div>
 
@@ -251,6 +261,64 @@ https://templatemo.com/tm-594-nexus-flow
             });
         });
     </script>
+
+    <!-- Javascript for popup animation -->
+    <script>
+        function openImageModal(src) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+
+            if (modal && modal.parentNode !== document.body) {
+                document.body.appendChild(modal);
+            }
+
+            modalImg.src = src;
+            modal.style.display = "flex";
+
+            modal.classList.remove("show");
+            void modal.offsetWidth;
+            modal.classList.add("show");
+
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
+
+            modal.addEventListener('click', function onOverlayClick(e) {
+                if (e.target === modal) {
+                    modal.removeEventListener('click', onOverlayClick);
+                    closeImageModal();
+                }
+            }, {
+                once: true
+            });
+
+            document.addEventListener('keydown', escHandler);
+
+            function escHandler(e) {
+                if (e.key === 'Escape') {
+                    document.removeEventListener('keydown', escHandler);
+                    closeImageModal();
+                }
+            }
+        }
+
+        function closeImageModal() {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            if (!modal) return;
+
+            modal.style.display = "none";
+            modalImg.src = "";
+
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+        }
+    </script>
+
+    <!-- Image Modal (hidden by default) -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-btn" onclick="closeImageModal()">&times;</span>
+        <img class="image-modal-content" id="modalImage" alt="Full size image">
+    </div>
 
 </body>
 
