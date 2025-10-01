@@ -8,17 +8,16 @@ if (!isset($_SESSION['client_id'])) {
 }
 
 $client_id = $_SESSION['client_id'];
-$result = $conn->prepare("SELECT survey_completed, plan_selected FROM client_process WHERE client_id = ?");
-$result->bind_param("i", $client_id);
-$result->execute();
-$progress = $result->get_result()->fetch_assoc();
 
-// Block if survey not completed
-if (basename($_SERVER['PHP_SELF']) == "plans.php" && !$progress['survey_completed']) {
-    die("Please complete Step 1 (Survey) first.");
-}
+// Fetch process status
+$stmt = $conn->prepare("SELECT survey_completed, plan_selected, payment_done FROM client_process WHERE client_id = ?");
+$stmt->bind_param("i", $client_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$process = $result->fetch_assoc();
+$stmt->close();
 
-// Block if payment.php and steps not finished
-if (basename($_SERVER['PHP_SELF']) == "payment.php" && (!$progress['survey_completed'] || !$progress['plan_selected'])) {
-    die("Please complete Step 1 and Step 2 first.");
+// Restrict access
+if (!$process || $process['plan_selected'] == 0) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Please complete Step 1 and 2 first.</h1>");
 }

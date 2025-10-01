@@ -8,17 +8,56 @@ if (!isset($_SESSION['client_id'])) {
 }
 
 $client_id = $_SESSION['client_id'];
-$result = $conn->prepare("SELECT survey_completed, plan_selected FROM client_process WHERE client_id = ?");
-$result->bind_param("i", $client_id);
-$result->execute();
-$progress = $result->get_result()->fetch_assoc();
 
-// Block if survey not completed
-if (basename($_SERVER['PHP_SELF']) == "plans.php" && !$progress['survey_completed']) {
-    die("Please complete Step 1 (Survey) first.");
+// Fetch process status
+$stmt = $conn->prepare("SELECT survey_completed, plan_selected, payment_done FROM client_process WHERE client_id = ?");
+$stmt->bind_param("i", $client_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$process = $result->fetch_assoc();
+$stmt->close();
+
+// Restrict access
+if (!$process || $process['survey_completed'] == 0) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Please complete Step 1 first.</h1>");
 }
 
-// Block if payment.php and steps not finished
-if (basename($_SERVER['PHP_SELF']) == "payment.php" && (!$progress['survey_completed'] || !$progress['plan_selected'])) {
-    die("Please complete Step 1 and Step 2 first.");
+?>
+
+
+
+<?php
+session_start();
+require_once("../../db_connect.php");
+
+// Step restriction check
+if (!isset($_SESSION['client_id'])) {
+    header("Location: ../login_form.php?error=Please log in first.");
+    exit();
 }
+$client_id = $_SESSION['client_id'];
+
+$stmt = $conn->prepare("SELECT survey_completed FROM client_process WHERE client_id=?");
+$stmt->bind_param("i", $client_id);
+$stmt->execute();
+$res = $stmt->get_result();
+$row = $res->fetch_assoc();
+if (!$row || $row['survey_completed'] == 0) {
+    die("<h1 style='text-align:center;margin-top:50px;'>Please complete Step 1 first.</h1>");
+}
+$stmt->close();
+
+$plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'Endurance'];
+?>
+
+<section class="plans-section">
+    <h2>Select Your Workout Plan</h2>
+    <div class="plans-grid">
+        <?php foreach ($plans as $plan): ?>
+            <div class="plan-card">
+                <h3><?php echo $plan; ?></h3>
+                <a href="choose_coach.php?plan=<?php echo urlencode($plan); ?>" class="cyber-button">Choose Plan</a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>

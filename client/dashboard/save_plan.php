@@ -1,0 +1,44 @@
+<?php
+session_start();
+require_once("../../db_connect.php");
+
+if (!isset($_SESSION['client_id'])) {
+    header("Location: ../login_form.php?error=Please log in first.");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $client_id = $_SESSION['client_id'];
+    $plan = $_POST['plan'];
+    $coach_id = $_POST['coach_id'];
+
+    // Check if client already has a plan
+    $check = $conn->prepare("SELECT id FROM client_plan WHERE client_id = ?");
+    $check->bind_param("i", $client_id);
+    $check->execute();
+    $check->store_result();
+
+    if ($check->num_rows > 0) {
+        // Update existing choice
+        $update = $conn->prepare("UPDATE client_plan SET plan=?, coach_id=?, selected_at=NOW() WHERE client_id=?");
+        $update->bind_param("sii", $plan, $coach_id, $client_id);
+        $update->execute();
+        $update->close();
+    } else {
+        // Insert new
+        $insert = $conn->prepare("INSERT INTO client_plan (client_id, plan, coach_id) VALUES (?, ?, ?)");
+        $insert->bind_param("isi", $client_id, $plan, $coach_id);
+        $insert->execute();
+        $insert->close();
+    }
+    $check->close();
+
+    // Update process tracker
+    $updateProcess = $conn->prepare("UPDATE client_process SET plan_selected = 1 WHERE client_id=?");
+    $updateProcess->bind_param("i", $client_id);
+    $updateProcess->execute();
+    $updateProcess->close();
+
+    header("Location: home.php?success=Plan and coach selected successfully!");
+    exit();
+}
