@@ -69,11 +69,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($action === 'update') {
         // UPDATE existing survey
         if ($profile_picture) {
+            // Fetch old picture path
+            $oldPicQuery = $conn->prepare("SELECT profile_picture FROM client_survey WHERE client_id = ?");
+            $oldPicQuery->bind_param("i", $client_id);
+            $oldPicQuery->execute();
+            $oldPicResult = $oldPicQuery->get_result();
+            if ($oldPicResult->num_rows > 0) {
+                $oldPic = $oldPicResult->fetch_assoc()['profile_picture'];
+                $oldPath = "../../" . $oldPic;
+                if ($oldPic && file_exists($oldPath)) {
+                    unlink($oldPath); // delete old picture
+                }
+            }
+            $oldPicQuery->close();
+
+            // Update with new picture
             $stmt = $conn->prepare("UPDATE client_survey 
                 SET phone=?, gender=?, dob=?, height_cm=?, weight_kg=?, profile_picture=?, medical_notes=?, diet_preference=?, free_time=? 
                 WHERE client_id=?");
             $stmt->bind_param("sssiissssi", $phone, $gender, $dob, $height_cm, $weight_kg, $profile_picture, $medical_notes, $diet_preference, $free_time, $client_id);
         } else {
+            // Update without changing picture
             $stmt = $conn->prepare("UPDATE client_survey 
                 SET phone=?, gender=?, dob=?, height_cm=?, weight_kg=?, medical_notes=?, diet_preference=?, free_time=? 
                 WHERE client_id=?");

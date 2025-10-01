@@ -66,7 +66,8 @@ $stmt->close();
         }
         ?>
     </select>
-    <input type="text" name="diet_other" placeholder="If Other, specify"><br>
+    <input type="text" name="diet_other" placeholder="If Other, specify"
+        value="<?php echo (!in_array($survey['diet_preference'] ?? '', $prefs) ? htmlspecialchars($survey['diet_preference']) : ''); ?>"><br>
 
     <h3>Weekly Free Time (hours per day)</h3>
     <?php
