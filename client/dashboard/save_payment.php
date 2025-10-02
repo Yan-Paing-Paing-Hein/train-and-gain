@@ -3,7 +3,7 @@ session_start();
 require_once("../../db_connect.php");
 
 if (!isset($_SESSION['client_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("<h1>Unauthorized access.</h1>");
+    die("<h1 style='text-align:center; margin-top:50px;'>Unauthorized access.</h1>");
 }
 
 $client_id = $_SESSION['client_id'];
@@ -26,12 +26,12 @@ if (
     !in_array($plan_type, ['Monthly', 'Six-Months', 'Yearly']) ||
     !in_array($payment_method, ['PayPal', 'Venmo', 'CashApp', 'GooglePay', 'ApplePay'])
 ) {
-    die("Invalid data submitted.");
+    die("<h1 style='text-align:center; margin-top:50px;>Invalid data submitted.</h1>");
 }
 
 // Handle file upload
 if (!isset($_FILES['screenshot']) || $_FILES['screenshot']['error'] !== UPLOAD_ERR_OK) {
-    die("Screenshot upload failed.");
+    die("<h1 style='text-align:center; margin-top:50px;>Screenshot upload failed.</h1>");
 }
 
 $upload_dir = __DIR__ . "/payments/";  // absolute path

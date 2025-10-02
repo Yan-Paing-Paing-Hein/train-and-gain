@@ -7,6 +7,27 @@ if (!isset($_SESSION['client_id'])) {
     exit();
 }
 
+
+$client_id = $_SESSION['client_id'];
+
+// Restrict if all 3 steps are done
+$process = $conn->prepare("SELECT survey_completed, plan_selected, payment_done 
+                           FROM client_process WHERE client_id = ?");
+$process->bind_param("i", $client_id);
+$process->execute();
+$processResult = $process->get_result();
+$processData = $processResult->fetch_assoc();
+$process->close();
+
+if (
+    $processData && $processData['survey_completed'] == 1
+    && $processData['plan_selected'] == 1
+    && $processData['payment_done'] == 1
+) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Survey cannot be submitted. All steps are already completed.</h1>");
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $client_id       = $_SESSION['client_id'];
     $action          = $_POST['action']; // 'insert' or 'update'
