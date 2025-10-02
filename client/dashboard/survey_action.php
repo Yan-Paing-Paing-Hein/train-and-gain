@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $check->close();
 
-        header("Location: home.php?success=Survey submitted successfully!");
+        header("Location: welcome.php?success=Survey submitted successfully!");
         exit();
     } elseif ($action === 'update') {
         // UPDATE existing survey
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $update->execute();
         $update->close();
 
-        header("Location: home.php?success=Survey updated successfully!");
+        header("Location: welcome.php?success=Survey updated successfully!");
         exit();
     }
 }

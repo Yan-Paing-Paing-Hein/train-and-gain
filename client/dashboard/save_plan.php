@@ -39,6 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateProcess->execute();
     $updateProcess->close();
 
-    header("Location: home.php?success=Plan and coach selected successfully!");
+    header("Location: welcome.php?success=Plan and coach selected successfully!");
     exit();
 }

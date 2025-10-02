@@ -57,7 +57,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../../client/coach.php">Coach</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../dashboard/home.php" class="cyber-button">Dashboard</a>
+                <a href="../dashboard/welcome.php" class="cyber-button">Dashboard</a>
                 <a href="../../client/logout.php" class="cyber-button">Log out</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
@@ -203,4 +203,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/client/dashboard/home.php -->
+<!-- http://localhost/train&gain/client/dashboard/welcome.php -->
