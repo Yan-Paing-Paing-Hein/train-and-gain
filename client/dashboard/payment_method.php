@@ -10,6 +10,18 @@ if (!isset($_SESSION['client_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
 $client_id = $_SESSION['client_id'];
 $plan_type = $_POST['plan_type'] ?? '';
 
+// Check if payment already done
+$stmt = $conn->prepare("SELECT payment_done FROM client_process WHERE client_id=?");
+$stmt->bind_param("i", $client_id);
+$stmt->execute();
+$res = $stmt->get_result();
+$process = $res->fetch_assoc();
+$stmt->close();
+
+if ($process && $process['payment_done'] == 1) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Payment already submitted. Your payment is under review.</h1>");
+}
+
 if (!in_array($plan_type, ['Monthly', 'Six-Months', 'Yearly'])) {
     die("Invalid plan selected.");
 }

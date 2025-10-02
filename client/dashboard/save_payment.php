@@ -10,6 +10,18 @@ $client_id = $_SESSION['client_id'];
 $plan_type = $_POST['plan_type'] ?? '';
 $payment_method = $_POST['payment_method'] ?? '';
 
+// Check if payment already done
+$stmt = $conn->prepare("SELECT payment_done FROM client_process WHERE client_id=?");
+$stmt->bind_param("i", $client_id);
+$stmt->execute();
+$res = $stmt->get_result();
+$process = $res->fetch_assoc();
+$stmt->close();
+
+if ($process && $process['payment_done'] == 1) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Payment already submitted. Your payment is under review.</h1>");
+}
+
 if (
     !in_array($plan_type, ['Monthly', 'Six-Months', 'Yearly']) ||
     !in_array($payment_method, ['PayPal', 'Venmo', 'CashApp', 'GooglePay', 'ApplePay'])
@@ -21,7 +33,6 @@ if (
 if (!isset($_FILES['screenshot']) || $_FILES['screenshot']['error'] !== UPLOAD_ERR_OK) {
     die("Screenshot upload failed.");
 }
-
 
 $upload_dir = __DIR__ . "/payments/";  // absolute path
 if (!is_dir($upload_dir)) {
@@ -41,8 +52,8 @@ $stmt->bind_param("isss", $client_id, $plan_type, $payment_method, $db_path);
 $stmt->execute();
 $stmt->close();
 
-// Update client_process -> payment_done = 1
-$update = $conn->prepare("UPDATE client_process SET payment_done = 1 WHERE client_id = ?");
+// Mark payment_done = 1
+$update = $conn->prepare("UPDATE client_process SET payment_done=1 WHERE client_id=?");
 $update->bind_param("i", $client_id);
 $update->execute();
 $update->close();
