@@ -54,6 +54,92 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        /* Grid Layout */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* Plan Cards */
+        .plan-card {
+            position: relative;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #f900e0;
+            border-radius: 20px;
+            overflow: hidden;
+            transform: skew(-5deg);
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 0 15px rgba(249, 0, 224, 0.3);
+            cursor: pointer;
+        }
+
+        /* Hover Glow */
+        .plan-card:hover {
+            box-shadow: 0 0 40px #f900e0, 0 0 80px #f900e0;
+            border-color: #f900e0;
+        }
+
+        /* Video Background (hidden until hover) */
+        .plan-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .plan-card:hover .plan-video {
+            opacity: 0.25;
+            /* transparent overlay */
+        }
+
+        /* Plan Content */
+        .plan-content {
+            position: relative;
+            padding: 40px;
+            text-align: center;
+            z-index: 2;
+            transform: skew(5deg);
+            /* reverse skew to keep text straight */
+        }
+
+        .plan-content h3 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #f900e0;
+        }
+
+        /* Current Plan Section */
+        .current-plan {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .current-plan .coach-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #f900e0;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(249, 0, 224, 0.5);
+        }
+
+        .current-plan img {
+            border-radius: 50%;
+            border: 3px solid #f900e0;
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -158,8 +244,13 @@ https://templatemo.com/tm-594-nexus-flow
             <div class="plans-grid">
                 <?php foreach ($plans as $plan): ?>
                     <div class="plan-card">
-                        <h3><?php echo $plan; ?></h3>
-                        <a href="choose_coach.php?plan=<?php echo urlencode($plan); ?>" class="cyber-button">Choose Plan</a>
+                        <video autoplay muted loop playsinline class="plan-video">
+                            <source src="videos/<?php echo strtolower(str_replace(' ', '_', $plan)); ?>.mp4" type="video/mp4">
+                        </video>
+                        <div class="plan-content">
+                            <h3><?php echo $plan; ?></h3>
+                            <a href="choose_coach.php?plan=<?php echo urlencode($plan); ?>" class="cyber-button">Choose Plan</a>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
