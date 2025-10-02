@@ -44,29 +44,6 @@ $stmt->close();
 $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'Endurance'];
 ?>
 
-<?php if ($current_plan): ?>
-    <section class="current-plan">
-        <h2>Your Currently Selected Plan & Coach</h2>
-        <div class="coach-card">
-            <img src="../../admin/coach/<?php echo htmlspecialchars($current_plan['profile_picture']); ?>" alt="Coach" width="120" height="120">
-            <div>
-                <h3><?php echo htmlspecialchars($current_plan['plan']); ?></h3>
-                <p><strong>Coach:</strong> <?php echo htmlspecialchars($current_plan['full_name']); ?></p>
-            </div>
-        </div>
-    </section>
-<?php endif; ?>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -162,6 +139,21 @@ https://templatemo.com/tm-594-nexus-flow
                 <h2 class="section-title3">Select Your Workout Plan</h2>
                 <p class="section-subtitle">Get Started with Train&Gain</p>
             </div>
+
+            <?php if ($current_plan): ?>
+                <section class="current-plan">
+                    <h2>Your Currently Selected Plan & Coach</h2>
+                    <div class="coach-card">
+                        <img src="../../admin/coach/<?php echo htmlspecialchars($current_plan['profile_picture']); ?>" alt="Coach" width="120" height="120">
+                        <div>
+                            <h3><?php echo htmlspecialchars($current_plan['plan']); ?></h3>
+                            <p><strong>Coach:</strong> <?php echo htmlspecialchars($current_plan['full_name']); ?></p>
+                        </div>
+                    </div>
+                </section>
+            <?php endif; ?>
+
+            <br><br><br>
 
             <div class="plans-grid">
                 <?php foreach ($plans as $plan): ?>
