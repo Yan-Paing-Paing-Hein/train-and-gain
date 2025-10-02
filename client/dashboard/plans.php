@@ -22,6 +22,11 @@ if (!$process || $process['survey_completed'] == 0) {
     die("<h1 style='text-align:center; margin-top:50px;'>Please complete Step 1 first.</h1>");
 }
 
+// NEW restriction: block if payment already submitted
+if ($process['payment_done'] == 1) {
+    die("<h1 style='text-align:center; margin-top:50px;'>You've already finished final step 3 and made payment. Cannot change options anymore.</h1>");
+}
+
 // Fetch current selected plan and coach (if any)
 $stmt = $conn->prepare("
     SELECT cp.plan, c.full_name, c.profile_picture

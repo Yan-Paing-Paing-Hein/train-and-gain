@@ -41,4 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header("Location: welcome.php?success=Plan and coach selected successfully!");
     exit();
+
+    // Fetch process info
+    $stmt = $conn->prepare("SELECT payment_done FROM client_process WHERE client_id=?");
+    $stmt->bind_param("i", $client_id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $process = $res->fetch_assoc();
+    $stmt->close();
+
+    if ($process && $process['payment_done'] == 1) {
+        die("<h1 style='text-align:center; margin-top:50px;'>You've already finished final step 3 and made payment. Cannot change options anymore.</h1>");
+    }
 }
