@@ -136,7 +136,7 @@ https://templatemo.com/tm-594-nexus-flow
                             <p>Complete your payment to activate your account.</p>
                         </div>
                         <div class="card-back">
-                            <a href="payment.php" class="cyber-button">Make Payment</a>
+                            <a href="payment_plan.php" class="cyber-button">Make Payment</a>
                         </div>
                     </div>
                 </div>
