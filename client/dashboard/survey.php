@@ -10,6 +10,25 @@ if (!isset($_SESSION['client_id'])) {
 $client_id = $_SESSION['client_id'];
 $survey = null;
 
+// Check if client has completed all 3 steps
+$process = $conn->prepare("SELECT survey_completed, plan_selected, payment_done 
+                           FROM client_process WHERE client_id = ?");
+$process->bind_param("i", $client_id);
+$process->execute();
+$processResult = $process->get_result();
+$processData = $processResult->fetch_assoc();
+$process->close();
+
+if (
+    $processData && $processData['survey_completed'] == 1
+    && $processData['plan_selected'] == 1
+    && $processData['payment_done'] == 1
+) {
+    // All steps completed → restrict access
+    echo "<h1 style='text-align:center; margin-top:50px;'>You have already completed all steps. Survey cannot be modified anymore.</h1>";
+    exit();
+}
+
 $stmt = $conn->prepare("SELECT * FROM client_survey WHERE client_id = ?");
 $stmt->bind_param("i", $client_id);
 $stmt->execute();

@@ -3,7 +3,7 @@ session_start();
 require_once("../../db_connect.php");
 
 if (!isset($_SESSION['client_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("Unauthorized access.");
+    die("<h1>Unauthorized access.</h1>");
 }
 
 $client_id = $_SESSION['client_id'];

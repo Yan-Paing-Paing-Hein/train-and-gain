@@ -2,7 +2,7 @@
 require_once("../db_connect.php");
 
 if (!isset($_GET['token'])) {
-    die("<h1>Invalid request!</h1>");
+    die("<h1 style='text-align:center; margin-top:50px;'>Invalid request!</h1>");
 }
 
 $token = $_GET['token'];
@@ -19,16 +19,16 @@ $reset = $result->fetch_assoc();
 $stmt->close();
 
 if (!$reset) {
-    die("<h1>Invalid or expired token!</h1>");
+    die("<h1 style='text-align:center; margin-top:50px;'>Invalid or expired token!</h1>");
 }
 
 if ($reset['is_used'] == 1) {
-    die("<h1>This reset link has already been used!</h1>");
+    die("<h1 style='text-align:center; margin-top:50px;'>This reset link has already been used!</h1>");
 }
 
 // Optional: 1-hour expiry
 if (time() - strtotime($reset['requested_at']) > 3600) {
-    die("<h1>This reset link has expired. Please request a new one.</h1>");
+    die("<h1 style='text-align:center; margin-top:50px;'>This reset link has expired. Please request a new one.</h1>");
 }
 ?>
 
