@@ -2,57 +2,43 @@
 session_start();
 require_once("../../db_connect.php");
 
-if (!isset($_SESSION['client_id'])) {
-    header("Location: ../login_form.php?error=Please log in first.");
-    exit();
+if (!isset($_SESSION['client_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    die("Unauthorized access.");
 }
+
 $client_id = $_SESSION['client_id'];
+$plan_type = $_POST['plan_type'] ?? '';
+$payment_method = $_POST['payment_method'] ?? '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $plan_type = $_POST['plan_type'] ?? '';
-    $payment_method = $_POST['payment_method'] ?? '';
-    $card_number = $_POST['card_number'] ?? '';
-    $expiry = $_POST['expiry'] ?? '';
-    $cvc = $_POST['cvc'] ?? '';
-    $agree = $_POST['agree'] ?? '';
-
-    if (!$agree) {
-        die("You must agree to the terms.");
-    }
-
-    // Determine amount
-    switch ($plan_type) {
-        case 'Monthly':
-            $amount = 50.00;
-            break;
-        case 'Six-Month':
-            $amount = 240.00;
-            break;
-        case 'Yearly':
-            $amount = 360.00;
-            break;
-        default:
-            die("Invalid plan selected.");
-    }
-
-    // Simulate payment
-    $transaction_id = "SIM" . time();
-    $status = "Completed";
-
-    // Insert payment
-    $stmt = $conn->prepare("INSERT INTO client_payment (client_id, plan_type, amount, payment_method, transaction_id, status) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isdsss", $client_id, $plan_type, $amount, $payment_method, $transaction_id, $status);
-    $stmt->execute();
-    $stmt->close();
-
-    // Update process
-    $stmt2 = $conn->prepare("UPDATE client_process SET payment_done = 1 WHERE client_id=?");
-    $stmt2->bind_param("i", $client_id);
-    $stmt2->execute();
-    $stmt2->close();
-
-    echo "<h1 style='text-align:center; margin-top:50px;'>Payment Successful 🎉 Welcome to Train&Gain!</h1>";
-    exit();
-} else {
-    die("Invalid request.");
+if (
+    !in_array($plan_type, ['Monthly', 'Six-Months', 'Yearly']) ||
+    !in_array($payment_method, ['PayPal', 'Venmo', 'CashApp', 'GooglePay', 'ApplePay'])
+) {
+    die("Invalid data submitted.");
 }
+
+// Handle file upload
+if (!isset($_FILES['screenshot']) || $_FILES['screenshot']['error'] !== UPLOAD_ERR_OK) {
+    die("Screenshot upload failed.");
+}
+
+
+$upload_dir = __DIR__ . "/payments/";  // absolute path
+if (!is_dir($upload_dir)) {
+    mkdir($upload_dir, 0777, true);
+}
+
+$filename = time() . "_" . basename($_FILES['screenshot']['name']);
+$target_path = $upload_dir . $filename;
+move_uploaded_file($_FILES['screenshot']['tmp_name'], $target_path);
+
+// Relative path for DB
+$db_path = "client/dashboard/payments/" . $filename;
+
+// Insert into client_payment
+$stmt = $conn->prepare("INSERT INTO client_payment (client_id, plan_type, payment_method, screenshot_path, status) VALUES (?,?,?,?, 'Pending')");
+$stmt->bind_param("isss", $client_id, $plan_type, $payment_method, $db_path);
+$stmt->execute();
+$stmt->close();
+
+echo "<h1 style='text-align:center; margin-top:50px;'>Your payment is under review. Please wait for admin approval.</h1>";

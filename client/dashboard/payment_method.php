@@ -2,65 +2,56 @@
 session_start();
 require_once("../../db_connect.php");
 
-if (!isset($_SESSION['client_id'])) {
+if (!isset($_SESSION['client_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: ../login_form.php?error=Please log in first.");
     exit();
 }
-$client_id = $_SESSION['client_id'];
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['plan_type'])) {
-    die("Invalid request.");
+$client_id = $_SESSION['client_id'];
+$plan_type = $_POST['plan_type'] ?? '';
+
+if (!in_array($plan_type, ['Monthly', 'Six-Months', 'Yearly'])) {
+    die("Invalid plan selected.");
 }
 
-$plan_type = $_POST['plan_type'];
-
-// Fetch client email
+// Fetch email from client_registered
 $stmt = $conn->prepare("SELECT email FROM client_registered WHERE id=?");
 $stmt->bind_param("i", $client_id);
 $stmt->execute();
-$email = $stmt->get_result()->fetch_assoc()['email'];
+$res = $stmt->get_result();
+$client = $res->fetch_assoc();
 $stmt->close();
 ?>
 
-<section class="payment-method-section">
+<section class="payment-method">
     <h2>Payment Method</h2>
-    <form method="POST" action="save_payment.php">
+    <form method="POST" action="save_payment.php" enctype="multipart/form-data">
+        <p><strong>Contact Email:</strong> <?php echo htmlspecialchars($client['email']); ?></p>
         <input type="hidden" name="plan_type" value="<?php echo htmlspecialchars($plan_type); ?>">
 
-        <div class="contact-info">
-            <h3>Contact Information</h3>
-            <p>Email: <strong><?php echo htmlspecialchars($email); ?></strong></p>
-        </div>
+        <label>
+            <input type="radio" name="payment_method" value="PayPal" required> PayPal
+        </label><br>
+        <label>
+            <input type="radio" name="payment_method" value="Venmo"> Venmo
+        </label><br>
+        <label>
+            <input type="radio" name="payment_method" value="CashApp"> CashApp
+        </label><br>
+        <label>
+            <input type="radio" name="payment_method" value="GooglePay"> Google Pay
+        </label><br>
+        <label>
+            <input type="radio" name="payment_method" value="ApplePay"> Apple Pay
+        </label><br><br>
 
-        <div class="payment-methods">
-            <h3>Card Information</h3>
-            <label>Card Number</label>
-            <input type="text" name="card_number" placeholder="1234 1234 1234 1234" required>
+        <label>Upload Transaction Screenshot (JPG/PNG):</label>
+        <input type="file" name="screenshot" accept="image/*" required><br><br>
 
-            <label>Expiration (MM/YY)</label>
-            <input type="text" name="expiry" placeholder="MM/YY" required>
+        <label>
+            <input type="checkbox" required> I agree to Train&Gain's Terms and authorize subscription charges.
+        </label><br><br>
 
-            <label>CVC</label>
-            <input type="text" name="cvc" placeholder="CVC" required>
-
-            <label>Payment Method</label>
-            <select name="payment_method" required>
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">MasterCard</option>
-                <option value="Credit Card">Credit Card</option>
-                <option value="Debit Card">Debit Card</option>
-                <option value="JCB">JCB</option>
-                <option value="UnionPay">UnionPay</option>
-            </select>
-        </div>
-
-        <div class="agreement">
-            <label>
-                <input type="checkbox" name="agree" required>
-                By subscribing, you agree to Train&Gain's Terms of Use and Privacy Policy.
-            </label>
-        </div>
-
-        <button type="submit" class="cyber-button">Make Payment</button>
+        <button type="submit" class="cyber-button">Submit Payment</button>
     </form>
 </section>
