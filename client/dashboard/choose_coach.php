@@ -6,9 +6,23 @@ if (!isset($_SESSION['client_id'])) {
     header("Location: ../login_form.php?error=Please log in first.");
     exit();
 }
+
 $client_id = $_SESSION['client_id'];
 
-// Get chosen plan
+// Fetch process info first
+$stmt = $conn->prepare("SELECT payment_done FROM client_process WHERE client_id=?");
+$stmt->bind_param("i", $client_id);
+$stmt->execute();
+$res = $stmt->get_result();
+$process = $res->fetch_assoc();
+$stmt->close();
+
+// Restrict if payment is already done
+if ($process && $process['payment_done'] == 1) {
+    die("<h1 style='text-align:center; margin-top:50px;'>You've already finished final step 3 and made payment. Cannot change options anymore.</h1>");
+}
+
+// Then check for plan param
 if (!isset($_GET['plan'])) {
     die("<h1 style='text-align:center;margin-top:50px;'>No plan selected.</h1>");
 }
@@ -19,18 +33,6 @@ $stmt = $conn->prepare("SELECT * FROM coach WHERE specialty = ? AND status = 'Ac
 $stmt->bind_param("s", $plan);
 $stmt->execute();
 $coaches = $stmt->get_result();
-
-// Fetch process info
-$stmt = $conn->prepare("SELECT payment_done FROM client_process WHERE client_id=?");
-$stmt->bind_param("i", $client_id);
-$stmt->execute();
-$res = $stmt->get_result();
-$process = $res->fetch_assoc();
-$stmt->close();
-
-if ($process && $process['payment_done'] == 1) {
-    die("<h1 style='text-align:center; margin-top:50px;'>You've already finished final step 3 and made payment. Cannot change options anymore.</h1>");
-}
 ?>
 
 <section class="coach-section">
