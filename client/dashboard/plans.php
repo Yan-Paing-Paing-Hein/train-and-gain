@@ -82,7 +82,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
             border-color: #f900e0;
         }
 
-        /* Video Background (hidden until hover) */
+        /* Video Background */
         .plan-video {
             position: absolute;
             top: 0;
@@ -90,14 +90,20 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            /* slightly dark by default */
+            opacity: 0.6;
+            /* darken video */
+            filter: brightness(1);
+            transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out;
             pointer-events: none;
+            z-index: 1;
         }
 
         .plan-card:hover .plan-video {
-            opacity: 0.25;
-            /* transparent overlay */
+            /* fully visible */
+            opacity: 1;
+            /* brighten video on hover */
+            filter: brightness(1.2);
         }
 
         /* Plan Content */
@@ -106,8 +112,8 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
             padding: 40px;
             text-align: center;
             z-index: 2;
-            transform: skew(5deg);
             /* reverse skew to keep text straight */
+            transform: skew(5deg);
         }
 
         .plan-content h3 {
@@ -140,6 +146,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
             border: 3px solid #f900e0;
         }
     </style>
+
     <!--
 
 TemplateMo 594 nexus flow
