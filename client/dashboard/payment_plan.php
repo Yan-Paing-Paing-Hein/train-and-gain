@@ -10,7 +10,7 @@ if (!isset($_SESSION['client_id'])) {
 $client_id = $_SESSION['client_id'];
 
 // Check step access
-$stmt = $conn->prepare("SELECT survey_completed, plan_selected FROM client_process WHERE client_id=?");
+$stmt = $conn->prepare("SELECT survey_completed, plan_selected, payment_done FROM client_process WHERE client_id=?");
 $stmt->bind_param("i", $client_id);
 $stmt->execute();
 $res = $stmt->get_result();
@@ -19,6 +19,11 @@ $stmt->close();
 
 if (!$process || $process['survey_completed'] == 0 || $process['plan_selected'] == 0) {
     die("<h1 style='text-align:center; margin-top:50px;'>Please complete Step 1 and Step 2 first.</h1>");
+}
+
+// Prevent re-access if payment already submitted
+if ($process['payment_done'] == 1) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Payment already submitted. Your payment is under review.</h1>");
 }
 ?>
 

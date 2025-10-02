@@ -41,4 +41,10 @@ $stmt->bind_param("isss", $client_id, $plan_type, $payment_method, $db_path);
 $stmt->execute();
 $stmt->close();
 
+// Update client_process -> payment_done = 1
+$update = $conn->prepare("UPDATE client_process SET payment_done = 1 WHERE client_id = ?");
+$update->bind_param("i", $client_id);
+$update->execute();
+$update->close();
+
 echo "<h1 style='text-align:center; margin-top:50px;'>Your payment is under review. Please wait for admin approval.</h1>";
