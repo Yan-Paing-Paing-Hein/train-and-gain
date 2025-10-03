@@ -35,23 +35,141 @@ $stmt->execute();
 $coaches = $stmt->get_result();
 ?>
 
-<section class="coach-section">
-    <h2>Available Coaches for <?php echo htmlspecialchars($plan); ?></h2>
-    <div class="coach-grid">
-        <?php while ($coach = $coaches->fetch_assoc()): ?>
-            <div class="coach-card">
-                <img src="../../admin/coach/<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Coach">
-                <h3><?php echo htmlspecialchars($coach['full_name']); ?></h3>
-                <p><?php echo htmlspecialchars($coach['about']); ?></p>
-                <p>Experience: <?php echo htmlspecialchars($coach['experience']); ?> years</p>
-                <p>Email: <?php echo htmlspecialchars($coach['email']); ?></p>
-                <p>Contact: <?php echo htmlspecialchars($coach['phone_number']); ?></p>
-                <form method="POST" action="save_plan.php">
-                    <input type="hidden" name="plan" value="<?php echo htmlspecialchars($plan); ?>">
-                    <input type="hidden" name="coach_id" value="<?php echo $coach['id']; ?>">
-                    <button type="submit" class="cyber-button">Choose This Coach</button>
-                </form>
-            </div>
-        <?php endwhile; ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+
+    <!--
+
+TemplateMo 594 nexus flow
+
+https://templatemo.com/tm-594-nexus-flow
+
+-->
+</head>
+
+<body id="top">
+    <!-- Enhanced Background Elements -->
+    <div class="cyber-bg">
+        <div class="cyber-gradient"></div>
+        <div class="matrix-rain" id="matrixRain"></div>
     </div>
-</section>
+
+    <div class="particles" id="particlesContainer"></div>
+
+    <div class="data-streams" id="dataStreams"></div>
+
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="grid-overlay">
+        <div class="grid-lines"></div>
+        <div class="grid-glow"></div>
+    </div>
+
+    <div class="scanlines"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#top" class="logo">Train & Gain</a>
+            <ul class="nav-links">
+                <li><a href="../../client/blogpost.php">BlogPost</a></li>
+                <li><a href="../../client/coach.php">Coach</a></li>
+            </ul>
+            <div class="nav-bottom">
+                <a href="../dashboard/welcome.php" class="cyber-button">Dashboard</a>
+                <a href="../../client/logout.php" class="cyber-button">Log out</a>
+            </div>
+            <button class="mobile-menu-button" id="mobileMenuBtn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+
+
+    <!-- Contact Section -->
+    <section class="contact fade-up" id="contact">
+        <div class="contact-container">
+            <div class="section-header">
+                <h2 class="section-title3">Available Coaches for <?php echo htmlspecialchars($plan); ?></h2>
+                <p class="section-subtitle">Get Started with Train&Gain</p>
+            </div>
+
+            <div class="coach-grid">
+                <?php while ($coach = $coaches->fetch_assoc()): ?>
+                    <div class="coach-card">
+                        <img src="../../admin/coach/<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Coach">
+                        <h3><?php echo htmlspecialchars($coach['full_name']); ?></h3>
+                        <p><?php echo htmlspecialchars($coach['about']); ?></p>
+                        <p>Experience: <?php echo htmlspecialchars($coach['experience']); ?> years</p>
+                        <p>Email: <?php echo htmlspecialchars($coach['email']); ?></p>
+                        <p>Contact: <?php echo htmlspecialchars($coach['phone_number']); ?></p>
+                        <form method="POST" action="save_plan.php">
+                            <input type="hidden" name="plan" value="<?php echo htmlspecialchars($plan); ?>">
+                            <input type="hidden" name="coach_id" value="<?php echo $coach['id']; ?>">
+                            <button type="submit" class="cyber-button">Choose This Coach</button>
+                        </form>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Terms of Service</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Documentation</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Contact Support</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NexusFlow Systems. All realities reserved.</p>
+                <p class="footer-credit">Brought to you by <a href="https://templatemo.com" target="_blank"
+                        rel="noopener nofollow">TemplateMo</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const title = document.querySelector(".section-title3");
+            const text = title.textContent.trim();
+            title.textContent = ""; // clear original text
+
+            text.split("").forEach((char, i) => {
+                const span = document.createElement("span");
+                span.textContent = char === " " ? "\u00A0" : char; // preserve spaces
+                span.style.setProperty("--delay", `${i * 0.05}s`);
+                title.appendChild(span);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
