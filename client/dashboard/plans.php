@@ -90,9 +90,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* slightly dark by default */
             opacity: 0.6;
-            /* darken video */
             filter: brightness(1);
             transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out;
             pointer-events: none;
@@ -100,9 +98,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
         }
 
         .plan-card:hover .plan-video {
-            /* fully visible */
             opacity: 1;
-            /* brighten video on hover */
             filter: brightness(1.2);
         }
 
@@ -112,7 +108,6 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
             padding: 40px;
             text-align: center;
             z-index: 2;
-            /* reverse skew to keep text straight */
             transform: skew(5deg);
         }
 
@@ -132,7 +127,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
         .current-plan h2 {
             font-size: 1.8rem;
             color: #fff;
-            text-shadow: 0 0 15px #f900e0, 0 0 25px #00ffe5;
+            text-shadow: 0 0 15px #f900e0, 0 0 25px #00ffff;
             margin-bottom: 40px;
         }
 
@@ -155,7 +150,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
         .neon-border {
             padding: 6px;
             border-radius: 50%;
-            background: linear-gradient(270deg, #f900e0, #00ffe5, #f900e0);
+            background: linear-gradient(270deg, #f900e0, #00ffff, #f900e0);
             background-size: 600% 600%;
             animation: gradientRotate 6s ease infinite;
         }
@@ -200,7 +195,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
         .arrow {
             display: inline-block;
             height: 3px;
-            background: linear-gradient(90deg, #f900e0, #00ffe5);
+            background: linear-gradient(90deg, #f900e0, #00ffff);
             position: relative;
             flex-shrink: 0;
             animation: expandLine 2s infinite;
@@ -256,7 +251,8 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
         .right-arrow .arrow::after {
             content: "";
             position: absolute;
-            top: -6px;
+            top: 50%;
+            transform: translateY(-50%);
             border-top: 6px solid transparent;
             border-bottom: 6px solid transparent;
         }
@@ -268,7 +264,7 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
 
         .right-arrow .arrow::after {
             right: -10px;
-            border-left: 10px solid #00ffe5;
+            border-left: 10px solid #00ffff;
         }
 
         /* Text Styling */
@@ -276,7 +272,11 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
         .coach-name {
             font-size: 1.3rem;
             color: #fff;
-            text-shadow: 0 0 10px #f900e0, 0 0 15px #00ffe5;
+            text-shadow: 0 0 10px #f900e0, 0 0 15px #00ffff;
+            margin: 0;
+            line-height: 1;
+            display: flex;
+            align-items: center;
         }
     </style>
 
@@ -390,7 +390,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <div class="coach-side">
                             <div class="arrow-line right-arrow">
                                 <span class="arrow"></span>
-                                <p class="coach-name"><strong>Coach:</strong> <?php echo htmlspecialchars($current_plan['full_name']); ?></p>
+                                <p class="coach-name"><strong></strong> <?php echo htmlspecialchars($current_plan['full_name']); ?></p>
                             </div>
                         </div>
                     </div>
@@ -467,7 +467,7 @@ https://templatemo.com/tm-594-nexus-flow
         });
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", () => {
             const leftArrow = document.querySelector(".left-arrow .arrow");
             const rightArrow = document.querySelector(".right-arrow .arrow");
@@ -478,7 +478,7 @@ https://templatemo.com/tm-594-nexus-flow
                 rightArrow.style.animationDelay = "1s";
             }
         });
-    </script>
+    </script> -->
 
 </body>
 
