@@ -43,6 +43,9 @@ $coaches = $stmt->get_result();
                 <img src="../../admin/coach/<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Coach">
                 <h3><?php echo htmlspecialchars($coach['full_name']); ?></h3>
                 <p><?php echo htmlspecialchars($coach['about']); ?></p>
+                <p>Experience: <?php echo htmlspecialchars($coach['experience']); ?> years</p>
+                <p>Email: <?php echo htmlspecialchars($coach['email']); ?></p>
+                <p>Contact: <?php echo htmlspecialchars($coach['phone_number']); ?></p>
                 <form method="POST" action="save_plan.php">
                     <input type="hidden" name="plan" value="<?php echo htmlspecialchars($plan); ?>">
                     <input type="hidden" name="coach_id" value="<?php echo $coach['id']; ?>">
