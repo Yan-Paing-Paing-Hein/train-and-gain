@@ -45,6 +45,149 @@ $coaches = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        /* --- Grid Layout --- */
+        .coach-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* --- Coach Card --- */
+        .coach-card {
+            background: rgba(255, 255, 255, 0.05);
+            /* semi-transparent */
+            backdrop-filter: blur(10px);
+            /* frosted glass */
+            border: 2px solid #00ffff;
+            /* neon border */
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(50px) scale(0.9);
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.4s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 229, 0.2);
+        }
+
+        .coach-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px #f900e0, 0 0 45px #00ffff;
+            border-color: #f900e0;
+        }
+
+        /* Profile Picture with Neon Glow */
+        .coach-card img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            background: linear-gradient(270deg, #f900e0, #00ffff, #f900e0);
+            background-size: 300% 300%;
+            animation: neon-border 4s linear infinite;
+            padding: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px #00ffff, 0 0 35px #f900e0;
+        }
+
+        /* Text */
+        .coach-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #f900e0;
+            text-shadow: 0 0 8px #f900e0, 0 0 15px rgba(249, 0, 224, 0.6);
+        }
+
+        .coach-card p {
+            font-size: 0.95rem;
+            margin: 6px 0;
+            color: #00ffff;
+            text-shadow: 0 0 8px #00ffff;
+        }
+
+        /* Button */
+        .cyber-button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            background: transparent;
+            color: #00ffff;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .cyber-button:hover {
+            color: #f900e0;
+            border-color: #f900e0;
+            box-shadow: 0 0 15px #f900e0, 0 0 30px #00ffff;
+        }
+
+        .cyber-button:hover::before {
+            left: 100%;
+        }
+
+        /* Animations */
+        @keyframes neon-border {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes hologramFlyIn {
+            from {
+                transform: translateY(80px) scale(0.85);
+                opacity: 0;
+                filter: blur(8px);
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+    </style>
+
+    <script>
+        // JS entrance animation for hologram effect
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".coach-card");
+            cards.forEach((card, i) => {
+                setTimeout(() => {
+                    card.style.animation = "hologramFlyIn 0.9s ease forwards";
+                }, i * 300); // delay each card
+            });
+        });
+    </script>
+
 
     <!--
 
@@ -166,6 +309,18 @@ https://templatemo.com/tm-594-nexus-flow
                 span.textContent = char === " " ? "\u00A0" : char; // preserve spaces
                 span.style.setProperty("--delay", `${i * 0.05}s`);
                 title.appendChild(span);
+            });
+        });
+    </script>
+
+    <script>
+        // JS entrance animation for hologram effect
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".coach-card");
+            cards.forEach((card, i) => {
+                setTimeout(() => {
+                    card.style.animation = "hologramFlyIn 0.9s ease forwards";
+                }, i * 300); // delay each card
             });
         });
     </script>
