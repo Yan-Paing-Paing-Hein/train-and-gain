@@ -57,11 +57,8 @@ $coaches = $stmt->get_result();
         /* --- Coach Card --- */
         .coach-card {
             background: rgba(255, 255, 255, 0.05);
-            /* semi-transparent */
             backdrop-filter: blur(10px);
-            /* frosted glass */
             border: 2px solid #00ffff;
-            /* neon border */
             border-radius: 20px;
             padding: 30px;
             text-align: center;
@@ -109,7 +106,7 @@ $coaches = $stmt->get_result();
         }
 
         /* Button */
-        .cyber-button {
+        .cyber-button2 {
             margin-top: 15px;
             padding: 12px 25px;
             border: 2px solid #00ffff;
@@ -125,7 +122,7 @@ $coaches = $stmt->get_result();
             overflow: hidden;
         }
 
-        .cyber-button::before {
+        .cyber-button2::before {
             content: "";
             position: absolute;
             top: 0;
@@ -136,13 +133,13 @@ $coaches = $stmt->get_result();
             transition: left 0.5s;
         }
 
-        .cyber-button:hover {
+        .cyber-button2:hover {
             color: #f900e0;
             border-color: #f900e0;
             box-shadow: 0 0 15px #f900e0, 0 0 30px #00ffff;
         }
 
-        .cyber-button:hover::before {
+        .cyber-button2:hover::before {
             left: 100%;
         }
 
@@ -175,19 +172,6 @@ $coaches = $stmt->get_result();
             }
         }
     </style>
-
-    <script>
-        // JS entrance animation for hologram effect
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".coach-card");
-            cards.forEach((card, i) => {
-                setTimeout(() => {
-                    card.style.animation = "hologramFlyIn 0.9s ease forwards";
-                }, i * 300); // delay each card
-            });
-        });
-    </script>
-
 
     <!--
 
@@ -265,7 +249,7 @@ https://templatemo.com/tm-594-nexus-flow
                         <form method="POST" action="save_plan.php">
                             <input type="hidden" name="plan" value="<?php echo htmlspecialchars($plan); ?>">
                             <input type="hidden" name="coach_id" value="<?php echo $coach['id']; ?>">
-                            <button type="submit" class="cyber-button">Choose This Coach</button>
+                            <button type="submit" class="cyber-button2">Choose This Coach</button>
                         </form>
                     </div>
                 <?php endwhile; ?>
