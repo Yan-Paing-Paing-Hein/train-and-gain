@@ -301,11 +301,23 @@ https://templatemo.com/tm-594-nexus-flow
         // JS entrance animation for hologram effect
         document.addEventListener("DOMContentLoaded", () => {
             const cards = document.querySelectorAll(".coach-card");
-            cards.forEach((card, i) => {
-                setTimeout(() => {
-                    card.style.animation = "hologramFlyIn 0.9s ease forwards";
-                }, i * 300); // delay each card
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = [...cards].indexOf(entry.target);
+                        const rowGroup = Math.floor(index / 2); // every 2 cards = 1 group
+                        setTimeout(() => {
+                            entry.target.style.animation = "hologramFlyIn 0.9s ease forwards";
+                        }, rowGroup * 300); // delay each group, not every card
+                        observer.unobserve(entry.target); // animate only once
+                    }
+                });
+            }, {
+                threshold: 0.2
             });
+
+            cards.forEach((card) => observer.observe(card));
         });
     </script>
 
