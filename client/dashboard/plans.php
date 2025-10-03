@@ -125,25 +125,158 @@ $plans = ['Weight Loss', 'Muscle Gain', 'Yoga', 'Strength Training', 'HIIT', 'En
 
         /* Current Plan Section */
         .current-plan {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-align: center;
         }
 
+        .current-plan h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            text-shadow: 0 0 15px #f900e0, 0 0 25px #00ffe5;
+            margin-bottom: 40px;
+        }
+
+        /* Flex Layout */
         .current-plan .coach-card {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            gap: 60px;
+            background: rgba(0, 0, 0, 0.6);
             border: 2px solid #f900e0;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(249, 0, 224, 0.5);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(249, 0, 224, 0.6);
+            position: relative;
+            overflow: hidden;
         }
 
-        .current-plan img {
+        /* Neon Gradient Profile */
+        .neon-border {
+            padding: 6px;
             border-radius: 50%;
-            border: 3px solid #f900e0;
+            background: linear-gradient(270deg, #f900e0, #00ffe5, #f900e0);
+            background-size: 600% 600%;
+            animation: gradientRotate 6s ease infinite;
+        }
+
+        .neon-border img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            border: 4px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Gradient rotation animation */
+        @keyframes gradientRotate {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Left & Right Sides */
+        .plan-side,
+        .coach-side {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Arrow Lines */
+        .arrow-line {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Arrows expanding effect */
+        .arrow {
+            display: inline-block;
+            height: 3px;
+            background: linear-gradient(90deg, #f900e0, #00ffe5);
+            position: relative;
+            flex-shrink: 0;
+            animation: expandLine 2s infinite;
+        }
+
+        .left-arrow .arrow {
+            width: 0;
+            animation: expandLineLeft 2s infinite;
+        }
+
+        .right-arrow .arrow {
+            width: 0;
+            animation: expandLineRight 2s infinite;
+        }
+
+        /* Expanding line animations */
+        @keyframes expandLineLeft {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            40% {
+                width: 60px;
+                opacity: 1;
+            }
+
+            100% {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes expandLineRight {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            40% {
+                width: 60px;
+                opacity: 1;
+            }
+
+            100% {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        /* Arrowheads */
+        .left-arrow .arrow::before,
+        .right-arrow .arrow::after {
+            content: "";
+            position: absolute;
+            top: -6px;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .left-arrow .arrow::before {
+            left: -10px;
+            border-right: 10px solid #f900e0;
+        }
+
+        .right-arrow .arrow::after {
+            right: -10px;
+            border-left: 10px solid #00ffe5;
+        }
+
+        /* Text Styling */
+        .plan-name,
+        .coach-name {
+            font-size: 1.3rem;
+            color: #fff;
+            text-shadow: 0 0 10px #f900e0, 0 0 15px #00ffe5;
         }
     </style>
 
@@ -236,11 +369,29 @@ https://templatemo.com/tm-594-nexus-flow
             <?php if ($current_plan): ?>
                 <section class="current-plan">
                     <h2>Your Currently Selected Plan & Coach</h2>
+
                     <div class="coach-card">
-                        <img src="../../admin/coach/<?php echo htmlspecialchars($current_plan['profile_picture']); ?>" alt="Coach" width="120" height="120">
-                        <div>
-                            <h3><?php echo htmlspecialchars($current_plan['plan']); ?></h3>
-                            <p><strong>Coach:</strong> <?php echo htmlspecialchars($current_plan['full_name']); ?></p>
+                        <!-- Workout Plan (Left) -->
+                        <div class="plan-side">
+                            <div class="arrow-line left-arrow">
+                                <h3 class="plan-name"><?php echo htmlspecialchars($current_plan['plan']); ?></h3>
+                                <span class="arrow"></span>
+                            </div>
+                        </div>
+
+                        <!-- Coach Profile (Center) -->
+                        <div class="coach-profile">
+                            <div class="neon-border">
+                                <img src="../../admin/coach/<?php echo htmlspecialchars($current_plan['profile_picture']); ?>" alt="Coach">
+                            </div>
+                        </div>
+
+                        <!-- Coach Name (Right) -->
+                        <div class="coach-side">
+                            <div class="arrow-line right-arrow">
+                                <span class="arrow"></span>
+                                <p class="coach-name"><strong>Coach:</strong> <?php echo htmlspecialchars($current_plan['full_name']); ?></p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -264,7 +415,6 @@ https://templatemo.com/tm-594-nexus-flow
 
         </div>
     </section>
-
 
 
 
@@ -314,6 +464,19 @@ https://templatemo.com/tm-594-nexus-flow
                     setTimeout(() => card.classList.remove("animate"), 1000); // remove after animation ends
                 }, index * 300); // stagger
             });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const leftArrow = document.querySelector(".left-arrow .arrow");
+            const rightArrow = document.querySelector(".right-arrow .arrow");
+
+            // Stagger animations for a futuristic sync effect
+            if (leftArrow && rightArrow) {
+                leftArrow.style.animationDelay = "0s";
+                rightArrow.style.animationDelay = "1s";
+            }
         });
     </script>
 
