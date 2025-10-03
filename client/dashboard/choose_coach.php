@@ -306,10 +306,14 @@ https://templatemo.com/tm-594-nexus-flow
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         const index = [...cards].indexOf(entry.target);
-                        const rowGroup = Math.floor(index / 2); // every 2 cards = 1 group
+                        const rowGroup = Math.floor(index / 2); // group of 2
+                        const positionInRow = index % 2; // 0 = left, 1 = right
+
                         setTimeout(() => {
                             entry.target.style.animation = "hologramFlyIn 0.9s ease forwards";
-                        }, rowGroup * 300); // delay each group, not every card
+                        }, rowGroup * 600 + positionInRow * 200);
+                        // row stagger: 600ms per row, +200ms between left & right card
+
                         observer.unobserve(entry.target); // animate only once
                     }
                 });
