@@ -37,6 +37,164 @@ if ($process['payment_done'] == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        /* Base Section */
+        .contact {
+            padding: 6rem 2rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(249, 0, 224, 0.05), transparent 60%);
+            z-index: 0;
+            filter: blur(60px);
+        }
+
+        .contact-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-title3 {
+            font-size: 2.5rem;
+            color: #00ffff;
+            text-shadow: 0 0 25px #00ffff;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            color: #f900e0;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #f900e0;
+        }
+
+        /* Grid Layout for Plans */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Plan Card */
+        .plan-option {
+            display: block;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plan-option input {
+            display: none;
+        }
+
+        .plan-card {
+            display: block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            text-align: center;
+            clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+        }
+
+        .plan-option:hover .plan-card {
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .plan-option input:checked+.plan-card {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #f900e0;
+            box-shadow: 0 0 35px rgba(249, 0, 224, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Plan Info */
+        .plan-name {
+            font-size: 1.5rem;
+            color: #00ffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .plan-price {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        .plan-period {
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        .discount {
+            color: #f900e0;
+            font-weight: bold;
+            text-shadow: 0 0 8px #f900e0;
+        }
+
+        .featured {
+            border-color: #f900e0;
+            box-shadow: 0 0 40px rgba(249, 0, 224, 0.3);
+        }
+
+        /* Button */
+        .cyber-button2 {
+            background: linear-gradient(90deg, #00ffff, #f900e0);
+            color: #000;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.4s ease;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+        }
+
+        .cyber-button2:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(249, 0, 224, 0.6);
+        }
+
+        /* Fade-up animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -123,74 +281,38 @@ https://templatemo.com/tm-594-nexus-flow
                 <p class="section-subtitle">Get Started with Train&Gain</p>
             </div>
 
+            <form method="POST" action="payment_method.php" class="pricing-form">
+                <div class="plan-grid">
+                    <label class="plan-option">
+                        <input type="radio" name="plan_type" value="Monthly" required>
+                        <span class="plan-card">
+                            <span class="plan-name">Monthly</span>
+                            <span class="plan-price">$50</span>
+                            <span class="plan-period">per month</span>
+                        </span>
+                    </label>
 
+                    <label class="plan-option">
+                        <input type="radio" name="plan_type" value="Six-Months">
+                        <span class="plan-card">
+                            <span class="plan-name">Six-Months</span>
+                            <span class="plan-price">$240</span>
+                            <span class="plan-period">/ 6 months <span class="discount">(20% off)</span></span>
+                        </span>
+                    </label>
 
-            <form method="POST" action="payment_method.php">
-                <label>
-                    <input type="radio" name="plan_type" value="Monthly" required>
-                    $50 / month
-                </label><br>
-                <label>
-                    <input type="radio" name="plan_type" value="Six-Months">
-                    $240 / 6 months (20% off)
-                </label><br>
-                <label>
-                    <input type="radio" name="plan_type" value="Yearly">
-                    $360 / year (40% off)
-                </label><br>
+                    <label class="plan-option">
+                        <input type="radio" name="plan_type" value="Yearly">
+                        <span class="plan-card featured">
+                            <span class="plan-name">Yearly</span>
+                            <span class="plan-price">$360</span>
+                            <span class="plan-period">per year <span class="discount">(40% off)</span></span>
+                        </span>
+                    </label>
+                </div>
 
-                <button type="submit" class="cyber-button">Continue</button>
+                <button type="submit" class="cyber-button2">Continue</button>
             </form>
-
-
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="plan-name">Initiate</div>
-                    <div class="plan-price">$49</div>
-                    <div class="plan-period">per neural link</div>
-                    <!-- <ul class="plan-features">
-                        <li>Basic quantum processing</li>
-                        <li>5 holographic workspaces</li>
-                        <li>Standard encryption</li>
-                        <li>Community support matrix</li>
-                        <li>Reality sync enabled</li>
-                    </ul> -->
-                    <a href="#" class="btn-secondary">Enter System</a>
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="plan-name">Nexus</div>
-                    <div class="plan-price">$149</div>
-                    <div class="plan-period">per neural link</div>
-                    <!-- <ul class="plan-features">
-                        <li>Advanced quantum algorithms</li>
-                        <li>Unlimited holo-workspaces</li>
-                        <li>Quantum encryption fortress</li>
-                        <li>Priority neural support</li>
-                        <li>Mind-reading analytics</li>
-                        <li>Hyperdrive sync protocol</li>
-                    </ul> -->
-                    <a href="#" class="btn-primary">Jack In</a>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="plan-name">Transcend</div>
-                    <div class="plan-price">$399</div>
-                    <div class="plan-period">per neural link</div>
-                    <!-- <ul class="plan-features">
-                        <li>Infinite processing power</li>
-                        <li>Custom reality matrices</li>
-                        <li>Temporal encryption layers</li>
-                        <li>Direct neural interface</li>
-                        <li>Predictive consciousness</li>
-                        <li>Quantum entanglement sync</li>
-                    </ul> -->
-                    <a href="#" class="btn-secondary">Ascend</a>
-                </div>
-            </div>
-
-
         </div>
     </section>
 
@@ -231,6 +353,24 @@ https://templatemo.com/tm-594-nexus-flow
                 title.appendChild(span);
             });
         });
+    </script>
+
+    <script>
+        // Animate fade-up when scrolling into view
+        const fadeUps = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 200); // slight stagger
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        fadeUps.forEach((el) => observer.observe(el));
     </script>
 
 </body>
