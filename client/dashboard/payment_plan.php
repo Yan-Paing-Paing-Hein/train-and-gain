@@ -94,7 +94,7 @@ if ($process['payment_done'] == 1) {
         .plan-card {
             display: block;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            border: 2px solid rgba(0, 255, 255, 0.3);
             padding: 2rem;
             border-radius: 12px;
             backdrop-filter: blur(10px);
@@ -110,9 +110,9 @@ if ($process['payment_done'] == 1) {
         }
 
         .plan-option input:checked+.plan-card {
-            border: 2px solid #00ffff;
+            border: 4px solid #f900e0;
             transform: scale(1.05);
-            animation: neonPulse 1.5s infinite alternate;
+            animation: neonPurplePulse 1.5s infinite alternate;
         }
 
         @keyframes pulseGlow {
@@ -297,7 +297,7 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title3">Select Your Payment Plan</h2>
-                <p class="section-subtitle">Get Started with Train&Gain</p>
+                <p class="section-subtitle">Select by clicking the plan you want to choose</p>
             </div>
 
             <form method="POST" action="payment_method.php" class="pricing-form">
