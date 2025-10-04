@@ -105,6 +105,14 @@ $coaches = $stmt->get_result();
             text-shadow: 0 0 8px #00ffff;
         }
 
+        .coach-card .exp-label,
+        .coach-card .email-label,
+        .coach-card .contact-label {
+            color: #f900e0;
+            text-shadow: 0 0 8px #f900e0, 0 0 15px rgba(249, 0, 224, 0.6);
+            font-weight: 600;
+        }
+
         /* Button */
         .cyber-button2 {
             margin-top: 15px;
@@ -243,9 +251,10 @@ https://templatemo.com/tm-594-nexus-flow
                         <img src="../../admin/coach/<?php echo htmlspecialchars($coach['profile_picture']); ?>" alt="Coach">
                         <h3><?php echo htmlspecialchars($coach['full_name']); ?></h3>
                         <p><?php echo htmlspecialchars($coach['about']); ?></p>
-                        <p>Experience: <?php echo htmlspecialchars($coach['experience']); ?> years</p>
-                        <p>Email: <?php echo htmlspecialchars($coach['email']); ?></p>
-                        <p>Contact: <?php echo htmlspecialchars($coach['phone_number']); ?></p>
+                        <p><span class="exp-label">Experience:</span> <?php echo htmlspecialchars($coach['experience']); ?> years</p>
+                        <p><span class="email-label">Email:</span> <?php echo htmlspecialchars($coach['email']); ?></p>
+                        <p><span class="contact-label">Contact:</span> <?php echo htmlspecialchars($coach['phone_number']); ?></p>
+
                         <form method="POST" action="save_plan.php">
                             <input type="hidden" name="plan" value="<?php echo htmlspecialchars($plan); ?>">
                             <input type="hidden" name="coach_id" value="<?php echo $coach['id']; ?>">
