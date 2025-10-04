@@ -101,7 +101,6 @@ if ($process['payment_done'] == 1) {
             transition: all 0.4s ease;
             text-align: center;
             position: relative;
-            animation: pulseGlow 2.5s infinite;
             clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
         }
 
@@ -111,11 +110,9 @@ if ($process['payment_done'] == 1) {
         }
 
         .plan-option input:checked+.plan-card {
-            background: rgba(0, 255, 255, 0.1);
-            border-color: #f900e0;
-            box-shadow: 0 0 35px rgba(249, 0, 224, 0.6);
+            border: 2px solid #00ffff;
             transform: scale(1.05);
-            animation: pulseGlowStrong 1.5s infinite;
+            animation: neonPulse 1.5s infinite alternate;
         }
 
         @keyframes pulseGlow {
@@ -203,6 +200,18 @@ if ($process['payment_done'] == 1) {
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             pointer-events: none;
+        }
+
+        @keyframes neonPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px #00ffff, 0 0 20px #f900e0, 0 0 30px #00ffff;
+            }
+
+            50% {
+                box-shadow: 0 0 25px #00ffff, 0 0 50px #f900e0, 0 0 75px #00ffff;
+            }
         }
     </style>
     <!--
