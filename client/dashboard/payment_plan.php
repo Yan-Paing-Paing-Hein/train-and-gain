@@ -38,24 +38,12 @@ if ($process['payment_done'] == 1) {
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <style>
-        /* Base Section */
+        /* Existing styles remain same as before */
         .contact {
             padding: 6rem 2rem;
             color: #fff;
             position: relative;
             overflow: hidden;
-        }
-
-        .contact::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(249, 0, 224, 0.05), transparent 60%);
-            z-index: 0;
-            filter: blur(60px);
         }
 
         .contact-container {
@@ -83,21 +71,20 @@ if ($process['payment_done'] == 1) {
             text-shadow: 0 0 10px #f900e0;
         }
 
-        /* Grid Layout for Plans */
+        /* Grid Layout */
         .plan-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             justify-items: center;
             margin-bottom: 3rem;
+            position: relative;
         }
 
-        /* Plan Card */
         .plan-option {
             display: block;
             width: 100%;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         .plan-option input {
@@ -113,6 +100,8 @@ if ($process['payment_done'] == 1) {
             backdrop-filter: blur(10px);
             transition: all 0.4s ease;
             text-align: center;
+            position: relative;
+            animation: pulseGlow 2.5s infinite;
             clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
         }
 
@@ -124,11 +113,35 @@ if ($process['payment_done'] == 1) {
         .plan-option input:checked+.plan-card {
             background: rgba(0, 255, 255, 0.1);
             border-color: #f900e0;
-            box-shadow: 0 0 35px rgba(249, 0, 224, 0.5);
+            box-shadow: 0 0 35px rgba(249, 0, 224, 0.6);
             transform: scale(1.05);
+            animation: pulseGlowStrong 1.5s infinite;
         }
 
-        /* Plan Info */
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes pulseGlowStrong {
+
+            0%,
+            100% {
+                box-shadow: 0 0 25px rgba(249, 0, 224, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(249, 0, 224, 0.8);
+            }
+        }
+
         .plan-name {
             font-size: 1.5rem;
             color: #00ffff;
@@ -158,12 +171,7 @@ if ($process['payment_done'] == 1) {
             text-shadow: 0 0 8px #f900e0;
         }
 
-        .featured {
-            border-color: #f900e0;
-            box-shadow: 0 0 40px rgba(249, 0, 224, 0.3);
-        }
-
-        /* Button */
+        /* Continue Button */
         .cyber-button2 {
             background: linear-gradient(90deg, #00ffff, #f900e0);
             color: #000;
@@ -176,6 +184,8 @@ if ($process['payment_done'] == 1) {
             text-transform: uppercase;
             transition: 0.4s ease;
             box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+            position: relative;
+            z-index: 2;
         }
 
         .cyber-button2:hover {
@@ -183,16 +193,16 @@ if ($process['payment_done'] == 1) {
             box-shadow: 0 0 35px rgba(249, 0, 224, 0.6);
         }
 
-        /* Fade-up animation */
-        .fade-up {
+        /* Neon line connecting animation */
+        .neon-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, #00ffff, #f900e0);
+            border-radius: 10px;
+            box-shadow: 0 0 15px #f900e0, 0 0 25px #00ffff;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
+            pointer-events: none;
         }
     </style>
     <!--
@@ -311,6 +321,9 @@ https://templatemo.com/tm-594-nexus-flow
                     </label>
                 </div>
 
+                <!-- Neon line placeholder -->
+                <div class="neon-line"></div>
+
                 <button type="submit" class="cyber-button2">Continue</button>
             </form>
         </div>
@@ -356,21 +369,51 @@ https://templatemo.com/tm-594-nexus-flow
     </script>
 
     <script>
-        // Animate fade-up when scrolling into view
         const fadeUps = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('visible');
-                    }, index * 200); // slight stagger
+                    }, index * 200);
                 }
             });
         }, {
             threshold: 0.2
         });
-
         fadeUps.forEach((el) => observer.observe(el));
+
+        // Neon line effect
+        const planOptions = document.querySelectorAll('.plan-option input');
+        const neonLine = document.querySelector('.neon-line');
+        const continueBtn = document.querySelector('.cyber-button2');
+
+        planOptions.forEach(input => {
+            input.addEventListener('change', () => {
+                const card = input.nextElementSibling;
+                const rect1 = card.getBoundingClientRect();
+                const rect2 = continueBtn.getBoundingClientRect();
+
+                const parentRect = document.querySelector('.contact-container').getBoundingClientRect();
+
+                // Calculate positions relative to container
+                const startX = rect1.left + rect1.width / 2 - parentRect.left;
+                const startY = rect1.bottom - parentRect.top;
+                const endX = rect2.left + rect2.width / 2 - parentRect.left;
+                const endY = rect2.top - parentRect.top;
+
+                neonLine.style.left = `${startX}px`;
+                neonLine.style.top = `${startY}px`;
+                neonLine.style.width = `0px`;
+                neonLine.style.opacity = 1;
+
+                // Animate the line connecting
+                requestAnimationFrame(() => {
+                    neonLine.style.transform = `rotate(${Math.atan2(endY - startY, endX - startX)}rad)`;
+                    neonLine.style.width = `${Math.hypot(endX - startX, endY - startY)}px`;
+                });
+            });
+        });
     </script>
 
 </body>
