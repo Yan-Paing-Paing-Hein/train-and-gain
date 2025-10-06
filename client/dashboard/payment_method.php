@@ -45,6 +45,115 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        /* ===== CYBERPUNK NEON PAYMENT STYLE ===== */
+        .neon-payment-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            font-family: 'Orbitron', sans-serif;
+            color: #e0e0e0;
+        }
+
+        .neon-payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 18px;
+        }
+
+        .neon-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(0, 255, 255, 0.4);
+            border-radius: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .neon-option input[type="radio"] {
+            display: none;
+        }
+
+        .neon-option span {
+            z-index: 2;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        /* Neon glowing border animation */
+        .neon-option::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #00ffff, #f900e0, #00ffff);
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .neon-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00ffff, 0 0 30px #f900e0;
+        }
+
+        .neon-option:hover::before {
+            opacity: 1;
+            animation: neonBorderFlow 3s linear infinite;
+        }
+
+        /* Selected effect */
+        .neon-option input[type="radio"]:checked+span {
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            font-weight: bold;
+        }
+
+        /* Keyframes for border motion */
+        @keyframes neonBorderFlow {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* File Upload */
+        .neon-upload input[type="file"] {
+            border: 2px solid rgba(0, 255, 255, 0.4);
+            border-radius: 8px;
+            padding: 10px;
+            background: transparent;
+            color: #00ffff;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .neon-upload input[type="file"]:hover {
+            border-color: #f900e0;
+            box-shadow: 0 0 15px #f900e0;
+        }
+
+        /* Checkbox */
+        .neon-terms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -131,36 +240,49 @@ https://templatemo.com/tm-594-nexus-flow
                 <p class="section-subtitle">Get Started with Train&Gain</p>
             </div>
 
-            <form method="POST" action="save_payment.php" enctype="multipart/form-data">
+            <form method="POST" action="save_payment.php" enctype="multipart/form-data" class="neon-payment-form">
                 <p><strong>Contact Email:</strong> <?php echo htmlspecialchars($client['email']); ?></p>
                 <input type="hidden" name="plan_type" value="<?php echo htmlspecialchars($plan_type); ?>">
 
-                <label>
-                    <input type="radio" name="payment_method" value="PayPal" required> PayPal
-                </label><br>
-                <label>
-                    <input type="radio" name="payment_method" value="Venmo"> Venmo
-                </label><br>
-                <label>
-                    <input type="radio" name="payment_method" value="CashApp"> CashApp
-                </label><br>
-                <label>
-                    <input type="radio" name="payment_method" value="GooglePay"> Google Pay
-                </label><br>
-                <label>
-                    <input type="radio" name="payment_method" value="ApplePay"> Apple Pay
-                </label><br><br>
+                <div class="neon-payment-options">
+                    <label class="neon-option">
+                        <input type="radio" name="payment_method" value="PayPal" required>
+                        <span>PayPal</span>
+                    </label>
 
-                <label>Upload Transaction Screenshot (JPG/PNG):</label>
-                <input type="file" name="screenshot" accept="image/*" required><br><br>
+                    <label class="neon-option">
+                        <input type="radio" name="payment_method" value="Venmo">
+                        <span>Venmo</span>
+                    </label>
 
-                <label>
-                    <input type="checkbox" required> I agree to Train&Gain's Terms and authorize subscription charges.
-                </label><br><br>
+                    <label class="neon-option">
+                        <input type="radio" name="payment_method" value="CashApp">
+                        <span>CashApp</span>
+                    </label>
+
+                    <label class="neon-option">
+                        <input type="radio" name="payment_method" value="GooglePay">
+                        <span>Google Pay</span>
+                    </label>
+
+                    <label class="neon-option">
+                        <input type="radio" name="payment_method" value="ApplePay">
+                        <span>Apple Pay</span>
+                    </label>
+                </div>
+
+                <div class="neon-upload">
+                    <label>Upload Transaction Screenshot (JPG/PNG):</label>
+                    <input type="file" name="screenshot" accept="image/*" required>
+                </div>
+
+                <label class="neon-terms">
+                    <input type="checkbox" required>
+                    I agree to Train&Gain's Terms and authorize subscription charges.
+                </label>
 
                 <button type="submit" class="cyber-button">Submit Payment</button>
             </form>
-
         </div>
     </section>
 
@@ -199,6 +321,21 @@ https://templatemo.com/tm-594-nexus-flow
                 span.textContent = char === " " ? "\u00A0" : char; // preserve spaces
                 span.style.setProperty("--delay", `${i * 0.05}s`);
                 title.appendChild(span);
+            });
+        });
+    </script>
+
+    <script>
+        // ====== NEON LIGHT MOUSE ANIMATION ======
+        document.querySelectorAll('.neon-option').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,255,255,0.25), rgba(0,0,0,0.15))`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'rgba(255,255,255,0.05)';
             });
         });
     </script>
