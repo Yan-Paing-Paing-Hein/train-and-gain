@@ -98,7 +98,7 @@ if ($process['payment_done'] == 1) {
             padding: 2rem;
             border-radius: 12px;
             backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
+            transition: all 0.4s ease, box-shadow 0.6s ease-in-out;
             text-align: center;
             position: relative;
             clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
@@ -110,9 +110,33 @@ if ($process['payment_done'] == 1) {
         }
 
         .plan-option input:checked+.plan-card {
-            border: 4px solid #f900e0;
-            transform: scale(1.05);
-            animation: neonPurplePulse 1.5s infinite alternate;
+            border: 3px solid #f900e0;
+            background: rgba(255, 255, 255, 0.07);
+            transform: scale(1.07);
+            animation: neonCyanPulse 1.5s infinite alternate;
+            box-shadow:
+                0 0 20px #f900e0,
+                0 0 40px #f900e0,
+                inset 0 0 15px #f900e0;
+            transition: all 0.4s ease-in-out;
+        }
+
+        @keyframes neonCyanPulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 15px #f900e0,
+                    0 0 30px #f900e0,
+                    inset 0 0 10px #f900e0;
+            }
+
+            50% {
+                box-shadow:
+                    0 0 35px #f900e0,
+                    0 0 70px #f900e0,
+                    inset 0 0 20px #f900e0;
+            }
         }
 
         @keyframes pulseGlow {
@@ -211,6 +235,28 @@ if ($process['payment_done'] == 1) {
 
             50% {
                 box-shadow: 0 0 25px #00ffff, 0 0 50px #f900e0, 0 0 75px #00ffff;
+            }
+        }
+
+        @keyframes neonDualPulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 15px #00ffff,
+                    0 0 30px #f900e0,
+                    0 0 45px #00ffff,
+                    inset 0 0 15px #f900e0;
+                border-image: linear-gradient(90deg, #00ffff, #f900e0) 1;
+            }
+
+            50% {
+                box-shadow:
+                    0 0 30px #00ffff,
+                    0 0 60px #f900e0,
+                    0 0 90px #00ffff,
+                    inset 0 0 30px #f900e0;
+                border-image: linear-gradient(270deg, #f900e0, #00ffff) 1;
             }
         }
     </style>
