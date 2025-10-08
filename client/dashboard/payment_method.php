@@ -46,20 +46,16 @@ $stmt->close();
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <style>
-        /* ===== CYBERPUNK NEON PAYMENT STYLE ===== */
-        .neon-payment-form {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            font-family: 'Orbitron', sans-serif;
-            color: #e0e0e0;
+        /* ===== CYBERPUNK NEON PAYMENT LOGO STYLE ===== */
+        .payment-method {
+            margin-top: 1.5rem;
         }
 
         .neon-payment-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
         }
 
         .neon-option {
@@ -67,91 +63,54 @@ $stmt->close();
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(0, 255, 255, 0.4);
-            border-radius: 10px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
             padding: 12px;
             background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            font-weight: 600;
-            text-transform: uppercase;
             cursor: pointer;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .neon-option input[type="radio"] {
             display: none;
         }
 
-        .neon-option span {
-            z-index: 2;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+        .neon-option img {
+            width: 80px;
+            height: auto;
+            filter: brightness(0.8) drop-shadow(0 0 8px #00ffff);
+            transition: all 0.4s ease;
         }
 
-        /* Neon glowing border animation */
-        .neon-option::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 10px;
-            background: linear-gradient(90deg, #00ffff, #f900e0, #00ffff);
-            opacity: 0;
-            z-index: 1;
-            transition: opacity 0.4s ease;
-        }
-
+        /* Hover effect — neon pulse */
         .neon-option:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px #00ffff, 0 0 30px #f900e0;
+            border-color: #f900e0;
+            box-shadow: 0 0 15px #00ffff, 0 0 25px #f900e0;
         }
 
-        .neon-option:hover::before {
-            opacity: 1;
-            animation: neonBorderFlow 3s linear infinite;
+        .neon-option:hover img {
+            filter: brightness(1.1) drop-shadow(0 0 15px #f900e0);
         }
 
         /* Selected effect */
-        .neon-option input[type="radio"]:checked+span {
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-            font-weight: bold;
+        .neon-option input[type="radio"]:checked+img {
+            border-radius: 10px;
+            filter: brightness(1.3) drop-shadow(0 0 25px #00ffff) saturate(1.5);
+            animation: neonPulse 1.2s infinite alternate;
+            box-shadow: 0 0 15px #00ffff, inset 0 0 10px #f900e0;
         }
 
-        /* Keyframes for border motion */
-        @keyframes neonBorderFlow {
+        /* Neon pulsing glow animation */
+        @keyframes neonPulse {
             0% {
-                filter: hue-rotate(0deg);
+                filter: brightness(1.2) drop-shadow(0 0 15px #00ffff);
             }
 
             100% {
-                filter: hue-rotate(360deg);
+                filter: brightness(1.4) drop-shadow(0 0 25px #f900e0);
             }
-        }
-
-        /* File Upload */
-        .neon-upload input[type="file"] {
-            border: 2px solid rgba(0, 255, 255, 0.4);
-            border-radius: 8px;
-            padding: 10px;
-            background: transparent;
-            color: #00ffff;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .neon-upload input[type="file"]:hover {
-            border-color: #f900e0;
-            box-shadow: 0 0 15px #f900e0;
-        }
-
-        /* Checkbox */
-        .neon-terms {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #ccc;
-            font-size: 0.9rem;
         }
     </style>
     <!--
@@ -248,42 +207,43 @@ https://templatemo.com/tm-594-nexus-flow
                         <input type="hidden" name="plan_type" value="<?php echo htmlspecialchars($plan_type); ?>">
                     </div>
 
-                    <div class="form-group">
+                    <div class="payment-method">
                         <label><strong>Select Payment Method</strong></label>
                         <div class="neon-payment-options">
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="PayPal" required>
-                                <span>PayPal</span>
+                                <img src="../../images/payments/paypal.png" alt="PayPal">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="Venmo">
-                                <span>Venmo</span>
+                                <img src="../../images/payments/venmo.png" alt="Venmo">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="CashApp">
-                                <span>CashApp</span>
+                                <img src="../../images/payments/cashapp.png" alt="CashApp">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="GooglePay">
-                                <span>Google Pay</span>
+                                <img src="../../images/payments/googlepay.png" alt="Google Pay">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="ApplePay">
-                                <span>Apple Pay</span>
+                                <img src="../../images/payments/applepay.png" alt="Apple Pay">
                             </label>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <label>Upload Transaction Screenshot (JPG/PNG):</label>
                         <input type="file" name="screenshot" accept="image/*" required>
                     </div>
 
-                    <div class="form-group neon-terms">
+                    <div class="form-group">
                         <label>
                             <input type="checkbox" required>
                             I agree to Train&Gain's Terms and authorize subscription charges.
@@ -338,19 +298,46 @@ https://templatemo.com/tm-594-nexus-flow
     </script>
 
     <script>
-        // ====== NEON LIGHT MOUSE ANIMATION ======
-        document.querySelectorAll('.neon-option').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
+        // Glowing ripple animation when clicking a payment logo
+        document.querySelectorAll('.neon-option').forEach(option => {
+            option.addEventListener('click', e => {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                option.appendChild(ripple);
+
+                const rect = option.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,255,255,0.25), rgba(0,0,0,0.15))`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.background = 'rgba(255,255,255,0.05)';
+
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+
+                setTimeout(() => ripple.remove(), 600);
             });
         });
     </script>
+
+    <style>
+        /* Ripple animation */
+        .ripple {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.7) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes rippleAnim {
+            to {
+                transform: scale(10);
+                opacity: 0;
+            }
+        }
+    </style>
+
 
 </body>
 
