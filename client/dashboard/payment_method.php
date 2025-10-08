@@ -240,49 +240,61 @@ https://templatemo.com/tm-594-nexus-flow
                 <p class="section-subtitle">Get Started with Train&Gain</p>
             </div>
 
-            <form method="POST" action="save_payment.php" enctype="multipart/form-data" class="neon-payment-form">
-                <p><strong>Contact Email:</strong> <?php echo htmlspecialchars($client['email']); ?></p>
-                <input type="hidden" name="plan_type" value="<?php echo htmlspecialchars($plan_type); ?>">
 
-                <div class="neon-payment-options">
-                    <label class="neon-option">
-                        <input type="radio" name="payment_method" value="PayPal" required>
-                        <span>PayPal</span>
-                    </label>
+            <div class="contact-form-wrapper">
+                <form method="POST" action="save_payment.php" enctype="multipart/form-data" class="contact-form">
+                    <div class="form-group">
+                        <p><strong>Contact Email:</strong> <?php echo htmlspecialchars($client['email']); ?></p>
+                        <input type="hidden" name="plan_type" value="<?php echo htmlspecialchars($plan_type); ?>">
+                    </div>
 
-                    <label class="neon-option">
-                        <input type="radio" name="payment_method" value="Venmo">
-                        <span>Venmo</span>
-                    </label>
+                    <div class="form-group">
+                        <label><strong>Select Payment Method</strong></label>
+                        <div class="neon-payment-options">
+                            <label class="neon-option">
+                                <input type="radio" name="payment_method" value="PayPal" required>
+                                <span>PayPal</span>
+                            </label>
 
-                    <label class="neon-option">
-                        <input type="radio" name="payment_method" value="CashApp">
-                        <span>CashApp</span>
-                    </label>
+                            <label class="neon-option">
+                                <input type="radio" name="payment_method" value="Venmo">
+                                <span>Venmo</span>
+                            </label>
 
-                    <label class="neon-option">
-                        <input type="radio" name="payment_method" value="GooglePay">
-                        <span>Google Pay</span>
-                    </label>
+                            <label class="neon-option">
+                                <input type="radio" name="payment_method" value="CashApp">
+                                <span>CashApp</span>
+                            </label>
 
-                    <label class="neon-option">
-                        <input type="radio" name="payment_method" value="ApplePay">
-                        <span>Apple Pay</span>
-                    </label>
-                </div>
+                            <label class="neon-option">
+                                <input type="radio" name="payment_method" value="GooglePay">
+                                <span>Google Pay</span>
+                            </label>
 
-                <div class="neon-upload">
-                    <label>Upload Transaction Screenshot (JPG/PNG):</label>
-                    <input type="file" name="screenshot" accept="image/*" required>
-                </div>
+                            <label class="neon-option">
+                                <input type="radio" name="payment_method" value="ApplePay">
+                                <span>Apple Pay</span>
+                            </label>
+                        </div>
+                    </div>
 
-                <label class="neon-terms">
-                    <input type="checkbox" required>
-                    I agree to Train&Gain's Terms and authorize subscription charges.
-                </label>
+                    <div class="form-group">
+                        <label>Upload Transaction Screenshot (JPG/PNG):</label>
+                        <input type="file" name="screenshot" accept="image/*" required>
+                    </div>
 
-                <button type="submit" class="cyber-button">Submit Payment</button>
-            </form>
+                    <div class="form-group neon-terms">
+                        <label>
+                            <input type="checkbox" required>
+                            I agree to Train&Gain's Terms and authorize subscription charges.
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="cyber-button">Submit Payment</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
