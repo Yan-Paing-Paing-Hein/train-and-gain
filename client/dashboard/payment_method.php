@@ -114,23 +114,77 @@ $stmt->close();
         /* Selected state - visible glowing border */
         .neon-option input[type="radio"]:checked~.neon-glow {
             border-color: #f900e0;
-            box-shadow: 0 0 35px #f900e0, 0 0 90px rgba(249, 0, 224, 0.9), 0 0 20px #f900e0 inset;
+            box-shadow: 0 0 25px #f900e0, 0 0 60px rgba(249, 0, 224, 0.6), 0 0 15px #f900e0 inset;
             animation: glowPulse 1.5s ease-in-out infinite;
         }
 
-        /* Neon pulse animation */
+        /* Softer pulse animation */
         @keyframes glowPulse {
             0% {
-                box-shadow: 0 0 35px #f900e0, 0 0 90px rgba(249, 0, 224, 0.9), 0 0 20px #f900e0 inset;
+                box-shadow: 0 0 25px #f900e0, 0 0 60px rgba(249, 0, 224, 0.6), 0 0 15px #f900e0 inset;
             }
 
             50% {
-                box-shadow: 0 0 60px #f900e0, 0 0 120px rgba(249, 0, 224, 1), 0 0 25px #f900e0 inset;
+                box-shadow: 0 0 40px #f900e0, 0 0 80px rgba(249, 0, 224, 0.8), 0 0 18px #f900e0 inset;
             }
 
             100% {
-                box-shadow: 0 0 35px #f900e0, 0 0 90px rgba(249, 0, 224, 0.9), 0 0 20px #f900e0 inset;
+                box-shadow: 0 0 25px #f900e0, 0 0 60px rgba(249, 0, 224, 0.6), 0 0 15px #f900e0 inset;
             }
+        }
+
+        /* ===== CYBERPUNK CHECKBOX STYLE ===== */
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: default;
+            /* text not clickable */
+            user-select: none;
+        }
+
+        /* Checkbox container */
+        .form-group input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #00ffff;
+            border-radius: 4px;
+            background: transparent;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+            cursor: pointer;
+            /* only box is clickable */
+        }
+
+        /* Neon hover glow */
+        .form-group input[type="checkbox"]:hover {
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        /* Checked state */
+        .form-group input[type="checkbox"]:checked {
+            background-color: #f900e0;
+            border-color: #f900e0;
+            box-shadow: 0 0 15px #f900e0, 0 0 30px rgba(249, 0, 224, 0.6);
+        }
+
+        /* Centered tick mark */
+        .form-group input[type="checkbox"]:checked::after {
+            content: '✔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -56%);
+            font-size: 16px;
+            color: #fff;
+            text-shadow: 0 0 5px #fff, 0 0 10px #f900e0;
+            pointer-events: none;
+            /* prevent click on tick */
         }
     </style>
 
@@ -263,6 +317,7 @@ https://templatemo.com/tm-594-nexus-flow
                         </div>
                     </div>
 
+                    <br><br>
 
                     <div class="form-group">
                         <label>Upload Transaction Screenshot (JPG/PNG):</label>
