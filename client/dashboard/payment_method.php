@@ -74,7 +74,6 @@ $stmt->close();
             cursor: pointer;
             border-radius: 14px;
             overflow: visible;
-            /* allow glow to spread outside */
             transition: all 0.3s ease;
             display: flex;
             justify-content: center;
@@ -134,19 +133,13 @@ $stmt->close();
         }
 
         /* ===== CYBERPUNK CHECKBOX STYLE ===== */
-        .form-group label {
+        .checkbox-wrapper {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #fff;
-            font-size: 1rem;
-            cursor: default;
-            /* text not clickable */
-            user-select: none;
         }
 
-        /* Checkbox container */
-        .form-group input[type="checkbox"] {
+        .checkbox-wrapper input[type="checkbox"] {
             appearance: none;
             -webkit-appearance: none;
             width: 22px;
@@ -158,23 +151,19 @@ $stmt->close();
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
             cursor: pointer;
-            /* only box is clickable */
         }
 
-        /* Neon hover glow */
-        .form-group input[type="checkbox"]:hover {
+        .checkbox-wrapper input[type="checkbox"]:hover {
             box-shadow: 0 0 15px #00ffff;
         }
 
-        /* Checked state */
-        .form-group input[type="checkbox"]:checked {
+        .checkbox-wrapper input[type="checkbox"]:checked {
             background-color: #f900e0;
             border-color: #f900e0;
             box-shadow: 0 0 15px #f900e0, 0 0 30px rgba(249, 0, 224, 0.6);
         }
 
-        /* Centered tick mark */
-        .form-group input[type="checkbox"]:checked::after {
+        .checkbox-wrapper input[type="checkbox"]:checked::after {
             content: '✔';
             position: absolute;
             top: 50%;
@@ -184,7 +173,18 @@ $stmt->close();
             color: #fff;
             text-shadow: 0 0 5px #fff, 0 0 10px #f900e0;
             pointer-events: none;
-            /* prevent click on tick */
+        }
+
+        .checkbox-wrapper .checkbox-text {
+            color: #fff;
+            font-size: 1rem;
+            cursor: default;
+            user-select: none;
+            text-align: justify;
+            text-shadow:
+                0 0 4px #00ffff,
+                0 0 8px rgba(0, 255, 255, 0.6),
+                0 0 12px rgba(0, 255, 255, 0.4);
         }
     </style>
 
@@ -325,10 +325,10 @@ https://templatemo.com/tm-594-nexus-flow
                     </div>
 
                     <div class="form-group">
-                        <label>
-                            <input type="checkbox" required>
-                            I agree to Train&Gain's Terms and authorize subscription charges.
-                        </label>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="agreement" required>
+                            <span class="checkbox-text">I agree to Train&Gain's Terms and authorize subscription charges.</span>
+                        </div>
                     </div>
 
                     <div class="form-group">
