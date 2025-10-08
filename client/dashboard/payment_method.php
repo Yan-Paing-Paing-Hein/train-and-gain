@@ -46,28 +46,33 @@ $stmt->close();
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <style>
-        /* ===== CYBERPUNK NEON PAYMENT LOGO STYLE ===== */
+        /* ===== CYBERPUNK PAYMENT METHOD STYLE ===== */
         .payment-method {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .payment-method label strong {
+            color: #00ffff;
+            text-shadow: 0 0 8px #00ffff;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        /* Container for payment logos */
+        .neon-payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
             margin-top: 1.5rem;
         }
 
-        .neon-payment-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 20px;
-            margin-top: 15px;
-        }
-
+        /* Each payment logo option */
         .neon-option {
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            border-radius: 12px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
             cursor: pointer;
+            border-radius: 12px;
             overflow: hidden;
             transition: all 0.3s ease;
         }
@@ -76,43 +81,48 @@ $stmt->close();
             display: none;
         }
 
+        /* Payment logo image */
         .neon-option img {
-            width: 80px;
-            height: auto;
-            filter: brightness(0.8) drop-shadow(0 0 8px #00ffff);
-            transition: all 0.4s ease;
+            width: 180px;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid #00ffff;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
         }
 
-        /* Hover effect — neon pulse */
-        .neon-option:hover {
-            transform: scale(1.05);
-            border-color: #f900e0;
-            box-shadow: 0 0 15px #00ffff, 0 0 25px #f900e0;
-        }
-
+        /* Hover effect */
         .neon-option:hover img {
-            filter: brightness(1.1) drop-shadow(0 0 15px #f900e0);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #00ffff;
         }
 
-        /* Selected effect */
+        /* Selected state — neon purple */
         .neon-option input[type="radio"]:checked+img {
-            border-radius: 10px;
-            filter: brightness(1.3) drop-shadow(0 0 25px #00ffff) saturate(1.5);
-            animation: neonPulse 1.2s infinite alternate;
-            box-shadow: 0 0 15px #00ffff, inset 0 0 10px #f900e0;
+            border-color: #f900e0;
+            box-shadow: 0 0 30px #f900e0, 0 0 60px rgba(249, 0, 224, 0.4);
+            filter: drop-shadow(0 0 10px #f900e0);
+            animation: pulseSelect 0.5s ease;
         }
 
-        /* Neon pulsing glow animation */
-        @keyframes neonPulse {
+        /* Subtle glow pulse animation */
+        @keyframes pulseSelect {
             0% {
-                filter: brightness(1.2) drop-shadow(0 0 15px #00ffff);
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
             }
 
             100% {
-                filter: brightness(1.4) drop-shadow(0 0 25px #f900e0);
+                transform: scale(1);
             }
         }
     </style>
+
     <!--
 
 TemplateMo 594 nexus flow
@@ -212,27 +222,27 @@ https://templatemo.com/tm-594-nexus-flow
                         <div class="neon-payment-options">
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="PayPal" required>
-                                <img src="../../images/payments/paypal.png" alt="PayPal">
+                                <img src="payment_methods_img/paypal.png" alt="PayPal">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="Venmo">
-                                <img src="../../images/payments/venmo.png" alt="Venmo">
+                                <img src="payment_methods_img/venmo.png" alt="Venmo">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="CashApp">
-                                <img src="../../images/payments/cashapp.png" alt="CashApp">
+                                <img src="payment_methods_img/cashapp.png" alt="CashApp">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="GooglePay">
-                                <img src="../../images/payments/googlepay.png" alt="Google Pay">
+                                <img src="payment_methods_img/googlepay.png" alt="Google Pay">
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="ApplePay">
-                                <img src="../../images/payments/applepay.png" alt="Apple Pay">
+                                <img src="payment_methods_img/applepay.png" alt="Apple Pay">
                             </label>
                         </div>
                     </div>
@@ -298,46 +308,31 @@ https://templatemo.com/tm-594-nexus-flow
     </script>
 
     <script>
-        // Glowing ripple animation when clicking a payment logo
-        document.querySelectorAll('.neon-option').forEach(option => {
-            option.addEventListener('click', e => {
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                option.appendChild(ripple);
+        document.addEventListener("DOMContentLoaded", () => {
+            const options = document.querySelectorAll(".neon-option");
 
-                const rect = option.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+            options.forEach(option => {
+                const input = option.querySelector("input[type='radio']");
+                const img = option.querySelector("img");
 
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
+                // When user selects a payment option
+                input.addEventListener("change", () => {
+                    // Reset all others to cyan
+                    options.forEach(opt => {
+                        const imgEl = opt.querySelector("img");
+                        imgEl.style.borderColor = "#00ffff";
+                        imgEl.style.boxShadow = "0 0 15px rgba(0,255,255,0.6)";
+                        imgEl.style.filter = "drop-shadow(0 0 8px rgba(0,255,255,0.6))";
+                    });
 
-                setTimeout(() => ripple.remove(), 600);
+                    // Highlight selected one with purple glow
+                    img.style.borderColor = "#f900e0";
+                    img.style.boxShadow = "0 0 30px #f900e0, 0 0 60px rgba(249,0,224,0.4)";
+                    img.style.filter = "drop-shadow(0 0 10px #f900e0)";
+                });
             });
         });
     </script>
-
-    <style>
-        /* Ripple animation */
-        .ripple {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.7) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: rippleAnim 0.6s ease-out forwards;
-            pointer-events: none;
-        }
-
-        @keyframes rippleAnim {
-            to {
-                transform: scale(10);
-                opacity: 0;
-            }
-        }
-    </style>
-
 
 </body>
 
