@@ -46,7 +46,7 @@ $stmt->close();
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
     <style>
-        /* ===== CYBERPUNK PAYMENT METHOD STYLE ===== */
+        /* ===== CYBERPUNK PAYMENT METHOD STYLE (VISIBLE GLOW FIXED) ===== */
         .payment-method {
             text-align: center;
             margin-top: 30px;
@@ -64,21 +64,36 @@ $stmt->close();
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1.8rem;
             margin-top: 1.5rem;
         }
 
-        /* Each payment logo option */
+        /* Each option wrapper */
         .neon-option {
             position: relative;
             cursor: pointer;
-            border-radius: 12px;
-            overflow: hidden;
+            border-radius: 14px;
+            overflow: visible;
+            /* allow glow to spread outside */
             transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .neon-option input[type="radio"] {
             display: none;
+        }
+
+        /* Glow container behind image */
+        .neon-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0, 255, 255, 0.6);
+            transition: all 0.4s ease;
+            z-index: 0;
         }
 
         /* Payment logo image */
@@ -86,39 +101,35 @@ $stmt->close();
             width: 180px;
             height: 100px;
             object-fit: cover;
-            border: 2px solid #00ffff;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            border-radius: 14px;
+            z-index: 1;
             transition: all 0.3s ease;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
         }
 
         /* Hover effect */
         .neon-option:hover img {
             transform: scale(1.05);
-            box-shadow: 0 0 25px #00ffff;
         }
 
-        /* Selected state — neon purple */
-        .neon-option input[type="radio"]:checked+img {
+        /* Selected state - visible glowing border */
+        .neon-option input[type="radio"]:checked~.neon-glow {
             border-color: #f900e0;
-            box-shadow: 0 0 30px #f900e0, 0 0 60px rgba(249, 0, 224, 0.4);
-            filter: drop-shadow(0 0 10px #f900e0);
-            animation: pulseSelect 0.5s ease;
+            box-shadow: 0 0 35px #f900e0, 0 0 90px rgba(249, 0, 224, 0.9), 0 0 20px #f900e0 inset;
+            animation: glowPulse 1.5s ease-in-out infinite;
         }
 
-        /* Subtle glow pulse animation */
-        @keyframes pulseSelect {
+        /* Neon pulse animation */
+        @keyframes glowPulse {
             0% {
-                transform: scale(1);
+                box-shadow: 0 0 35px #f900e0, 0 0 90px rgba(249, 0, 224, 0.9), 0 0 20px #f900e0 inset;
             }
 
             50% {
-                transform: scale(1.08);
+                box-shadow: 0 0 60px #f900e0, 0 0 120px rgba(249, 0, 224, 1), 0 0 25px #f900e0 inset;
             }
 
             100% {
-                transform: scale(1);
+                box-shadow: 0 0 35px #f900e0, 0 0 90px rgba(249, 0, 224, 0.9), 0 0 20px #f900e0 inset;
             }
         }
     </style>
@@ -223,26 +234,31 @@ https://templatemo.com/tm-594-nexus-flow
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="PayPal" required>
                                 <img src="payment_methods_img/paypal.png" alt="PayPal">
+                                <span class="neon-glow"></span>
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="Venmo">
                                 <img src="payment_methods_img/venmo.png" alt="Venmo">
+                                <span class="neon-glow"></span>
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="CashApp">
                                 <img src="payment_methods_img/cashapp.png" alt="CashApp">
+                                <span class="neon-glow"></span>
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="GooglePay">
                                 <img src="payment_methods_img/googlepay.png" alt="Google Pay">
+                                <span class="neon-glow"></span>
                             </label>
 
                             <label class="neon-option">
                                 <input type="radio" name="payment_method" value="ApplePay">
                                 <img src="payment_methods_img/applepay.png" alt="Apple Pay">
+                                <span class="neon-glow"></span>
                             </label>
                         </div>
                     </div>
@@ -325,10 +341,10 @@ https://templatemo.com/tm-594-nexus-flow
                         imgEl.style.filter = "drop-shadow(0 0 8px rgba(0,255,255,0.6))";
                     });
 
-                    // Highlight selected one with purple glow
+                    // Highlight selected one with strong purple glow
                     img.style.borderColor = "#f900e0";
-                    img.style.boxShadow = "0 0 30px #f900e0, 0 0 60px rgba(249,0,224,0.4)";
-                    img.style.filter = "drop-shadow(0 0 10px #f900e0)";
+                    img.style.boxShadow = "0 0 45px #f900e0, 0 0 100px rgba(249,0,224,0.8), 0 0 20px #f900e0 inset";
+                    img.style.filter = "drop-shadow(0 0 16px #f900e0)";
                 });
             });
         });
