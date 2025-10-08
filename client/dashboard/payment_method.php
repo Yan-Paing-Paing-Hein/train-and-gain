@@ -186,6 +186,78 @@ $stmt->close();
                 0 0 8px rgba(0, 255, 255, 0.6),
                 0 0 12px rgba(0, 255, 255, 0.4);
         }
+
+        .send-payment {
+            display: block;
+            margin: 1.5rem auto 0 auto;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #00ffff;
+            background-color: #0a0a0a;
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+            transition: all 0.3s ease;
+            transform: skewX(-10deg);
+        }
+
+        /* Keep text horizontal */
+        .send-payment span {
+            display: inline-block;
+            transform: skewX(10deg);
+        }
+
+        /* Inner pseudo-element for subtle animated neon border */
+        .send-payment::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 8px;
+            background: linear-gradient(270deg, #00ffff, #f900e0, #00ffff);
+            z-index: -1;
+            filter: blur(6px);
+            background-size: 400% 400%;
+            animation: neonGlow 3s linear infinite;
+            transform: skewX(-10deg);
+        }
+
+        /* Hover effect */
+        .send-payment:hover {
+            color: #100075ff;
+            border-color: #f900e0;
+            box-shadow: 0 0 15px #f900e0, 0 0 30px rgba(249, 0, 224, 0.5);
+            transform: scale(1.05) skewX(-10deg);
+        }
+
+        /* Click effect */
+        .send-payment:active {
+            transform: scale(0.98) skewX(-10deg);
+        }
+
+        /* Animate the gradient */
+        @keyframes neonGlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
 
     <!--
@@ -331,9 +403,7 @@ https://templatemo.com/tm-594-nexus-flow
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="cyber-button">Submit Payment</button>
-                    </div>
+                    <button type="submit" class="send-payment"><span>Submit Payment</span></button>
                 </form>
             </div>
         </div>
