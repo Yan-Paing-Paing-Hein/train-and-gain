@@ -1,9 +1,23 @@
 <?php
+require_once("../../db_connect.php");
+
 session_start();
 if (!isset($_SESSION['client_id'])) {
     header("Location: ../login_form.php?error=Please log in first.");
     exit();
 }
+
+$client_id = $_SESSION['client_id'];
+
+// Fetch process status
+$stmt = $conn->prepare("SELECT survey_completed FROM client_process WHERE client_id = ?");
+$stmt->bind_param("i", $client_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$process = $result->fetch_assoc();
+$stmt->close();
+
+$survey_completed = $process ? (int)$process['survey_completed'] : 0;
 ?>
 
 
@@ -16,6 +30,95 @@ if (!isset($_SESSION['client_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 12px;
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+            border: 2px solid #f900e0;
+            color: #00ffff;
+            box-shadow: 0 0 15px #f900e0aa,
+                0 0 30px #f900e080,
+                0 0 45px #f900e060;
+            animation: fadeIn 0.3s ease, neonGlow 2s infinite alternate;
+        }
+
+        .modal-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #f900e0;
+            /* Neon pink */
+        }
+
+        .modal-box p {
+            color: #00ffff;
+            /* Neon cyan */
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Got it button */
+        .btn-gotit {
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #00ffff;
+            color: #1a1a1a;
+            box-shadow: 0 0 8px #00ffffaa,
+                0 0 16px #00ffff88,
+                0 0 24px #00ffff66;
+            transition: 0.2s ease;
+        }
+
+        .btn-gotit:hover {
+            background: #00ffff;
+            box-shadow: 0 0 15px #00ffffff,
+                0 0 30px #00ffffcc,
+                0 0 45px #00ffff99;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px #f900e080, 0 0 20px #f900e060, 0 0 30px #f900e040;
+            }
+
+            100% {
+                box-shadow: 0 0 20px #f900e0ff, 0 0 40px #f900e0cc, 0 0 60px #f900e099;
+            }
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -124,7 +227,7 @@ https://templatemo.com/tm-594-nexus-flow
                             <p>Select one of the 6 workout plans. Each plan will show available coaches.</p>
                         </div>
                         <div class="card-back">
-                            <a href="plans.php" class="cyber-button">Choose Plan</a>
+                            <a href="#" id="choosePlanBtn" class="cyber-button">Choose Plan</a>
                         </div>
                     </div>
                 </div>
@@ -198,6 +301,38 @@ https://templatemo.com/tm-594-nexus-flow
             });
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const choosePlanBtn = document.getElementById("choosePlanBtn");
+            const modal = document.getElementById("step1Modal");
+            const closeModalBtn = document.getElementById("closeModalBtn");
+
+            const surveyCompleted = <?php echo $survey_completed; ?>;
+
+            choosePlanBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                if (surveyCompleted === 0) {
+                    modal.style.display = "flex"; // show modal
+                } else {
+                    window.location.href = "plans.php"; // go to next step
+                }
+            });
+
+            closeModalBtn.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+        });
+    </script>
+
+    <!-- Step 1 Incomplete Modal -->
+    <div id="step1Modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Complete Step 1 First!</h3>
+            <p>You need to fill out the survey form before selecting your workout plan.</p>
+            <button id="closeModalBtn" class="btn-gotit">Got it</button>
+        </div>
+    </div>
 
 </body>
 
