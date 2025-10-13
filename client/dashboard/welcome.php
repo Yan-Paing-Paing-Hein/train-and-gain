@@ -9,15 +9,17 @@ if (!isset($_SESSION['client_id'])) {
 
 $client_id = $_SESSION['client_id'];
 
-// Fetch process status
-$stmt = $conn->prepare("SELECT survey_completed FROM client_process WHERE client_id = ?");
+// Fetch process status for Step 1 & Step 2
+$stmt = $conn->prepare("SELECT survey_completed, plan_selected FROM client_process WHERE client_id = ?");
 $stmt->bind_param("i", $client_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $process = $result->fetch_assoc();
 $stmt->close();
 
+// Convert to integers
 $survey_completed = $process ? (int)$process['survey_completed'] : 0;
+$plan_selected = $process ? (int)$process['plan_selected'] : 0;
 ?>
 
 
@@ -227,7 +229,7 @@ https://templatemo.com/tm-594-nexus-flow
                             <p>Select one of the 6 workout plans. Each plan will show available coaches.</p>
                         </div>
                         <div class="card-back">
-                            <a href="#" id="choosePlanBtn" class="cyber-button">Choose Plan</a>
+                            <a href="plans.php" id="choosePlanBtn" class="cyber-button">Choose Plan</a>
                         </div>
                     </div>
                 </div>
@@ -239,7 +241,7 @@ https://templatemo.com/tm-594-nexus-flow
                             <p>Complete your payment to activate your account.</p>
                         </div>
                         <div class="card-back">
-                            <a href="payment_plan.php" class="cyber-button">Make Payment</a>
+                            <a href="payment_plan.php" id="makePaymentBtn" class="cyber-button">Make Payment</a>
                         </div>
                     </div>
                 </div>
@@ -305,23 +307,38 @@ https://templatemo.com/tm-594-nexus-flow
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const choosePlanBtn = document.getElementById("choosePlanBtn");
-            const modal = document.getElementById("step1Modal");
-            const closeModalBtn = document.getElementById("closeModalBtn");
+            const makePaymentBtn = document.getElementById("makePaymentBtn");
+            const step1Modal = document.getElementById("step1Modal");
+            const step3Modal = document.getElementById("step3Modal");
+            const closeStep1Btn = document.getElementById("closeModalBtn");
+            const closeStep3Btn = document.getElementById("closeModalBtnStep3");
 
             const surveyCompleted = <?php echo $survey_completed; ?>;
+            const planSelected = <?php echo $plan_selected; ?>;
 
+            // Step 2 button
             choosePlanBtn.addEventListener("click", function(e) {
                 e.preventDefault();
                 if (surveyCompleted === 0) {
-                    modal.style.display = "flex"; // show modal
+                    step1Modal.style.display = "flex";
                 } else {
-                    window.location.href = "plans.php"; // go to next step
+                    window.location.href = "plans.php";
                 }
             });
 
-            closeModalBtn.addEventListener("click", () => {
-                modal.style.display = "none";
+            // Step 3 button
+            makePaymentBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                if (surveyCompleted === 0 || planSelected === 0) {
+                    step3Modal.style.display = "flex";
+                } else {
+                    window.location.href = "payment_plan.php";
+                }
             });
+
+            // Close modals
+            closeStep1Btn.addEventListener("click", () => step1Modal.style.display = "none");
+            closeStep3Btn.addEventListener("click", () => step3Modal.style.display = "none");
         });
     </script>
 
@@ -331,6 +348,15 @@ https://templatemo.com/tm-594-nexus-flow
             <h3>Complete Step 1 First!</h3>
             <p>You need to fill out the survey form before selecting your workout plan.</p>
             <button id="closeModalBtn" class="btn-gotit">Got it</button>
+        </div>
+    </div>
+
+    <!-- Step 3 Incomplete Modal -->
+    <div id="step3Modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Complete Steps 1 & 2 First!</h3>
+            <p>You need to complete the survey and choose a workout plan before making payment.</p>
+            <button id="closeModalBtnStep3" class="btn-gotit">Got it</button>
         </div>
     </div>
 
