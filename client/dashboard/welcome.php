@@ -10,7 +10,7 @@ if (!isset($_SESSION['client_id'])) {
 $client_id = $_SESSION['client_id'];
 
 // Fetch process status for Step 1 & Step 2
-$stmt = $conn->prepare("SELECT survey_completed, plan_selected FROM client_process WHERE client_id = ?");
+$stmt = $conn->prepare("SELECT survey_completed, plan_selected, payment_done FROM client_process WHERE client_id = ?");
 $stmt->bind_param("i", $client_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -20,6 +20,7 @@ $stmt->close();
 // Convert to integers
 $survey_completed = $process ? (int)$process['survey_completed'] : 0;
 $plan_selected = $process ? (int)$process['plan_selected'] : 0;
+$payment_done = $process ? (int)$process['payment_done'] : 0;
 ?>
 
 
@@ -245,6 +246,13 @@ https://templatemo.com/tm-594-nexus-flow
                         </div>
                     </div>
                 </div>
+
+                <div id="completion-message" style="display:none; text-align:center; margin-top:40px;">
+                    <p style="color:#00ffff; font-size:1.3rem; text-shadow:0 0 8px #00ffff;">
+                        All steps are completed. But please wait for admin approval.<br>
+                        If some of your information are missing, you may need to fill the required step again.
+                    </p>
+                </div>
             </div>
 
 
@@ -359,6 +367,27 @@ https://templatemo.com/tm-594-nexus-flow
             <button id="closeModalBtnStep3" class="btn-gotit">Got it</button>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const featuresGrid = document.querySelector(".features-grid2");
+            const completionMessage = document.getElementById("completion-message"); // ← this line was missing
+            const surveyCompleted = <?php echo $survey_completed; ?>;
+            const planSelected = <?php echo $plan_selected; ?>;
+            const paymentDone = <?php echo $payment_done; ?>;
+
+            // Hide the steps section if all 3 are completed
+            if (surveyCompleted === 1 && planSelected === 1 && paymentDone === 1) {
+                // Hide only the step cards, not the outer container
+                document.querySelectorAll(".feature-card2").forEach(card => {
+                    card.style.display = "none";
+                });
+
+                // Show neon message
+                completionMessage.style.display = "block";
+            }
+        });
+    </script>
 
 </body>
 
