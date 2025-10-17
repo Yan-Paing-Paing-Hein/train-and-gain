@@ -240,9 +240,27 @@ https://templatemo.com/tm-594-nexus-flow
                         <th>Admin Message</th>
                         <td class="form-group">
                             <form method="POST" action="">
-                                <textarea name="admin_message" rows="4" cols="50" placeholder="Type admin message here..." required><?php echo htmlspecialchars($payment['admin_message']); ?></textarea>
-                                <br>
+                                <textarea name="admin_message" rows="4" cols="50" placeholder="Type admin message here..."><?php echo htmlspecialchars($payment['admin_message']); ?></textarea>
+
+                                <br><br>
+
+                                <?php if ($payment['status'] === 'Pending'): ?>
+                                    <div class="action-bar">
+                                        <div class="action-left">
+                                            <button type="submit" name="approve" class="btn-approve">Approve</button>
+                                        </div>
+
+                                        <div class="action-right">
+                                            <button type="submit" name="reject" class="btn-reject" onclick="return confirm('Are you sure you want to reject this payment?')">Reject</button>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="action-bar fade-up" style="text-align:center; margin-top:20px;">
+                                        <p style="color:#00ffff;">This payment has been <?php echo htmlspecialchars($payment['status']); ?>.</p>
+                                    </div>
+                                <?php endif; ?>
                             </form>
+
                             <?php if (isset($_GET['updated'])): ?>
                                 <p style="color:#00ffff;">Admin message updated successfully.</p>
                             <?php endif; ?>
@@ -252,31 +270,6 @@ https://templatemo.com/tm-594-nexus-flow
             </table>
         </div>
 
-        <br><br><br><br><br>
-
-        <?php if ($payment['status'] === 'Pending'): ?>
-            <div class="action-bar fade-up">
-
-                <div class="action-left">
-                    <form method="POST" style="display:inline;">
-                        <button type="submit" name="approve" class="btn-edit">Approve</button>
-                    </form>
-                </div>
-
-                <div class="action-right">
-                    <form method="POST" style="display:inline;">
-                        <!-- Hidden admin message included in reject action -->
-                        <input type="hidden" name="admin_message" value="<?php echo htmlspecialchars($payment['admin_message']); ?>">
-                        <button type="submit" name="reject" class="btn-delete" onclick="return confirm('Are you sure you want to reject this payment?')">Reject</button>
-                    </form>
-                </div>
-
-            </div>
-        <?php else: ?>
-            <div class="action-bar fade-up" style="text-align:center; margin-top:20px;">
-                <p style="color:#00ffff;">This payment has been <?php echo htmlspecialchars($payment['status']); ?>.</p>
-            </div>
-        <?php endif; ?>
     </section>
 
 
