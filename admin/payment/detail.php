@@ -11,24 +11,47 @@ $payment_id = intval($_GET['id']);
 
 // Handle admin actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $admin_message = isset($_POST['admin_message']) ? trim($_POST['admin_message']) : '';
+
     // Approve action
     if (isset($_POST['approve'])) {
-        // Update payment status
-        $update = $conn->prepare("UPDATE client_payment SET status='Approved' WHERE id=?");
-        $update->bind_param("i", $payment_id);
-        $update->execute();
-        $update->close();
+        $conn->begin_transaction();
+        try {
+            // Update payment status and message (if any)
+            $stmt = $conn->prepare("UPDATE client_payment SET status='Approved', admin_message=? WHERE id=?");
+            $stmt->bind_param("si", $admin_message, $payment_id);
+            $stmt->execute();
+            $stmt->close();
+
+            // Get client_id to update client_process
+            $getClient = $conn->prepare("SELECT client_id FROM client_payment WHERE id=?");
+            $getClient->bind_param("i", $payment_id);
+            $getClient->execute();
+            $res = $getClient->get_result();
+            $client = $res->fetch_assoc();
+            $getClient->close();
+
+            if ($client) {
+                // When approved, mark payment_done=1
+                $updateProcess = $conn->prepare("UPDATE client_process SET payment_done=1 WHERE client_id=?");
+                $updateProcess->bind_param("i", $client['client_id']);
+                $updateProcess->execute();
+                $updateProcess->close();
+            }
+
+            $conn->commit();
+        } catch (Exception $e) {
+            $conn->rollback();
+            die("Error: " . $e->getMessage());
+        }
 
         // Redirect to refresh
-        header("Location: detail.php?id=$payment_id");
+        header("Location: detail.php?id=$payment_id&updated=1");
         exit;
     }
 
     // Reject action
     if (isset($_POST['reject'])) {
-        $admin_message = trim($_POST['admin_message']);
-
-        // Update both tables
         $conn->begin_transaction();
         try {
             // Update payment status and admin message
@@ -46,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $getClient->close();
 
             if ($client) {
+                // When rejected, mark payment_done=0
                 $updateProcess = $conn->prepare("UPDATE client_process SET payment_done=0 WHERE client_id=?");
                 $updateProcess->bind_param("i", $client['client_id']);
                 $updateProcess->execute();
@@ -59,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Redirect to refresh
-        header("Location: detail.php?id=$payment_id");
+        header("Location: detail.php?id=$payment_id&updated=1");
         exit;
     }
 }
