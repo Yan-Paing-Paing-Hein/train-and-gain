@@ -1,3 +1,15 @@
+<?php
+require_once("../../db_connect.php");
+
+// Fetch all client payments
+$query = "SELECT id, client_id, plan_type, payment_method, status, created_at FROM client_payment ORDER BY id ASC";
+$result = $conn->query($query);
+$payments = $result->fetch_all(MYSQLI_ASSOC);
+$total_payments = count($payments);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,8 +63,11 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../payment/create.php" class="cyber-button">Create Payment</a>
+                <a href="#" class="cyber-button">Create Payment</a>
             </div>
+            <!-- <div class="nav-bottom">
+                <a href="../payment/create.php" class="cyber-button">Create Payment</a>
+            </div> -->
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
                     <span></span>
@@ -87,71 +102,64 @@ https://templatemo.com/tm-594-nexus-flow
 
 
 
-    <!-- Contact Section -->
+
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Payment Table</h2>
-                <p class="section-subtitle">35 payments have been received!</p>
+                <h2 class="section-title">Client Payments</h2>
+                <p class="section-subtitle">
+                    <?php
+                    if ($total_payments === 0) {
+                        echo "No payment has been received.";
+                    } elseif ($total_payments === 1) {
+                        echo "1 payment has been recorded.";
+                    } else {
+                        echo "$total_payments payments have been recorded.";
+                    }
+                    ?>
+                </p>
             </div>
+        </div>
 
-
-
-
-            <!-- CRUD Table Section -->
-            <div class="payment-crud-container">
-                <table class="payment-crud">
-                    <thead>
+        <div class="crud-table-container">
+            <table class="crud-table">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Client ID</th>
+                        <th>Plan Type</th>
+                        <th>Payment Method</th>
+                        <th>Status</th>
+                        <th>Paid at</th>
+                        <th>View Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($total_payments > 0): ?>
+                        <?php foreach ($payments as $payment): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($payment['id']); ?></td>
+                                <td><?php echo htmlspecialchars($payment['client_id']); ?></td>
+                                <td><?php echo htmlspecialchars($payment['plan_type']); ?></td>
+                                <td><?php echo htmlspecialchars($payment['payment_method']); ?></td>
+                                <td><?php echo htmlspecialchars($payment['status']); ?></td>
+                                <td><?php echo htmlspecialchars($payment['created_at']); ?></td>
+                                <td>
+                                    <a href="detail.php?id=<?php echo $payment['id']; ?>" class="btn-view">View</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <tr>
-                            <th>ID</th>
-                            <th>Client</th>
-                            <th>Amount Paid</th>
-                            <th>Payment Method</th>
+                            <td colspan="7" style="text-align:center;">No payment has been received.</td>
                         </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>250$</td>
-                            <td>PayPal</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Emma Stone</td>
-                            <td>250$</td>
-                            <td>PayPal</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Michael Smith</td>
-                            <td>250$</td>
-                            <td>PayPal</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Sophia Johnson</td>
-                            <td>250$</td>
-                            <td>PayPal</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>David Lee</td>
-                            <td>250$</td>
-                            <td>PayPal</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-
-
-
-
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </section>
+
+
 
     <!-- Footer -->
     <footer class="footer">

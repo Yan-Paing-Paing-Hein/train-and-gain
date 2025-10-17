@@ -1,54 +1,23 @@
+<?php
+require_once("../../db_connect.php");
+
+// Fetch all client payments
+$query = "SELECT id, client_id, plan_type, payment_method, status, created_at FROM client_payment ORDER BY id ASC";
+$result = $conn->query($query);
+$payments = $result->fetch_all(MYSQLI_ASSOC);
+$total_payments = count($payments);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Index</title>
+    <title>Payment Index</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
-    <style>
-        .client-category-container {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .client-category-box {
-            flex: 1 1 300px;
-            max-width: 400px;
-            padding: 30px 20px;
-            border: 2px solid #f900e0;
-            border-radius: 10px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
-            box-shadow: 0 0 15px rgba(249, 0, 224, 0.6);
-            background: rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .client-category-box:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 25px rgba(249, 0, 224, 0.8);
-        }
-
-        .client-category-box h3 {
-            color: #f900e0;
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 8px #f900e0;
-        }
-
-        .client-category-box p {
-            color: #00ffff;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 8px #00ffff;
-        }
-    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -94,8 +63,11 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../review/index.php">Review</a></li>
             </ul>
             <div class="nav-bottom">
-                <a href="../client/reset_requests.php" class="cyber-button">Password Requests</a>
+                <a href="../payment/index.php" class="cyber-button">View All Payments</a>
             </div>
+            <!-- <div class="nav-bottom">
+                <a href="../payment/create.php" class="cyber-button">Create Payment</a>
+            </div> -->
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
                     <span></span>
@@ -114,7 +86,7 @@ https://templatemo.com/tm-594-nexus-flow
             <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
         <div class="mobile-menu-cta">
-            <a href="#" class="cyber-button">Create Client</a>
+            <a href="../payment/create.php" class="cyber-button">Create Payment</a>
         </div>
         <nav class="mobile-menu-nav">
             <ul>
@@ -128,33 +100,21 @@ https://templatemo.com/tm-594-nexus-flow
         </nav>
     </div>
 
-    <!-- Contact Section -->
+
+
+
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Client Table</h2>
-                <p class="section-subtitle">35 clients have joined!</p>
+                <h2 class="section-title">Client ID</h2>
+
             </div>
         </div>
 
 
-
-        <div class="client-category-container">
-            <!-- Registered Clients -->
-            <div class="client-category-box">
-                <h3>Registered Client</h3>
-                <p>Clients who have been registered whether active or inactive.</p>
-                <a href="../client/inactive_client.php" class="btn-view">View</a>
-            </div>
-
-            <!-- Active Clients -->
-            <div class="client-category-box">
-                <h3>Active Client</h3>
-                <p>Clients who have completed all steps and are awaiting or have admin approval.</p>
-                <a href="#" class="btn-view">View</a>
-            </div>
-        </div>
     </section>
+
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -177,8 +137,10 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
 </body>
 
 </html>
 
-<!-- http://localhost/train&gain/admin/client/index.php -->
+
+<!-- http://localhost/train&gain/admin/payment/detail.php -->
