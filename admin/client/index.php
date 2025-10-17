@@ -144,7 +144,7 @@ https://templatemo.com/tm-594-nexus-flow
             <div class="client-category-box">
                 <h3>Registered Client</h3>
                 <p>Clients who have been registered whether active or inactive.</p>
-                <a href="../client/inactive_client.php" class="btn-view">View</a>
+                <a href="../client/registered_client.php" class="btn-view">View</a>
             </div>
 
             <!-- Active Clients -->

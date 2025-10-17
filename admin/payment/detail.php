@@ -1,11 +1,63 @@
 <?php
+
 require_once("../../db_connect.php");
 
+// Get payment ID from URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    die("Invalid payment ID.");
+}
+$payment_id = intval($_GET['id']);
+
+// Handle admin message form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $admin_message = trim($_POST['admin_message']);
+    $update_query = "UPDATE client_payment SET admin_message = ? WHERE id = ?";
+    $stmt = $conn->prepare($update_query);
+    $stmt->bind_param("si", $admin_message, $payment_id);
+    $stmt->execute();
+    $stmt->close();
+
+    // Redirect to refresh page after updating
+    header("Location: detail.php?id=$payment_id");
+    exit;
+}
+
+// Fetch joined data from both tables
+$query = "
+    SELECT 
+        p.id AS payment_id,
+        c.id AS client_id,
+        c.name,
+        c.email,
+        p.plan_type,
+        p.payment_method,
+        p.status,
+        p.created_at,
+        p.screenshot_path,
+        p.admin_message
+    FROM client_payment p
+    JOIN client_registered c ON p.client_id = c.id
+    WHERE p.id = ?
+";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $payment_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$payment = $result->fetch_assoc();
+$stmt->close();
+
+if (!$payment) {
+    die("Payment record not found.");
+}
+
+
+// require_once("../../db_connect.php");
+
 // Fetch all client payments
-$query = "SELECT id, client_id, plan_type, payment_method, status, created_at FROM client_payment ORDER BY id ASC";
-$result = $conn->query($query);
-$payments = $result->fetch_all(MYSQLI_ASSOC);
-$total_payments = count($payments);
+// $query = "SELECT id, client_id, plan_type, payment_method, status, created_at FROM client_payment ORDER BY id ASC";
+// $result = $conn->query($query);
+// $payments = $result->fetch_all(MYSQLI_ASSOC);
+// $total_payments = count($payments);
 ?>
 
 
@@ -102,17 +154,133 @@ https://templatemo.com/tm-594-nexus-flow
 
 
 
-
     <section class="contact fade-up" id="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <h2 class="section-title">Client ID</h2>
+        <div class="client-detail-container">
+            <h2 class="client-detail-title">Detail of Payment ID.<?php echo htmlspecialchars($payment['payment_id']); ?></h2>
+            <table class="client-detail-table">
+                <tbody>
+                    <tr>
+                        <th>Client ID</th>
+                        <td><?php echo htmlspecialchars($payment['client_id']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td><?php echo htmlspecialchars($payment['name']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><?php echo htmlspecialchars($payment['email']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Plan Type</th>
+                        <td><?php echo htmlspecialchars($payment['plan_type']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Payment Method</th>
+                        <td><?php echo htmlspecialchars($payment['payment_method']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td><?php echo htmlspecialchars($payment['status']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Paid at</th>
+                        <td><?php echo htmlspecialchars($payment['created_at']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Screenshot</th>
+                        <td>
+                            <?php
+                            $storedPath = $payment['screenshot_path'];
+                            $publicUrl = '../../' . $storedPath;
+                            $serverPath = __DIR__ . '/../../' . $storedPath;
+                            if (is_file($serverPath)) {
 
-            </div>
+                                echo '<a href="' . htmlspecialchars($publicUrl) . '" target="_blank" rel="noopener noreferrer">';
+                                echo '<img src="' . htmlspecialchars($publicUrl) . '" alt="Payment Screenshot" width="200">';
+                                echo '</a>';
+                            } else {
+                                echo '<span style="color:#f900e0;">Screenshot not found.</span>';
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Admin Message</th>
+                        <td class="form-group">
+                            <form method="POST" action="">
+                                <textarea name="admin_message" rows="4" cols="50" placeholder="Type admin message here..." required><?php echo htmlspecialchars($payment['admin_message']); ?></textarea>
+                                <br>
+                                <!-- <button type="submit" class="cyber-button">Save Message</button> -->
+                            </form>
+                            <?php if (isset($_GET['updated'])): ?>
+                                <p style="color:#00ffff;">Admin message updated successfully.</p>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
+        <br><br><br><br><br>
 
+        <div class="action-bar fade-up">
+
+            <div class="action-left">
+                <a href="#">
+                    <button class="btn-edit">Approve</button>
+                </a>
+            </div>
+
+            <div class="action-right">
+                <button class="btn-delete">Reject</button>
+            </div>
+
+        </div>
     </section>
+
+
+
+
+    <!-- <section class="contact fade-up" id="contact">
+
+        <div class="client-detail-container">
+            <h2 class="client-detail-title">Detail of Payment ID.2</h2>
+            <table class="client-detail-table">
+                <tbody>
+                    <tr>
+                        <th>Client ID</th>
+                        <td>xyz</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>xyz</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>xyz</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br><br><br><br><br>
+
+        <div class="action-bar fade-up">
+
+            <div class="action-left">
+                <a href="#">
+                    <button class="btn-edit">Approve</button>
+                </a>
+            </div>
+
+            <div class="action-right">
+                <button class="btn-delete">Reject</button>
+            </div>
+
+        </div>
+
+    </section> -->
 
 
 
@@ -137,6 +305,30 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../../js/templatemo-nexus-scripts.js"></script>
+
+    <script>
+        document.querySelectorAll(".client-detail-table tr").forEach(row => {
+            row.addEventListener("mouseenter", () => {
+                row.style.transition = "transform 0.3s ease";
+                row.style.transform = "scale(1.02)";
+            });
+            row.addEventListener("mouseleave", () => {
+                row.style.transform = "scale(1)";
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll(".client-detail-table tr").forEach((row, i) => {
+            row.style.opacity = 0;
+            row.style.transform = "translateX(-20px)";
+            setTimeout(() => {
+                row.style.transition = "all 0.6s ease";
+                row.style.opacity = 1;
+                row.style.transform = "translateX(0)";
+            }, i * 200);
+        });
+    </script>
 
 </body>
 

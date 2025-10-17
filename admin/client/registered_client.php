@@ -101,7 +101,7 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Inactive Client</h2>
+                <h2 class="section-title">Registered Client</h2>
                 <p class="section-subtitle">
                     <?php
                     if ($total_clients === 0) {
