@@ -8,19 +8,62 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 }
 $payment_id = intval($_GET['id']);
 
-// Handle admin message form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $admin_message = trim($_POST['admin_message']);
-    $update_query = "UPDATE client_payment SET admin_message = ? WHERE id = ?";
-    $stmt = $conn->prepare($update_query);
-    $stmt->bind_param("si", $admin_message, $payment_id);
-    $stmt->execute();
-    $stmt->close();
 
-    // Redirect to refresh page after updating
-    header("Location: detail.php?id=$payment_id");
-    exit;
+// Handle admin actions
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Approve action
+    if (isset($_POST['approve'])) {
+        // Update payment status
+        $update = $conn->prepare("UPDATE client_payment SET status='Approved' WHERE id=?");
+        $update->bind_param("i", $payment_id);
+        $update->execute();
+        $update->close();
+
+        // Redirect to refresh
+        header("Location: detail.php?id=$payment_id");
+        exit;
+    }
+
+    // Reject action
+    if (isset($_POST['reject'])) {
+        $admin_message = trim($_POST['admin_message']);
+
+        // Update both tables
+        $conn->begin_transaction();
+        try {
+            // Update payment status and admin message
+            $stmt = $conn->prepare("UPDATE client_payment SET status='Rejected', admin_message=? WHERE id=?");
+            $stmt->bind_param("si", $admin_message, $payment_id);
+            $stmt->execute();
+            $stmt->close();
+
+            // Get client_id to update client_process
+            $getClient = $conn->prepare("SELECT client_id FROM client_payment WHERE id=?");
+            $getClient->bind_param("i", $payment_id);
+            $getClient->execute();
+            $res = $getClient->get_result();
+            $client = $res->fetch_assoc();
+            $getClient->close();
+
+            if ($client) {
+                $updateProcess = $conn->prepare("UPDATE client_process SET payment_done=0 WHERE client_id=?");
+                $updateProcess->bind_param("i", $client['client_id']);
+                $updateProcess->execute();
+                $updateProcess->close();
+            }
+
+            $conn->commit();
+        } catch (Exception $e) {
+            $conn->rollback();
+            die("Error: " . $e->getMessage());
+        }
+
+        // Redirect to refresh
+        header("Location: detail.php?id=$payment_id");
+        exit;
+    }
 }
+
 
 // Fetch joined data from both tables
 $query = "
@@ -49,15 +92,6 @@ $stmt->close();
 if (!$payment) {
     die("Payment record not found.");
 }
-
-
-// require_once("../../db_connect.php");
-
-// Fetch all client payments
-// $query = "SELECT id, client_id, plan_type, payment_method, status, created_at FROM client_payment ORDER BY id ASC";
-// $result = $conn->query($query);
-// $payments = $result->fetch_all(MYSQLI_ASSOC);
-// $total_payments = count($payments);
 ?>
 
 
@@ -117,9 +151,6 @@ https://templatemo.com/tm-594-nexus-flow
             <div class="nav-bottom">
                 <a href="../payment/index.php" class="cyber-button">View All Payments</a>
             </div>
-            <!-- <div class="nav-bottom">
-                <a href="../payment/create.php" class="cyber-button">Create Payment</a>
-            </div> -->
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
                     <span></span>
@@ -211,7 +242,6 @@ https://templatemo.com/tm-594-nexus-flow
                             <form method="POST" action="">
                                 <textarea name="admin_message" rows="4" cols="50" placeholder="Type admin message here..." required><?php echo htmlspecialchars($payment['admin_message']); ?></textarea>
                                 <br>
-                                <!-- <button type="submit" class="cyber-button">Save Message</button> -->
                             </form>
                             <?php if (isset($_GET['updated'])): ?>
                                 <p style="color:#00ffff;">Admin message updated successfully.</p>
@@ -224,63 +254,30 @@ https://templatemo.com/tm-594-nexus-flow
 
         <br><br><br><br><br>
 
-        <div class="action-bar fade-up">
+        <?php if ($payment['status'] === 'Pending'): ?>
+            <div class="action-bar fade-up">
 
-            <div class="action-left">
-                <a href="#">
-                    <button class="btn-edit">Approve</button>
-                </a>
+                <div class="action-left">
+                    <form method="POST" style="display:inline;">
+                        <button type="submit" name="approve" class="btn-edit">Approve</button>
+                    </form>
+                </div>
+
+                <div class="action-right">
+                    <form method="POST" style="display:inline;">
+                        <!-- Hidden admin message included in reject action -->
+                        <input type="hidden" name="admin_message" value="<?php echo htmlspecialchars($payment['admin_message']); ?>">
+                        <button type="submit" name="reject" class="btn-delete" onclick="return confirm('Are you sure you want to reject this payment?')">Reject</button>
+                    </form>
+                </div>
+
             </div>
-
-            <div class="action-right">
-                <button class="btn-delete">Reject</button>
+        <?php else: ?>
+            <div class="action-bar fade-up" style="text-align:center; margin-top:20px;">
+                <p style="color:#00ffff;">This payment has been <?php echo htmlspecialchars($payment['status']); ?>.</p>
             </div>
-
-        </div>
+        <?php endif; ?>
     </section>
-
-
-
-
-    <!-- <section class="contact fade-up" id="contact">
-
-        <div class="client-detail-container">
-            <h2 class="client-detail-title">Detail of Payment ID.2</h2>
-            <table class="client-detail-table">
-                <tbody>
-                    <tr>
-                        <th>Client ID</th>
-                        <td>xyz</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td>xyz</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>xyz</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <br><br><br><br><br>
-
-        <div class="action-bar fade-up">
-
-            <div class="action-left">
-                <a href="#">
-                    <button class="btn-edit">Approve</button>
-                </a>
-            </div>
-
-            <div class="action-right">
-                <button class="btn-delete">Reject</button>
-            </div>
-
-        </div>
-
-    </section> -->
 
 
 

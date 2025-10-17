@@ -145,7 +145,7 @@ https://templatemo.com/tm-594-nexus-flow
                                 <td><?php echo htmlspecialchars($payment['status']); ?></td>
                                 <td><?php echo htmlspecialchars($payment['created_at']); ?></td>
                                 <td>
-                                    <a href="detail.php?id=<?php echo $payment['id']; ?>" class="btn-view">View</a>
+                                    <a href="detail.php?id=<?php echo $payment['id']; ?>" class="btn-view">View Detail</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
