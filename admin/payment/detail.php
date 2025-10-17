@@ -263,30 +263,31 @@ https://templatemo.com/tm-594-nexus-flow
                     <tr>
                         <th>Admin Message</th>
                         <td class="form-group">
-                            <form method="POST" action="">
-                                <textarea name="admin_message" rows="4" cols="50" placeholder="Type admin message here..."><?php echo htmlspecialchars($payment['admin_message']); ?></textarea>
 
-                                <br><br>
-
-                                <?php if ($payment['status'] === 'Pending'): ?>
+                            <?php if ($payment['status'] === 'Pending'): ?>
+                                <!-- Show textarea and buttons only when still pending -->
+                                <form method="POST" action="">
+                                    <textarea name="admin_message" rows="4" cols="50" placeholder="Type admin message here..."><?php echo htmlspecialchars($payment['admin_message']); ?></textarea>
+                                    <br><br>
                                     <div class="action-bar">
                                         <div class="action-left">
                                             <button type="submit" name="approve" class="btn-approve">Approve</button>
                                         </div>
-
                                         <div class="action-right">
                                             <button type="submit" name="reject" class="btn-reject" onclick="return confirm('Are you sure you want to reject this payment?')">Reject</button>
                                         </div>
                                     </div>
-                                <?php else: ?>
-                                    <div class="action-bar fade-up" style="text-align:center; margin-top:20px;">
-                                        <p style="color:#00ffff;">This payment has been <?php echo htmlspecialchars($payment['status']); ?>.</p>
-                                    </div>
-                                <?php endif; ?>
-                            </form>
+                                </form>
 
-                            <?php if (isset($_GET['updated'])): ?>
-                                <p style="color:#00ffff;">Admin message updated successfully.</p>
+                            <?php else: ?>
+                                <!-- Once approved/rejected, show admin message as plain text -->
+                                <?php if (!empty($payment['admin_message'])): ?>
+                                    <p style="color:#00ffff;">
+                                        <?php echo nl2br(htmlspecialchars($payment['admin_message'])); ?>
+                                    </p>
+                                <?php else: ?>
+                                    <p style="color:#808080;">(No admin message was provided.)</p>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </td>
                     </tr>
