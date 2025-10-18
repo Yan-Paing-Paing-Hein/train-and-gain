@@ -9,6 +9,26 @@ if (!isset($_SESSION['client_id'])) {
 
 $client_id = $_SESSION['client_id'];
 
+// Check latest payment status
+$check_status = $conn->prepare("
+    SELECT status 
+    FROM client_payment 
+    WHERE client_id = ? 
+    ORDER BY id DESC 
+    LIMIT 1
+");
+$check_status->bind_param("i", $client_id);
+$check_status->execute();
+$result_status = $check_status->get_result();
+$payment_status = $result_status->fetch_assoc();
+$check_status->close();
+
+// If latest payment is approved, redirect to home.php
+if ($payment_status && $payment_status['status'] === 'Approved') {
+    header("Location: home.php");
+    exit();
+}
+
 // Fetch process status for Step 1 & Step 2
 $stmt = $conn->prepare("SELECT survey_completed, plan_selected, payment_done FROM client_process WHERE client_id = ?");
 $stmt->bind_param("i", $client_id);
@@ -212,11 +232,11 @@ https://templatemo.com/tm-594-nexus-flow
                 <?php
                 // Check if payment is rejected for this client
                 $reject_stmt = $conn->prepare("
-                SELECT admin_message, status 
-                FROM client_payment 
-                WHERE client_id = ? 
-                ORDER BY id DESC 
-                LIMIT 1
+                    SELECT admin_message, status 
+                    FROM client_payment 
+                    WHERE client_id = ? 
+                    ORDER BY id DESC 
+                    LIMIT 1
                 ");
                 $reject_stmt->bind_param("i", $client_id);
                 $reject_stmt->execute();
