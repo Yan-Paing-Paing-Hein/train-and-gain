@@ -208,6 +208,30 @@ https://templatemo.com/tm-594-nexus-flow
                 <p class="section-subtitle">Get Started with Train&Gain</p>
             </div>
 
+            <div>
+                <?php
+                // Check if payment is rejected for this client
+                $reject_stmt = $conn->prepare("
+                SELECT admin_message, status 
+                FROM client_payment 
+                WHERE client_id = ? 
+                ORDER BY id DESC 
+                LIMIT 1
+                ");
+                $reject_stmt->bind_param("i", $client_id);
+                $reject_stmt->execute();
+                $reject_result = $reject_stmt->get_result();
+                $latest_payment = $reject_result->fetch_assoc();
+                $reject_stmt->close();
+
+                // Display rejection message if applicable
+                if ($latest_payment && $latest_payment['status'] === 'Rejected' && $payment_done == 0) {
+                    echo '<p style="color:#ff0033; font-size:1.2rem; text-align:center; text-shadow:0 0 8px #ff0033;"><strong>Payment Rejected:</strong> ' . htmlspecialchars($latest_payment['admin_message']) . '</p>';
+                }
+                ?>
+            </div>
+
+            <br><br>
 
 
             <div class="features-grid2">
