@@ -235,12 +235,30 @@ https://templatemo.com/tm-594-nexus-flow
                         <td><?php echo htmlspecialchars($payment['payment_method']); ?></td>
                     </tr>
                     <tr>
-                        <th>Status</th>
-                        <td><?php echo htmlspecialchars($payment['status']); ?></td>
-                    </tr>
-                    <tr>
                         <th>Paid at</th>
                         <td><?php echo htmlspecialchars($payment['created_at']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>
+                            <?php
+                            $statusClass = '';
+                            switch ($payment['status']) {
+                                case 'Approved':
+                                    $statusClass = 'status-approved';
+                                    break;
+                                case 'Rejected':
+                                    $statusClass = 'status-rejected';
+                                    break;
+                                default:
+                                    $statusClass = 'status-pending';
+                                    break;
+                            }
+                            ?>
+                            <span class="<?php echo $statusClass; ?>">
+                                <?php echo htmlspecialchars($payment['status']); ?>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <th>Screenshot</th>

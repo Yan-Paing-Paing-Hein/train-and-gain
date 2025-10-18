@@ -129,8 +129,8 @@ https://templatemo.com/tm-594-nexus-flow
                         <th>Client ID</th>
                         <th>Plan Type</th>
                         <th>Payment Method</th>
-                        <th>Status</th>
                         <th>Paid at</th>
+                        <th>Status</th>
                         <th>View Detail</th>
                     </tr>
                 </thead>
@@ -142,6 +142,7 @@ https://templatemo.com/tm-594-nexus-flow
                                 <td><?php echo htmlspecialchars($payment['client_id']); ?></td>
                                 <td><?php echo htmlspecialchars($payment['plan_type']); ?></td>
                                 <td><?php echo htmlspecialchars($payment['payment_method']); ?></td>
+                                <td><?php echo htmlspecialchars($payment['created_at']); ?></td>
                                 <td>
                                     <?php
                                     $statusClass = '';
@@ -161,7 +162,6 @@ https://templatemo.com/tm-594-nexus-flow
                                         <?php echo htmlspecialchars($payment['status']); ?>
                                     </span>
                                 </td>
-                                <td><?php echo htmlspecialchars($payment['created_at']); ?></td>
                                 <td>
                                     <a href="detail.php?id=<?php echo $payment['id']; ?>" class="btn-view">View Detail</a>
                                 </td>
