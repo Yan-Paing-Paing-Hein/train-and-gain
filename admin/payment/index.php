@@ -142,7 +142,25 @@ https://templatemo.com/tm-594-nexus-flow
                                 <td><?php echo htmlspecialchars($payment['client_id']); ?></td>
                                 <td><?php echo htmlspecialchars($payment['plan_type']); ?></td>
                                 <td><?php echo htmlspecialchars($payment['payment_method']); ?></td>
-                                <td><?php echo htmlspecialchars($payment['status']); ?></td>
+                                <td>
+                                    <?php
+                                    $statusClass = '';
+                                    switch ($payment['status']) {
+                                        case 'Approved':
+                                            $statusClass = 'status-approved';
+                                            break;
+                                        case 'Rejected':
+                                            $statusClass = 'status-rejected';
+                                            break;
+                                        default:
+                                            $statusClass = 'status-pending';
+                                            break;
+                                    }
+                                    ?>
+                                    <span class="<?php echo $statusClass; ?>">
+                                        <?php echo htmlspecialchars($payment['status']); ?>
+                                    </span>
+                                </td>
                                 <td><?php echo htmlspecialchars($payment['created_at']); ?></td>
                                 <td>
                                     <a href="detail.php?id=<?php echo $payment['id']; ?>" class="btn-view">View Detail</a>

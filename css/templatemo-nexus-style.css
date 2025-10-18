@@ -3825,3 +3825,36 @@ nav {
 }
 
 /* End of CSS from client/dashboard/plans.php */
+
+.status-pending {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 0, 0.2);
+    color: #ffff33;
+    border: 1px solid #ffff33;
+    box-shadow: 0 0 10px rgba(255, 255, 100, 0.7);
+}
+
+.status-rejected {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+.status-approved {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    background: rgba(50, 255, 100, 0.2);
+    color: #32ff64;
+    border: 1px solid #32ff64;
+    box-shadow: 0 0 10px rgba(50, 255, 100, 0.7);
+}
