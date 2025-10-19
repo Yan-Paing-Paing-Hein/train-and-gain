@@ -128,6 +128,158 @@ if (!$payment) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Index</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+
+        /* ===== Base Modal Box (Glassmorphism) ===== */
+        .modal-box {
+            background: rgba(26, 26, 26, 0.55);
+            color: #00ffff;
+            padding: 25px;
+            border-radius: 16px;
+            width: 400px;
+            text-align: center;
+            backdrop-filter: blur(15px) saturate(160%);
+            -webkit-backdrop-filter: blur(15px) saturate(160%);
+            box-shadow:
+                0 0 20px rgba(0, 0, 0, 0.8),
+                inset 0 0 10px rgba(255, 255, 255, 0.05);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ===== APPROVE MODAL ===== */
+        .approve-box {
+            border: 2px solid #f900e0;
+            box-shadow:
+                0 0 15px rgba(249, 0, 224, 0.8),
+                0 0 30px rgba(249, 0, 224, 0.6),
+                0 0 45px rgba(249, 0, 224, 0.4);
+            animation: fadeIn 0.3s ease, neonGlowPink 2s infinite alternate;
+        }
+
+        /* ===== REJECT MODAL ===== */
+        .reject-box {
+            border: 2px solid #ff0000;
+            box-shadow:
+                0 0 15px rgba(255, 0, 0, 0.8),
+                0 0 30px rgba(255, 0, 0, 0.6),
+                0 0 45px rgba(255, 0, 0, 0.4);
+            animation: fadeIn 0.3s ease, neonGlowRed 2s infinite alternate;
+        }
+
+        /* ===== Titles and Text ===== */
+        .modal-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: #f900e0;
+            text-shadow: 0 0 8px #f900e0;
+        }
+
+        .modal-box p {
+            color: #00ffff;
+            margin-bottom: 20px;
+        }
+
+        /* ===== Buttons Section ===== */
+        .modal-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .btn-cancel,
+        .btn-confirm {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        /* Cancel Button */
+        .btn-cancel {
+            background: rgba(85, 85, 85, 0.7);
+            color: #fff;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(119, 119, 119, 0.8);
+        }
+
+        /* Confirm Button */
+        .btn-confirm {
+            background: rgba(0, 255, 255, 0.85);
+            color: #000;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-confirm:hover {
+            background: #f900e0;
+            color: #fff;
+            box-shadow: 0 0 15px #f900e0;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== Neon Glow Animations ===== */
+        @keyframes neonGlowPink {
+            0% {
+                box-shadow:
+                    0 0 10px rgba(249, 0, 224, 0.6),
+                    0 0 20px rgba(249, 0, 224, 0.4),
+                    0 0 30px rgba(249, 0, 224, 0.2);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 20px rgba(249, 0, 224, 1),
+                    0 0 40px rgba(249, 0, 224, 0.8),
+                    0 0 60px rgba(249, 0, 224, 0.6);
+            }
+        }
+
+        @keyframes neonGlowRed {
+            0% {
+                box-shadow:
+                    0 0 10px rgba(255, 0, 0, 0.6),
+                    0 0 20px rgba(255, 0, 0, 0.4),
+                    0 0 30px rgba(255, 0, 0, 0.2);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 20px rgba(255, 0, 0, 1),
+                    0 0 40px rgba(255, 0, 0, 0.8),
+                    0 0 60px rgba(255, 0, 0, 0.6);
+            }
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -289,10 +441,34 @@ https://templatemo.com/tm-594-nexus-flow
                                     <br><br>
                                     <div class="action-bar">
                                         <div class="action-left">
-                                            <button type="submit" name="approve" class="btn-approve">Approve</button>
+                                            <button type="button" class="btn-approve" onclick="openApproveModal()">Approve</button>
                                         </div>
                                         <div class="action-right">
-                                            <button type="submit" name="reject" class="btn-reject" onclick="return confirm('Are you sure you want to reject this payment?')">Reject</button>
+                                            <button type="button" class="btn-reject" onclick="openRejectModal()">Reject</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Approve Modal -->
+                                    <div id="approveModal" class="modal-overlay">
+                                        <div class="modal-box approve-box">
+                                            <h3>Confirm Approval</h3>
+                                            <p>Are you sure you want to approve this payment?</p>
+                                            <div class="modal-actions">
+                                                <button type="button" class="btn-cancel" onclick="closeApproveModal()">Cancel</button>
+                                                <button type="submit" name="approve" class="btn-confirm">Approve</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Reject Modal -->
+                                    <div id="rejectModal" class="modal-overlay">
+                                        <div class="modal-box reject-box">
+                                            <h3>Confirm Rejection</h3>
+                                            <p>Are you sure you want to reject this payment?</p>
+                                            <div class="modal-actions">
+                                                <button type="button" class="btn-cancel" onclick="closeRejectModal()">Cancel</button>
+                                                <button type="submit" name="reject" class="btn-confirm">Reject</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -361,6 +537,26 @@ https://templatemo.com/tm-594-nexus-flow
                 row.style.transform = "translateX(0)";
             }, i * 200);
         });
+    </script>
+
+    <script>
+        // Approve modal functions
+        function openApproveModal() {
+            document.getElementById("approveModal").style.display = "flex";
+        }
+
+        function closeApproveModal() {
+            document.getElementById("approveModal").style.display = "none";
+        }
+
+        // Reject modal functions
+        function openRejectModal() {
+            document.getElementById("rejectModal").style.display = "flex";
+        }
+
+        function closeRejectModal() {
+            document.getElementById("rejectModal").style.display = "none";
+        }
     </script>
 
 </body>
