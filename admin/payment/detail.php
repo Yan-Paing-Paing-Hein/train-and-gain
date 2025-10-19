@@ -230,8 +230,26 @@ if (!$payment) {
 
         .btn-confirm:hover {
             background: #f900e0;
-            color: #fff;
+            color: #000;
             box-shadow: 0 0 15px #f900e0;
+        }
+
+        .btn-confirm2 {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            background: #B60000;
+            color: #fff;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-confirm2:hover {
+            background: #ff0000;
+            color: #000;
+            box-shadow: 0 0 15px #ff0000;
         }
 
         /* ===== Animations ===== */
@@ -467,7 +485,7 @@ https://templatemo.com/tm-594-nexus-flow
                                             <p>Are you sure you want to reject this payment?</p>
                                             <div class="modal-actions">
                                                 <button type="button" class="btn-cancel" onclick="closeRejectModal()">Cancel</button>
-                                                <button type="submit" name="reject" class="btn-confirm">Reject</button>
+                                                <button type="submit" name="reject" class="btn-confirm2">Reject</button>
                                             </div>
                                         </div>
                                     </div>
