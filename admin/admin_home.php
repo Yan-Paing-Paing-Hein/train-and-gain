@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Check admin login session
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header("Location: login_form.php?loginfirst=1");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
