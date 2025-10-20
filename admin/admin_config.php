@@ -7,5 +7,5 @@
 $admin_email = "paingpaing@gmail.com";
 
 // Admin hashed password (for example only)
-// The original password for this hash is: Admin@123
-$admin_hashed_password = '$2y$10$0TzK3DYpP6nGyfRuFKoXEeo/36mXfTYX3JwO7GmPqY2DN2n3lnUqu';
+// The original password for this hash is: skibidi
+$admin_hashed_password = '$2y$10$5Z0SR/YoeDVJJQfvJB0WNeWayY6BzjLZ7uKx2jai06Lyp.hgJgFia';
