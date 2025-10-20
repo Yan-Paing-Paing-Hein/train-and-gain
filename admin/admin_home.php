@@ -1,18 +1,5 @@
 <?php
-session_start();
-
-// Strong no-cache headers
-header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-
-// If not logged in, redirect
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header("Location: login_form.php?loginfirst=1");
-    exit();
-}
+require_once "admin_protect.php";
 ?>
 
 
@@ -309,14 +296,6 @@ https://templatemo.com/tm-594-nexus-flow
 
     <script src="../js/templatemo-nexus-scripts.js"></script>
 
-    <script>
-        window.addEventListener("pageshow", function(event) {
-            if (event.persisted) {
-                // Force reload if coming from browser back cache
-                window.location.reload();
-            }
-        });
-    </script>
 </body>
 
 </html>
