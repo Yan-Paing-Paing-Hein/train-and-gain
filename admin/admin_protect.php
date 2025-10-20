@@ -20,7 +20,8 @@ header("Pragma: no-cache");
 
 // If not logged in, redirect
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header("Location: login_form.php?loginfirst=1");
+    // Use an absolute path (relative to project root)
+    header("Location: /train&gain/admin/login_form.php?loginfirst=1");
     exit();
 }
 ?>

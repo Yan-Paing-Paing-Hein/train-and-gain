@@ -1,4 +1,7 @@
 <?php
+// Protect admin access
+require_once "../admin_protect.php";
+
 // Include database connection
 include '../../db_connect.php';
 
