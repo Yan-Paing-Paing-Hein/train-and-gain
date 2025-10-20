@@ -2,6 +2,7 @@ menu.xlsx
 /admin/blogpost/uploads/
 /admin/coach/profiles/
 /admin/new_hash.php
+/admin/admin_config.php
 /client/dashboard/profiles/
 /client/dashboard/payments/
 /client/dashboard/videos/

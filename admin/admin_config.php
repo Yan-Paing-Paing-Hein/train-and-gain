@@ -4,4 +4,4 @@
 // ==============================
 
 $admin_email = "paingpaing@gmail.com";
-$admin_hashed_password = '$2y$10$5Z0SR/YoeDVJJQfvJB0WNeWayY6BzjLZ7uKx2jai06Lyp.hgJgFia';
+$admin_hashed_password = '$2y$10$klgYKlvrQVdx3C6FcHYA3uk.W0N3SACNBberafQpSgkPerh.6AYoO';
