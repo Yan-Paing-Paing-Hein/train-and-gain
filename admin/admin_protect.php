@@ -9,6 +9,7 @@ if (basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
     exit("<h1>Access Denied</h1>");
 }
 
+session_name("admin_session");
 session_start();
 
 // Strong no-cache headers

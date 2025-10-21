@@ -1,4 +1,5 @@
 <?php
+session_name("admin_session");
 session_start();
 
 // Invalidate cache for this request
