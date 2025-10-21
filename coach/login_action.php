@@ -42,11 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Check account status
-    if ($coach['status'] !== 'Active') {
-        $_SESSION['error_message'] = "Your account is currently inactive. Please contact admin.";
-        header("Location: login_form.php");
-        exit();
-    }
+    // if ($coach['status'] !== 'Active') {
+    //     $_SESSION['error_message'] = "Your account is currently inactive. Please contact admin.";
+    //     header("Location: login_form.php");
+    //     exit();
+    // }
 
     // Store session data for logged-in coach
     $_SESSION['coach_id'] = $coach['id'];

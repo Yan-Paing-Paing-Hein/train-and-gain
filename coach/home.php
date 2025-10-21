@@ -1,3 +1,46 @@
+<?php
+session_start();
+require_once("../db_connect.php");
+
+// ==========================
+// Access Protection
+// ==========================
+
+// If the coach is not logged in, redirect to login page
+if (!isset($_SESSION['coach_id'])) {
+    // Prevent caching to make sure logged-out users can’t go back
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    header("Location: login_form.php");
+    exit();
+}
+
+// ==========================
+// Fetch Logged-In Coach Info
+// ==========================
+$coach_id = $_SESSION['coach_id'];
+$sql = "SELECT full_name FROM coach WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $coach_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$coach = $result->fetch_assoc();
+
+if (!$coach) {
+    // Invalid session (coach not found)
+    session_destroy();
+    header("Location: login_form.php");
+    exit();
+}
+
+$full_name = htmlspecialchars($coach['full_name']);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,7 +130,7 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title3">Welcome, </h2>
+                <h2 class="section-title3">Welcome, <?php echo $full_name; ?>!</h2>
                 <p class="section-subtitle">Let's train with us together!</p>
             </div>
 
