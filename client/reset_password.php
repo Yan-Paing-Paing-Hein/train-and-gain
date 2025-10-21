@@ -27,9 +27,9 @@ if ($reset['is_used'] == 1) {
 }
 
 // Optional: 1-hour expiry
-if (time() - strtotime($reset['requested_at']) > 3600) {
-    die("<h1 style='text-align:center; margin-top:50px;'>This reset link has expired. Please request a new one.</h1>");
-}
+// if (time() - strtotime($reset['requested_at']) > 3600) {
+//     die("<h1 style='text-align:center; margin-top:50px;'>This reset link has expired. Please request a new one.</h1>");
+// }
 ?>
 
 <!DOCTYPE html>

@@ -1,4 +1,7 @@
 <?php
+// Protect admin access
+require_once "../admin_protect.php";
+
 require_once("../../db_connect.php");
 
 // Fetch all registered clients
@@ -172,3 +175,5 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
+
+<!-- http://localhost/train&gain/admin/client/registered_client.php -->

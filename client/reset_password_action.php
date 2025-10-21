@@ -25,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("<h1 style='text-align:center; margin-top:50px;'>Invalid or expired token!</h1>");
     }
 
-    if (time() - strtotime($reset['requested_at']) > 3600) {
-        die("<h1 style='text-align:center; margin-top:50px;'>This reset link has expired. Please request again!</h1>");
-    }
+    // if (time() - strtotime($reset['requested_at']) > 3600) {
+    //     die("<h1 style='text-align:center; margin-top:50px;'>This reset link has expired. Please request again!</h1>");
+    // }
 
     // Hash password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

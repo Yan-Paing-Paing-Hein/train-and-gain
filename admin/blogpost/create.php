@@ -1,4 +1,7 @@
 <?php
+// Protect admin access
+require_once "../admin_protect.php";
+
 include '../../db_connect.php';
 
 // Handle form submission

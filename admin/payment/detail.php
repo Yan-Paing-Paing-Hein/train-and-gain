@@ -1,4 +1,6 @@
 <?php
+// Protect admin access
+require_once "../admin_protect.php";
 
 require_once("../../db_connect.php");
 

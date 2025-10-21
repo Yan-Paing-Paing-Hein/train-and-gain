@@ -1,3 +1,10 @@
+<?php
+// Protect admin access
+require_once "../admin_protect.php";
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
