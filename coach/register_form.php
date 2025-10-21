@@ -1,3 +1,11 @@
+<?php
+session_start();
+$error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : "";
+unset($_SESSION['error_message']);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,11 +102,7 @@ https://templatemo.com/tm-594-nexus-flow
             <div class="contact-form-wrapper">
                 <form class="contact-form" method="POST" action="register_action.php" enctype="multipart/form-data">
 
-                    <!-- <div class="form-group">
-                        <label for="name">User Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter user name" required>
-                    </div> -->
-
+                    <!-- Coach Email -->
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="useremail@gmail.com" required>
@@ -108,8 +112,7 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="password-wrapper">
-                            <input type="password" id="password" name="password"
-                                placeholder="Enter password manually" required>
+                            <input type="password" id="password" name="password" placeholder="Enter password manually" required>
                             <button type="button" id="togglePassword" class="toggle-password">Show</button>
                         </div>
                     </div>
@@ -118,29 +121,21 @@ https://templatemo.com/tm-594-nexus-flow
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password</label>
                         <div class="password-wrapper">
-                            <input type="password" id="confirm_password" name="confirm_password"
-                                placeholder="Re-enter your password" required>
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required>
                             <button type="button" id="toggleConfirmPassword" class="toggle-password">Show</button>
                         </div>
                     </div>
 
-                    <?php if (isset($_GET['error'])): ?>
-                        <div class="error-message" style="color: red; text-align: center; margin-bottom: 15px;">
-                            <?php echo htmlspecialchars($_GET['error']); ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (isset($_GET['success'])): ?>
-                        <div class="success-message" style="color: #00ff33; text-align: center; margin-bottom: 15px;">
-                            <?php echo htmlspecialchars($_GET['success']); ?>
-                        </div>
+                    <!-- Error Message -->
+                    <?php if (!empty($error_message)) : ?>
+                        <p style="color: red; text-align: center; margin-top: 10px;">
+                            <?php echo htmlspecialchars($error_message); ?>
+                        </p>
                     <?php endif; ?>
 
                     <button type="submit" class="btn-create btn-upload">Register</button>
-
                 </form>
             </div>
-
         </div>
     </section>
 
