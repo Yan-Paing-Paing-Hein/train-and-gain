@@ -1,5 +1,9 @@
 <?php
+// Use the same session name for consistency across coach site
+session_name("coach_session");
 session_start();
+
+// Retrieve and clear any error message
 $error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : "";
 unset($_SESSION['error_message']);
 ?>

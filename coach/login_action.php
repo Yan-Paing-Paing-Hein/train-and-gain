@@ -1,4 +1,5 @@
 <?php
+session_name("coach_session");
 session_start();
 include("../db_connect.php");
 
@@ -19,24 +20,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows === 0) {
-        $_SESSION['error_message'] = "This email is not listed by admin.";
-        header("Location: login_form.php");
-        exit();
-    }
+    // if ($result->num_rows === 0) {
+    //     $_SESSION['error_message'] = "This email is not listed by admin.";
+    //     header("Location: login_form.php");
+    //     exit();
+    // }
 
     $coach = $result->fetch_assoc();
 
     // Check if coach has registered before (password not empty)
-    if (empty($coach['password'])) {
-        $_SESSION['error_message'] = "This coach has not completed registration yet.";
-        header("Location: login_form.php");
-        exit();
-    }
+    // if (empty($coach['password'])) {
+    //     $_SESSION['error_message'] = "This coach has not completed registration yet.";
+    //     header("Location: login_form.php");
+    //     exit();
+    // }
 
     // Verify password
     if (!password_verify($password, $coach['password'])) {
-        $_SESSION['error_message'] = "Incorrect password. Please try again.";
+        $_SESSION['error_message'] = "Invalid email or password!";
         header("Location: login_form.php");
         exit();
     }

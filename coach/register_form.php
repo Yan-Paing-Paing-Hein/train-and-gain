@@ -1,5 +1,7 @@
 <?php
+session_name("coach_session");
 session_start();
+
 $error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : "";
 unset($_SESSION['error_message']);
 ?>
