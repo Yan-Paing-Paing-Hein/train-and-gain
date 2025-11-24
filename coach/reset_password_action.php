@@ -12,19 +12,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Verify token
-    $stmt = $conn->prepare("
-        SELECT pr.id, pr.coach_id, pr.is_used, pr.requested_at
-        FROM coach_password_resets pr
-        WHERE pr.token = ?
-    ");
+    $stmt = $conn->prepare("SELECT pr.id, pr.coach_id, pr.requested_at, pr.is_used 
+                            FROM coach_password_resets pr
+                            WHERE pr.token = ?");
     $stmt->bind_param("s", $token);
     $stmt->execute();
-    $reset = $stmt->get_result()->fetch_assoc();
+    $result = $stmt->get_result();
+    $reset = $result->fetch_assoc();
     $stmt->close();
 
     if (!$reset || $reset['is_used'] == 1) {
         die("<h1 style='text-align:center; margin-top:50px;'>Invalid or expired token!</h1>");
     }
+
+    // Optional expiry
+    // if (time() - strtotime($reset['requested_at']) > 3600) {
+    //     die("<h1 style='text-align:center; margin-top:50px;'>This reset link has expired. Please request again!</h1>");
+    // }
 
     // Hash password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

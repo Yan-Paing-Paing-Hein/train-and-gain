@@ -1,9 +1,18 @@
 <?php
 // Protect admin access
 require_once "../admin_protect.php";
+
+require_once("../../db_connect.php");
+
+// Fetch coach password reset requests (unused)
+$result = $conn->query("
+    SELECT pr.id, pr.token, pr.requested_at, c.full_name, c.email
+    FROM coach_password_resets pr
+    JOIN coach c ON pr.coach_id = c.id
+    WHERE pr.is_used = 0
+    ORDER BY pr.requested_at ASC
+");
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,51 +20,8 @@ require_once "../admin_protect.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Index</title>
+    <title>Coach Reset Requests</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
-    <style>
-        .client-category-container {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .client-category-box {
-            flex: 1 1 300px;
-            max-width: 400px;
-            padding: 30px 20px;
-            border: 2px solid #f900e0;
-            border-radius: 10px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
-            box-shadow: 0 0 15px rgba(249, 0, 224, 0.6);
-            background: rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .client-category-box:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 25px rgba(249, 0, 224, 0.8);
-        }
-
-        .client-category-box h3 {
-            color: #f900e0;
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 8px #f900e0;
-        }
-
-        .client-category-box p {
-            color: #00ffff;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 8px #00ffff;
-        }
-    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -139,27 +105,41 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Password Reset Requests</h2>
-                <p class="section-subtitle">3 requests pending!</p>
+                <h2 class="section-title">Coach Password Reset Requests</h2>
+                <!-- <p class="section-subtitle">Requests from coaches awaiting admin action</p> -->
             </div>
         </div>
 
-
-
-        <div class="client-category-container">
-            <!-- Registered Clients -->
-            <div class="client-category-box">
-                <h3>Client Request</h3>
-                <p>Clients who forgot password.</p>
-                <a href="../request/client_reset_requests.php" class="btn-view">View</a>
-            </div>
-
-            <!-- Active Clients -->
-            <div class="client-category-box">
-                <h3>Coach Request</h3>
-                <p>Coaches who forgot password.</p>
-                <a href="../request/coach_reset_requests.php" class="btn-view">View</a>
-            </div>
+        <!-- CRUD Table Section -->
+        <div class="crud-table-container">
+            <table class="crud-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Requested At</th>
+                        <th>Reset Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($result && $result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($row['full_name']); ?></td>
+                                <td><?= htmlspecialchars($row['email']); ?></td>
+                                <td><?= htmlspecialchars($row['requested_at']); ?></td>
+                                <td>
+                                    <input type="text" value="<?= htmlspecialchars("http://localhost/train&gain/coach/reset_password.php?token=" . $row['token']); ?>" readonly style="width:400px;">
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4" style="text-align:center;">No request found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -187,5 +167,3 @@ https://templatemo.com/tm-594-nexus-flow
 </body>
 
 </html>
-
-<!-- http://localhost/train&gain/admin/request/index.php -->

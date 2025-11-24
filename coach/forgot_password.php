@@ -1,4 +1,5 @@
 <?php
+session_name("coach_session");
 session_start();
 ?>
 
