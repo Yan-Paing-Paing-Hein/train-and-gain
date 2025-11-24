@@ -115,7 +115,7 @@ https://templatemo.com/tm-594-nexus-flow
             <table class="crud-table">
                 <thead>
                     <tr>
-                        <th>User</th>
+                        <th>Coach</th>
                         <th>Email</th>
                         <th>Requested At</th>
                         <th>Reset Link</th>
