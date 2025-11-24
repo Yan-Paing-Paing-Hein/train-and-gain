@@ -101,6 +101,9 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../review/index.php">Review</a></li>
                 <li><a href="../request/index.php">Request</a></li>
             </ul>
+            <div class="nav-bottom">
+                <a href="../logout.php" class="cyber-button">Log out</a>
+            </div>
 
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
