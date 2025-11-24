@@ -6,24 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in Form</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
-    <style>
-        .forgot-link {
-            color: #00ffff;
-            /* Neon cyan by default */
-            text-decoration: underline;
-            font-size: 0.9em;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
-            display: inline-block;
-        }
-
-        .forgot-link:hover {
-            color: #f900e0;
-            /* Switch to neon purple */
-            transform: scale(1.1);
-            text-shadow: 0 0 8px #f900e0, 0 0 16px #f900e0, 0 0 24px #f900e0;
-        }
-    </style>
     <!--
 
 TemplateMo 594 nexus flow

@@ -127,9 +127,13 @@ https://templatemo.com/tm-594-nexus-flow
 
                     <!-- Error Message -->
                     <?php if (!empty($error_message)) : ?>
-                        <p style="color: red; text-align: center; margin-top: 10px;">
+                        <div class="error-message" style="color: red; text-align: center; margin-bottom: 15px;">
                             <?php echo htmlspecialchars($error_message); ?>
-                        </p>
+                            <br>
+                            <a href="forgot_password.php" class="forgot-link">
+                                Forgot your password?
+                            </a>
+                        </div>
                     <?php endif; ?>
 
                     <button type="submit" class="btn-create btn-upload">Log in</button>
