@@ -1,14 +1,6 @@
 <?php
 // Protect admin access
 require_once "../admin_protect.php";
-
-require_once("../../db_connect.php");
-
-// Fetch all registered clients
-$query = "SELECT id, name, email, registered_at FROM client_registered ORDER BY id ASC";
-$result = $conn->query($query);
-$clients = $result->fetch_all(MYSQLI_ASSOC);
-$total_clients = count($clients);
 ?>
 
 
@@ -21,6 +13,49 @@ $total_clients = count($clients);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Index</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        .client-category-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .client-category-box {
+            flex: 1 1 300px;
+            max-width: 400px;
+            padding: 30px 20px;
+            border: 2px solid #f900e0;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+            box-shadow: 0 0 15px rgba(249, 0, 224, 0.6);
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .client-category-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(249, 0, 224, 0.8);
+        }
+
+        .client-category-box h3 {
+            color: #f900e0;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px #f900e0;
+        }
+
+        .client-category-box p {
+            color: #00ffff;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px #00ffff;
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -104,52 +139,29 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Registered Client</h2>
-                <p class="section-subtitle">
-                    <?php
-                    if ($total_clients === 0) {
-                        echo "No client has registered.";
-                    } elseif ($total_clients === 1) {
-                        echo "1 client has registered!";
-                    } else {
-                        echo "$total_clients clients have registered!";
-                    }
-                    ?>
-                </p>
+                <h2 class="section-title">Password Reset Requests</h2>
+                <p class="section-subtitle">3 requests pending!</p>
             </div>
         </div>
 
-        <div class="crud-table-container">
-            <table class="crud-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Registered At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($total_clients > 0): ?>
-                        <?php foreach ($clients as $client): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($client['id']); ?></td>
-                                <td><?php echo htmlspecialchars($client['name']); ?></td>
-                                <td><?php echo htmlspecialchars($client['email']); ?></td>
-                                <td><?php echo htmlspecialchars($client['registered_at']); ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="6" style="text-align:center;">No client has registered.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+
+
+        <div class="client-category-container">
+            <!-- Registered Clients -->
+            <div class="client-category-box">
+                <h3>Client Request</h3>
+                <p>Clients who forgot password.</p>
+                <a href="../request/client_reset_requests.php" class="btn-view">View</a>
+            </div>
+
+            <!-- Active Clients -->
+            <div class="client-category-box">
+                <h3>Coach Request</h3>
+                <p>Coaches who forgot password.</p>
+                <a href="#" class="btn-view">View</a>
+            </div>
         </div>
     </section>
-
-
 
     <!-- Footer -->
     <footer class="footer">
@@ -176,4 +188,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/client/registered_client.php -->
+<!-- http://localhost/train&gain/admin/request/index.php -->

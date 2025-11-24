@@ -166,6 +166,7 @@ if (!$payment) {
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
             <div class="nav-bottom">
                 <a href="../payment/index.php" class="cyber-button">View All Payments</a>
@@ -198,6 +199,7 @@ if (!$payment) {
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
         </nav>
     </div>

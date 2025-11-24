@@ -9,7 +9,7 @@ $token = $_GET['token'];
 
 // Check token in password_resets
 $stmt = $conn->prepare("SELECT pr.id, pr.client_id, pr.requested_at, pr.is_used, c.email 
-                        FROM password_resets pr
+                        FROM client_password_resets pr
                         JOIN client_registered c ON pr.client_id = c.id
                         WHERE pr.token = ?");
 $stmt->bind_param("s", $token);

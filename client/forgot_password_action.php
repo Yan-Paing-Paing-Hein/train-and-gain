@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // 1. Check if user already has a pending request
         $stmtCheck = $conn->prepare("
-            SELECT id FROM password_resets 
+            SELECT id FROM client_password_resets 
             WHERE client_id = ? AND is_used = 0
         ");
         $stmtCheck->bind_param("i", $user['id']);
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // 2. Otherwise → generate new token and insert
         $token = bin2hex(random_bytes(32));
 
-        $stmt2 = $conn->prepare("INSERT INTO password_resets (client_id, token) VALUES (?, ?)");
+        $stmt2 = $conn->prepare("INSERT INTO client_password_resets (client_id, token) VALUES (?, ?)");
         $stmt2->bind_param("is", $user['id'], $token);
         $stmt2->execute();
         $stmt2->close();

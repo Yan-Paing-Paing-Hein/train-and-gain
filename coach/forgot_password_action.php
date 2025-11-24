@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt2->execute();
         $stmt2->close();
 
-        header("Location: forgot_password.php?success=Your request has been sent. Please wait for the reset link.");
+        header("Location: forgot_password.php?success=Your request has been sent to admin. Please wait for the reset link.");
         exit();
     } else {
         header("Location: forgot_password.php?error=No coach found with that email.");

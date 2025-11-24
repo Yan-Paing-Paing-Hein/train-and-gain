@@ -105,6 +105,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
             <div class="nav-bottom">
                 <a href="../coach/index.php" class="cyber-button">Coach Table</a>
@@ -137,6 +138,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
         </nav>
     </div>

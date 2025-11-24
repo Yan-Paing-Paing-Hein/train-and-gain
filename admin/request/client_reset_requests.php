@@ -6,7 +6,7 @@ require_once("../../db_connect.php");
 
 $result = $conn->query("
     SELECT pr.id, pr.token, pr.requested_at, c.name, c.email
-    FROM password_resets pr
+    FROM client_password_resets pr
     JOIN client_registered c ON pr.client_id = c.id
     WHERE pr.is_used = 0
     ORDER BY pr.requested_at ASC
@@ -64,10 +64,9 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
-            <div class="nav-bottom">
-                <a href="../client/index.php" class="cyber-button">Client Table</a>
-            </div>
+
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
                     <span></span>
@@ -96,6 +95,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
         </nav>
     </div>
@@ -107,7 +107,7 @@ https://templatemo.com/tm-594-nexus-flow
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Password Reset Requests</h2>
+                <h2 class="section-title">Client Password Reset Requests</h2>
                 <!-- <p class="section-subtitle">35 clients have joined!</p> -->
             </div>
         </div>
@@ -172,4 +172,4 @@ https://templatemo.com/tm-594-nexus-flow
 
 </html>
 
-<!-- http://localhost/train&gain/admin/client/reset_requests.php -->
+<!-- http://localhost/train&gain/admin/request/client_reset_requests.php -->

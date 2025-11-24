@@ -99,10 +99,9 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
-            <div class="nav-bottom">
-                <a href="../client/reset_requests.php" class="cyber-button">Password Requests</a>
-            </div>
+
             <button class="mobile-menu-button" id="mobileMenuBtn">
                 <div class="hamburger">
                     <span></span>
@@ -131,6 +130,7 @@ https://templatemo.com/tm-594-nexus-flow
                 <li><a href="../client/index.php">Client</a></li>
                 <li><a href="../payment/index.php">Payment</a></li>
                 <li><a href="../review/index.php">Review</a></li>
+                <li><a href="../request/index.php">Request</a></li>
             </ul>
         </nav>
     </div>

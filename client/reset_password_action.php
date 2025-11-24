@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Verify token
     $stmt = $conn->prepare("SELECT pr.id, pr.client_id, pr.requested_at, pr.is_used 
-                            FROM password_resets pr
+                            FROM client_password_resets pr
                             WHERE pr.token = ?");
     $stmt->bind_param("s", $token);
     $stmt->execute();
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->close();
 
     // Mark token as used
-    $stmt = $conn->prepare("UPDATE password_resets SET is_used = 1 WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE client_password_resets SET is_used = 1 WHERE id = ?");
     $stmt->bind_param("i", $reset['id']);
     $stmt->execute();
     $stmt->close();
