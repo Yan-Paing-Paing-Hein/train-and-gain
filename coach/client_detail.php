@@ -68,8 +68,17 @@ $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Index</title>
+    <title>Client Detail</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+    </style>
 </head>
 
 <body id="top">
@@ -104,6 +113,7 @@ $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
                 <li><a href="../../client/coach.php">Coach</a></li>
             </ul> -->
             <div class="nav-bottom">
+                <a href="home.php" class="cyber-button">Dashboard</a>
                 <a href="logout.php" class="cyber-button">Log out</a>
             </div>
             <button class="mobile-menu-button" id="mobileMenuBtn">
@@ -144,15 +154,15 @@ $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
     <section class="contact fade-up" id="contact">
         <div class="client-detail-container">
 
-            <h2 class="client-detail-title">Client Survey Details</h2>
+            <h2 class="client-detail-title">Client ID.<?php echo htmlspecialchars($client['client_id']); ?> Survey Details</h2>
 
             <table class="client-detail-table">
                 <tbody>
                     <tr>
                         <th>Profile Picture</th>
-                        <td>
+                        <td style="display: flex; justify-content: center; align-items: center; height: 180px;">
                             <?php
-                            $storedPath = $client['profile_picture']; // e.g., client/dashboard/profiles/img.png
+                            $storedPath = $client['profile_picture'];
                             $publicUrl = '../../train&gain/' . $storedPath;
                             $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
                             ?>
@@ -233,8 +243,10 @@ $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
                 </tbody>
             </table>
 
-            <!-- Future Plan Creation Button -->
-            <a href="#" class="create-plan-btn">Create Plan</a>
+            <br>
+            <div style="text-align: center;">
+                <a href="create_plan.php" class="cyber-button">Create Plan</a>
+            </div>
 
         </div>
     </section>
