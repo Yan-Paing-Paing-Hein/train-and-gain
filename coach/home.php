@@ -163,7 +163,8 @@ https://templatemo.com/tm-594-nexus-flow
                                     <td><?php echo htmlspecialchars($client['client_name']); ?></td>
                                     <td>
                                         <?php if (!empty($client['profile_picture'])): ?>
-                                            <img src="../uploads/<?php echo htmlspecialchars($client['profile_picture']); ?>" alt="Profile" class="table-profile-pic">
+                                            <img src="../<?php echo htmlspecialchars($client['profile_picture']); ?>"
+                                                alt="Profile" class="table-profile-pic">
                                         <?php else: ?>
                                             <span>No Image</span>
                                         <?php endif; ?>
@@ -171,7 +172,12 @@ https://templatemo.com/tm-594-nexus-flow
                                     <td><?php echo htmlspecialchars($client['client_email']); ?></td>
                                     <td><?php echo htmlspecialchars($client['gender'] ?? ''); ?></td>
                                     <td><span class="status-approved">Planned</span></td>
-                                    <td><a href="detail.php?id=<?php echo (int)$client['client_id']; ?>" class="btn-view">View Detail</a></td>
+                                    <td>
+                                        <a href="client_detail.php?id=<?php echo (int)$client['client_id']; ?>"
+                                            class="btn-view">
+                                            View Detail
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
