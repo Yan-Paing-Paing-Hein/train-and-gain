@@ -143,7 +143,6 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">Client Table</h2>
-                <p class="section-subtitle">35 clients have joined!</p>
             </div>
         </div>
 
@@ -160,8 +159,8 @@ https://templatemo.com/tm-594-nexus-flow
             <!-- Active Clients -->
             <div class="client-category-box">
                 <h3>Active Client</h3>
-                <p>Clients who have completed all steps and are awaiting or have admin approval.</p>
-                <a href="#" class="btn-view">View</a>
+                <p>Clients who have completed all steps and been approved by admin.</p>
+                <a href="../client/active_client.php" class="btn-view">View</a>
             </div>
         </div>
     </section>
