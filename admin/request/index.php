@@ -143,7 +143,7 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">Password Reset Requests</h2>
-                <p class="section-subtitle">3 requests pending!</p>
+                <!-- <p class="section-subtitle">3 requests pending!</p> -->
             </div>
         </div>
 

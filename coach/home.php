@@ -1,4 +1,39 @@
 <?php include("coach_protect.php"); ?>
+<?php
+// Make sure database connection is included
+require_once("../db_connect.php");
+
+// Use coach ID from session (already set in coach_protect.php)
+$coach_id = $_SESSION['coach_id'];
+
+// Fetch approved clients assigned to this coach
+$query = $conn->prepare("
+    SELECT 
+        cr.id AS client_id,
+        cr.name AS client_name,
+        cr.email AS client_email,
+        cs.profile_picture AS profile_picture,
+        cs.gender AS gender,
+        cp.plan AS plan_type,
+        pay.status AS payment_status
+    FROM client_plan cp
+    INNER JOIN client_registered cr ON cp.client_id = cr.id
+    LEFT JOIN client_survey cs ON cr.id = cs.client_id
+    INNER JOIN client_payment pay ON cr.id = pay.client_id
+    WHERE cp.coach_id = ?
+      AND pay.status = 'Approved'
+");
+$query->bind_param("i", $coach_id);
+$query->execute();
+$result = $query->get_result();
+
+$clients = [];
+while ($row = $result->fetch_assoc()) {
+    $clients[] = $row;
+}
+
+$total_clients = count($clients);
+?>
 
 
 
@@ -92,13 +127,61 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title3">Welcome, <?php echo $full_name; ?>!</h2>
-                <p class="section-subtitle">Let's train with us together!</p>
+                <p class="section-subtitle">
+                    <?php
+                    if ($total_clients === 0) {
+                        echo "You have no client yet.";
+                    } elseif ($total_clients === 1) {
+                        echo "You have 1 client.";
+                    } else {
+                        echo "You have $total_clients clients.";
+                    }
+                    ?>
+                </p>
             </div>
 
 
 
-
-
+            <div class="crud-table-container">
+                <table class="crud-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Profile Picture</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Status</th>
+                            <th>View Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($total_clients > 0): ?>
+                            <?php foreach ($clients as $client): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($client['client_id']); ?></td>
+                                    <td><?php echo htmlspecialchars($client['client_name']); ?></td>
+                                    <td>
+                                        <?php if (!empty($client['profile_picture'])): ?>
+                                            <img src="../uploads/<?php echo htmlspecialchars($client['profile_picture']); ?>" alt="Profile" class="table-profile-pic">
+                                        <?php else: ?>
+                                            <span>No Image</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($client['client_email']); ?></td>
+                                    <td><?php echo htmlspecialchars($client['gender'] ?? ''); ?></td>
+                                    <td><span class="status-approved">Planned</span></td>
+                                    <td><a href="detail.php?id=<?php echo (int)$client['client_id']; ?>" class="btn-view">View Detail</a></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="8" style="text-align:center;">No client has assigned yet.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
 
 
         </div>

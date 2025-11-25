@@ -224,7 +224,7 @@ https://templatemo.com/tm-594-nexus-flow
                     </div>
 
                     <div class="form-group">
-                        <h3>Weekly Free Time (hours per day)</h3>
+                        <h3 style="color: #f900e0;">Weekly Free Time (hours per day)</h3>
                         <?php
                         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                         $freeTimeData = $survey ? json_decode($survey['free_time'], true) : [];
