@@ -48,6 +48,17 @@ $client = $result->fetch_assoc();
 // Decode free time JSON
 $free_time = json_decode($client['free_time'], true);
 $days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+
+
+$storedPath = $client['profile_picture'];
+// example stored: client/dashboard/profiles/img.png
+
+// Correct public URL
+$publicUrl = '../../train&gain/' . $storedPath;
+
+// Correct server path
+$serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
 ?>
 
 
@@ -141,9 +152,18 @@ $days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Su
                         <th>Profile Picture</th>
                         <td>
                             <?php
-                            $img = "../../client/dashboard/profiles/" . htmlspecialchars($client['profile_picture']);
+                            $storedPath = $client['profile_picture']; // e.g., client/dashboard/profiles/img.png
+                            $publicUrl = '../../train&gain/' . $storedPath;
+                            $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
                             ?>
-                            <img src="<?php echo $img; ?>" alt="Profile Picture" class="profile-img">
+
+                            <?php if (!empty($storedPath) && is_file($serverPath)): ?>
+                                <a href="<?php echo htmlspecialchars($publicUrl); ?>" target="_blank">
+                                    <img src="<?php echo htmlspecialchars($publicUrl); ?>" alt="Profile Picture" class="profile-img">
+                                </a>
+                            <?php else: ?>
+                                <span style="color:#f900e0;">Profile picture not found.</span>
+                            <?php endif; ?>
                         </td>
                     </tr>
 
