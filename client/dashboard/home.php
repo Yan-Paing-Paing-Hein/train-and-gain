@@ -78,6 +78,48 @@ $show_message = !($workout_status === 'Planned' && $diet_status === 'Planned');
             background: rgba(0, 0, 0, 0.3);
             box-shadow: 0 0 15px #f900e0;
         }
+
+        .client-category-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .client-category-box {
+            flex: 1 1 300px;
+            max-width: 400px;
+            padding: 30px 20px;
+            border: 2px solid #f900e0;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+            box-shadow: 0 0 15px rgba(249, 0, 224, 0.6);
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .client-category-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(249, 0, 224, 0.8);
+        }
+
+        .client-category-box h3 {
+            color: #f900e0;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px #f900e0;
+        }
+
+        .client-category-box p {
+            color: #00ffff;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px #00ffff;
+        }
     </style>
     <!--
 
@@ -164,15 +206,30 @@ https://templatemo.com/tm-594-nexus-flow
                 <h2 class="section-title3">Welcome, <?php echo htmlspecialchars($_SESSION['client_name']); ?>!</h2>
                 <p class="section-subtitle">Let's train with us together!</p>
             </div>
+        </div>
 
 
-            <?php if ($show_message): ?>
-                <div class="plan-wait-box fade-up">
-                    <p>Please wait for your coach to finish your workout and diet plans. Once it is done, they will be revealed here.</p>
-                </div>
-            <?php endif; ?>
+        <?php if ($show_message): ?>
+            <div class="plan-wait-box fade-up">
+                <p>Please wait for your coach to finish your workout and diet plans. Once it is done, they will be revealed here.</p>
+            </div>
+        <?php endif; ?>
 
 
+        <div class="client-category-container">
+            <!-- Create Workout Plan -->
+            <div class="client-category-box">
+                <h3>Your Workout Plans</h3>
+                <p>Your coach has already created workout plans for your weekend days.</p>
+                <a href="workout_plan.php?id=<?php echo $client_id; ?>" class="btn-view">View</a>
+            </div>
+
+            <!-- Create Diet Plan -->
+            <div class="client-category-box">
+                <h3>Your Diet Plans</h3>
+                <p>Your coach has already created diet plans for your weekend days.</p>
+                <a href="diet_plan.php?id=<?php echo $client_id; ?>" class="btn-view">View</a>
+            </div>
         </div>
     </section>
 
