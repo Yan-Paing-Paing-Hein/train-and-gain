@@ -190,6 +190,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 20px;
             text-shadow: 0 0 8px #00ffff;
         }
+
+        .contact-form-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: 4rem;
+        }
+
+        .save-as-draft {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            color: var(--darker-bg);
+            padding: 1rem 2rem;
+            border: none;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            clip-path: polygon(20px 0%, 100% 0%, calc(100% - 20px) 100%, 0% 100%);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .save-as-draft:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.4);
+        }
     </style>
     <!--
 
@@ -247,61 +277,49 @@ https://templatemo.com/tm-594-nexus-flow
 
 
 
-    <!-- Contact Section -->
-    <!-- <section class="contact fade-up" id="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <h2 class="section-title">Create Workout Plans for Client ID.<?php echo $client_id; ?></h2>
-            </div>
-        </div>
-
-
-
-
-    </section> -->
-
-
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
             <div class="section-header">
-                <h2 class="section-title">Create Workout Plans for Client ID.<?php echo $client_id; ?></h2>
+                <h2 class="section-title">Create Workout Plan for Client ID.<?php echo $client_id; ?></h2>
+                <p class="section-subtitle">Come train and come gain!</p>
                 <p style="color:#0ff; text-align:center;">
                     Current Status: <strong><?php echo $plan['status']; ?></strong>
                 </p>
             </div>
-        </div>
 
-        <form method="POST" style="max-width:900px; margin:auto; padding:20px;">
+            <div class="contact-form-wrapper">
+                <form class="contact-form" method="POST" style="max-width:800px; margin:auto;">
 
-            <?php
-            $days = [
-                "monday" => "Monday",
-                "tuesday" => "Tuesday",
-                "wednesday" => "Wednesday",
-                "thursday" => "Thursday",
-                "friday" => "Friday",
-                "saturday" => "Saturday",
-                "sunday" => "Sunday"
-            ];
+                    <?php
+                    $days = [
+                        "monday" => "Monday",
+                        "tuesday" => "Tuesday",
+                        "wednesday" => "Wednesday",
+                        "thursday" => "Thursday",
+                        "friday" => "Friday",
+                        "saturday" => "Saturday",
+                        "sunday" => "Sunday"
+                    ];
 
-            foreach ($days as $key => $label):
-            ?>
-                <div style="margin-bottom: 25px;">
-                    <label style="color:#f900e0; font-size:1.3rem;">
-                        Workout Plan for <?php echo $label; ?>:
-                    </label>
-                    <textarea
-                        name="<?php echo $key; ?>"
-                        rows="4"
-                        style="width:100%; padding:10px; border:2px solid #f900e0; border-radius:10px; background:rgba(255,255,255,0.07); color:#fff;"><?php echo htmlspecialchars($plan[$key]); ?></textarea>
-                </div>
-            <?php endforeach; ?>
+                    foreach ($days as $key => $label):
+                    ?>
+                        <div class="form-group">
+                            <label for="<?php echo $key; ?>">Workout Plan for <?php echo $label; ?>:</label>
+                            <textarea
+                                id="<?php echo $key; ?>"
+                                name="<?php echo $key; ?>"
+                                rows="5"
+                                placeholder="Write your workout plan for <?php echo $label; ?>"><?php echo htmlspecialchars($plan[$key]); ?></textarea>
+                        </div>
+                    <?php endforeach; ?>
 
-            <div style="text-align:center; margin-top:30px;">
-                <button type="submit" class="cyber-button">Save as Draft</button>
+                    <div style="text-align:center; margin-top:20px;">
+                        <button type="submit" class="save-as-draft">Save as Draft</button>
+                    </div>
+
+                </form>
             </div>
-
-        </form>
+        </div>
     </section>
 
 
