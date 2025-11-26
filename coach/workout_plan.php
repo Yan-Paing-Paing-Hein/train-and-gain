@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insert->execute();
     }
 
-    echo "<script>alert('Workout plan saved as draft successfully!'); window.location.href='workout_plan.php?id=$client_id';</script>";
+    header("Location: workout_plan.php?id=$client_id");
     exit;
 }
 ?>
@@ -149,6 +149,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Dashboard</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
     <style>
+        .status-text span {
+            color: #f900e0;
+        }
+
+        .status-text strong {
+            color: #00ffff;
+        }
+
         .client-category-container {
             display: flex;
             justify-content: center;
@@ -220,6 +228,94 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 255, 255, 0.4);
         }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 12px;
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+            border: 2px solid #f900e0;
+            color: #00ffff;
+            box-shadow: 0 0 15px #f900e0aa,
+                0 0 30px #f900e080,
+                0 0 45px #f900e060;
+            animation: fadeIn 0.3s ease, neonGlow 2s infinite alternate;
+        }
+
+        .modal-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #f900e0;
+            /* Neon pink */
+        }
+
+        .modal-box p {
+            color: #00ffff;
+            /* Neon cyan */
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Got it button */
+        .btn-gotit {
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #00ffff;
+            color: #1a1a1a;
+            box-shadow: 0 0 8px #00ffffaa,
+                0 0 16px #00ffff88,
+                0 0 24px #00ffff66;
+            transition: 0.2s ease;
+        }
+
+        .btn-gotit:hover {
+            background: #00ffff;
+            box-shadow: 0 0 15px #00ffffff,
+                0 0 30px #00ffffcc,
+                0 0 45px #00ffff99;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px #f900e080, 0 0 20px #f900e060, 0 0 30px #f900e040;
+            }
+
+            100% {
+                box-shadow: 0 0 20px #f900e0ff, 0 0 40px #f900e0cc, 0 0 60px #f900e099;
+            }
+        }
     </style>
     <!--
 
@@ -281,9 +377,14 @@ https://templatemo.com/tm-594-nexus-flow
         <div class="contact-container">
             <div class="section-header">
                 <h2 class="section-title">Create Workout Plan for Client ID.<?php echo $client_id; ?></h2>
-                <p class="section-subtitle">Come train and come gain!</p>
-                <p style="color:#0ff; text-align:center;">
-                    Current Status: <strong><?php echo $plan['status']; ?></strong>
+                <p class="status-text" style="text-align:center;">
+                    <span>Current Status:</span>
+                    <strong><?php echo htmlspecialchars($plan['status'] ?? 'Not Planned'); ?></strong>
+                    <?php if (!empty($plan['updated_at'])): ?>
+                        <br>
+                        <span>Last updated:</span>
+                        <strong><?php echo htmlspecialchars($plan['updated_at']); ?></strong>
+                    <?php endif; ?>
                 </p>
             </div>
 
@@ -345,5 +446,40 @@ https://templatemo.com/tm-594-nexus-flow
     </footer>
 
     <script src="../js/templatemo-nexus-scripts.js"></script>
+
+    <!-- Save as Draft Modal -->
+    <div id="draftModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Workout plan saved!</h3>
+            <p>Workout plan saved as draft successfully!</p>
+            <button id="closeDraftModal" class="btn-gotit">Got it</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const saveDraftBtn = document.querySelector(".save-as-draft");
+            const draftModal = document.getElementById("draftModal");
+            const closeDraftModal = document.getElementById("closeDraftModal");
+            const form = document.querySelector(".contact-form");
+
+            let shouldSubmit = false; // Prevent infinite loop
+
+            saveDraftBtn.addEventListener("click", function(e) {
+                if (!shouldSubmit) {
+                    e.preventDefault(); // Stop normal submit the FIRST time
+                    draftModal.style.display = "flex";
+                }
+            });
+
+            closeDraftModal.addEventListener("click", function() {
+                draftModal.style.display = "none";
+                shouldSubmit = true; // Allow form to submit now
+                form.submit(); // Submit the form automatically
+            });
+
+        });
+    </script>
 
 </body>
