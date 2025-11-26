@@ -94,14 +94,20 @@ $diet_plan = $query->get_result()->fetch_assoc();
             box-shadow: 0 0 30px rgba(249, 0, 224, 0.7);
             overflow-x: auto;
         }
-    </style>
-    <style>
+
         .profile-img {
             width: 150px;
             height: 150px;
             object-fit: cover;
             border-radius: 50%;
             display: block;
+        }
+
+        .action-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -373,6 +379,14 @@ $diet_plan = $query->get_result()->fetch_assoc();
                 </tbody>
             </table>
 
+        </div>
+
+        <br>
+
+        <div class="action-bar fade-up">
+            <a href="../blogpost/edit.php?id=<?php echo $blog['id']; ?>">
+                <button type="button" class="btn-edit">Edit</button>
+            </a>
         </div>
     </section>
 

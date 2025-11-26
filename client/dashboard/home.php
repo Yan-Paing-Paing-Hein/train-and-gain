@@ -28,6 +28,29 @@ if (!$payment_status || $payment_status['status'] !== 'Approved') {
     header("Location: welcome.php");
     exit();
 }
+
+// Fetch workout plan status
+$workout_sql = "SELECT status FROM created_workout_plans WHERE client_id = ? LIMIT 1";
+$stmt1 = $conn->prepare($workout_sql);
+$stmt1->bind_param("i", $client_id);
+$stmt1->execute();
+$workout_result = $stmt1->get_result();
+$workout = $workout_result->fetch_assoc();
+
+// Fetch diet plan status
+$diet_sql = "SELECT status FROM created_diet_plans WHERE client_id = ? LIMIT 1";
+$stmt2 = $conn->prepare($diet_sql);
+$stmt2->bind_param("i", $client_id);
+$stmt2->execute();
+$diet_result = $stmt2->get_result();
+$diet = $diet_result->fetch_assoc();
+
+// If rows do not exist yet → treat as Not Planned
+$workout_status = $workout['status'] ?? 'Not Planned';
+$diet_status    = $diet['status'] ?? 'Not Planned';
+
+// Show message unless BOTH workout + diet are "Planned"
+$show_message = !($workout_status === 'Planned' && $diet_status === 'Planned');
 ?>
 
 
@@ -39,6 +62,23 @@ if (!$payment_status || $payment_status['status'] !== 'Approved') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        .plan-wait-box {
+            border: 2px solid #f900e0;
+            color: #00ffff;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1rem;
+            width: 80%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 15px #f900e0;
+        }
+    </style>
     <!--
 
 TemplateMo 594 nexus flow
@@ -126,9 +166,11 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
 
 
-
-
-
+            <?php if ($show_message): ?>
+                <div class="plan-wait-box fade-up">
+                    <p>Please wait for your coach to finish your workout and diet plans. Once it is done, they will be revealed here.</p>
+                </div>
+            <?php endif; ?>
 
 
         </div>
