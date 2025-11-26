@@ -59,6 +59,18 @@ $publicUrl = '../../train&gain/' . $storedPath;
 
 // Correct server path
 $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
+
+
+
+$query = $conn->prepare("SELECT * FROM created_workout_plans WHERE client_id = ? LIMIT 1");
+$query->bind_param("i", $client_id);
+$query->execute();
+$workout_plan = $query->get_result()->fetch_assoc();
+
+$query = $conn->prepare("SELECT * FROM created_diet_plans WHERE client_id = ? LIMIT 1");
+$query->bind_param("i", $client_id);
+$query->execute();
+$diet_plan = $query->get_result()->fetch_assoc();
 ?>
 
 
@@ -70,6 +82,19 @@ $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Detail</title>
     <link href="../css/templatemo-nexus-style.css" rel="stylesheet">
+    <style>
+        .client-plan-container {
+            background: var(--card-bg);
+            border: 3px solid #f900e0;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 80%;
+            backdrop-filter: blur(10px);
+            clip-path: polygon(30px 0%, 100% 0%, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0% 100%, 0% 30px);
+            box-shadow: 0 0 30px rgba(249, 0, 224, 0.7);
+            overflow-x: auto;
+        }
+    </style>
     <style>
         .profile-img {
             width: 150px;
@@ -249,6 +274,104 @@ $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
                     Create Plan
                 </a>
             </div>
+
+        </div>
+
+        <br><br><br>
+
+        <div class="client-plan-container">
+
+            <h2 class="client-detail-title">Current Workout Plans for Client ID.<?php echo htmlspecialchars($client['client_id']); ?></h2>
+
+            <table class="client-detail-table">
+                <tbody>
+
+                    <tr>
+                        <th>For Monday</th>
+                        <td><?php echo nl2br(htmlspecialchars($workout_plan['monday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Tuesday</th>
+                        <td><?php echo nl2br(htmlspecialchars($workout_plan['tuesday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Wednesday</th>
+                        <td><?php echo nl2br(htmlspecialchars($workout_plan['wednesday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Thursday</th>
+                        <td><?php echo nl2br(htmlspecialchars($workout_plan['thursday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Friday</th>
+                        <td><?php echo nl2br(htmlspecialchars($workout_plan['friday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Saturday</th>
+                        <td><?php echo nl2br(htmlspecialchars($workout_plan['saturday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Sunday</th>
+                        <td><?php echo nl2br(htmlspecialchars($workout_plan['sunday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <br><br><br>
+
+        <div class="client-plan-container">
+
+            <h2 class="client-detail-title">Current Diet Plans for Client ID.<?php echo htmlspecialchars($client['client_id']); ?></h2>
+
+            <table class="client-detail-table">
+                <tbody>
+
+                    <tr>
+                        <th>For Monday</th>
+                        <td><?php echo nl2br(htmlspecialchars($diet_plan['monday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Tuesday</th>
+                        <td><?php echo nl2br(htmlspecialchars($diet_plan['tuesday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Wednesday</th>
+                        <td><?php echo nl2br(htmlspecialchars($diet_plan['wednesday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Thursday</th>
+                        <td><?php echo nl2br(htmlspecialchars($diet_plan['thursday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Friday</th>
+                        <td><?php echo nl2br(htmlspecialchars($diet_plan['friday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Saturday</th>
+                        <td><?php echo nl2br(htmlspecialchars($diet_plan['saturday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>For Sunday</th>
+                        <td><?php echo nl2br(htmlspecialchars($diet_plan['sunday'] ?? 'No plan yet')); ?></td>
+                    </tr>
+
+                </tbody>
+            </table>
 
         </div>
     </section>
