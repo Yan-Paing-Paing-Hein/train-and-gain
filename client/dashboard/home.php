@@ -216,21 +216,24 @@ https://templatemo.com/tm-594-nexus-flow
         <?php endif; ?>
 
 
-        <div class="client-category-container">
-            <!-- Create Workout Plan -->
-            <div class="client-category-box">
-                <h3>Your Workout Plans</h3>
-                <p>Your coach has already created workout plans for your weekend days.</p>
-                <a href="workout_plan.php?id=<?php echo $client_id; ?>" class="btn-view">View</a>
-            </div>
+        <?php if ($workout_status === 'Planned' && $diet_status === 'Planned'): ?>
+            <div class="client-category-container">
+                <!-- Create Workout Plan -->
+                <div class="client-category-box">
+                    <h3>Your Workout Plans</h3>
+                    <p>Your coach has already created workout plans for your weekend days.</p>
+                    <a href="workout_plan.php?id=<?php echo $client_id; ?>" class="btn-view">View</a>
+                </div>
 
-            <!-- Create Diet Plan -->
-            <div class="client-category-box">
-                <h3>Your Diet Plans</h3>
-                <p>Your coach has already created diet plans for your weekend days.</p>
-                <a href="diet_plan.php?id=<?php echo $client_id; ?>" class="btn-view">View</a>
+                <!-- Create Diet Plan -->
+                <div class="client-category-box">
+                    <h3>Your Diet Plans</h3>
+                    <p>Your coach has already created diet plans for your weekend days.</p>
+                    <a href="diet_plan.php?id=<?php echo $client_id; ?>" class="btn-view">View</a>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
+
     </section>
 
 
