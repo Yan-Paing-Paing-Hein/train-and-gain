@@ -245,7 +245,9 @@ $serverPath = __DIR__ . '/../../train&gain/' . $storedPath;
 
             <br>
             <div style="text-align: center;">
-                <a href="create_plan.php" class="cyber-button">Create Plan</a>
+                <a href="create_plan.php?id=<?php echo urlencode($client['client_id']); ?>" class="cyber-button">
+                    Create Plan
+                </a>
             </div>
 
         </div>
