@@ -43,6 +43,29 @@ $result = $query->get_result();
 if ($result->num_rows === 0) {
     die("<h1 style='text-align:center; margin-top:50px;'>You are not allowed to view this client's details or the payment is not approved.</h1>");
 }
+
+// Check workout plan status
+$check_workout = $conn->prepare("SELECT status FROM created_workout_plans WHERE client_id = ? LIMIT 1");
+$check_workout->bind_param("i", $client_id);
+$check_workout->execute();
+$workout_result = $check_workout->get_result();
+$workout_status = ($workout_result->num_rows > 0)
+    ? $workout_result->fetch_assoc()['status']
+    : 'Not Planned';
+
+// Check diet plan status
+$check_diet = $conn->prepare("SELECT status FROM created_diet_plans WHERE client_id = ? LIMIT 1");
+$check_diet->bind_param("i", $client_id);
+$check_diet->execute();
+$diet_result = $check_diet->get_result();
+$diet_status = ($diet_result->num_rows > 0)
+    ? $diet_result->fetch_assoc()['status']
+    : 'Not Planned';
+
+// If BOTH 'Planned' → block access
+if ($workout_status === 'Planned' && $diet_status === 'Planned') {
+    die("<h1 style='text-align:center; margin-top:50px;'>This workout plan has already been submitted and cannot be edited.</h1>");
+}
 ?>
 
 
