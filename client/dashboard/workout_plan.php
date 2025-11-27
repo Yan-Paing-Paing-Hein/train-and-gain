@@ -1,3 +1,76 @@
+<?php
+require_once("../../db_connect.php");
+
+session_start();
+if (!isset($_SESSION['client_id'])) {
+    header("Location: ../login_form.php?error=Please log in first.");
+    exit();
+}
+
+$client_id = $_SESSION['client_id'];
+
+// --- NEW: Validate GET id and ownership ---
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Invalid client ID.</h1>");
+}
+
+$requested_id = intval($_GET['id']);
+
+if ($requested_id !== $client_id) {
+    die("<h1 style='text-align:center; margin-top:50px;'>Invalid client ID.</h1>");
+}
+
+// Verify that this client’s latest payment is approved
+$check_status = $conn->prepare("
+    SELECT status 
+    FROM client_payment 
+    WHERE client_id = ? 
+    ORDER BY id DESC 
+    LIMIT 1
+");
+$check_status->bind_param("i", $client_id);
+$check_status->execute();
+$result_status = $check_status->get_result();
+$payment_status = $result_status->fetch_assoc();
+$check_status->close();
+
+// If not approved, redirect back to welcome.php
+if (!$payment_status || $payment_status['status'] !== 'Approved') {
+    header("Location: welcome.php");
+    exit();
+}
+
+// Fetch workout plan status
+$workout_sql = "SELECT status FROM created_workout_plans WHERE client_id = ? LIMIT 1";
+$stmt1 = $conn->prepare($workout_sql);
+$stmt1->bind_param("i", $client_id);
+$stmt1->execute();
+$workout_result = $stmt1->get_result();
+$workout = $workout_result->fetch_assoc();
+$stmt1->close();
+
+// Fetch diet plan status
+$diet_sql = "SELECT status FROM created_diet_plans WHERE client_id = ? LIMIT 1";
+$stmt2 = $conn->prepare($diet_sql);
+$stmt2->bind_param("i", $client_id);
+$stmt2->execute();
+$diet_result = $stmt2->get_result();
+$diet = $diet_result->fetch_assoc();
+$stmt2->close();
+
+// Treat missing rows as Not Planned
+$workout_status = $workout['status'] ?? 'Not Planned';
+$diet_status    = $diet['status'] ?? 'Not Planned';
+
+// If BOTH are not 'Planned' → block access
+if (!($workout_status === 'Planned' && $diet_status === 'Planned')) {
+    header("Location: home.php");
+    exit();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
