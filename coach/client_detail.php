@@ -110,53 +110,120 @@ $diet_plan = $query->get_result()->fetch_assoc();
             margin-top: 20px;
         }
 
-        /* Modal overlay (centered) */
-        .modal-overlay {
+        #submitModal.modal-overlay {
+            display: none;
             position: fixed;
             inset: 0;
-            display: flex;
-            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
             justify-content: center;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 9999;
+            align-items: center;
+            z-index: 2000;
         }
 
         /* Modal box */
-        .modal-box {
-            width: 420px;
-            max-width: 92%;
-            background: #0b0b0b;
-            border: 1.5px solid #f900e0;
-            padding: 22px;
-            border-radius: 10px;
+        #submitModal .modal-box {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+            border: 2px solid #f900e0;
             color: #00ffff;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+            box-shadow:
+                0 0 15px #f900e0aa,
+                0 0 30px #f900e080,
+                0 0 45px #f900e060;
+
+            animation: fadeIn 0.3s ease, neonGlowSubmit 2s infinite alternate;
         }
 
-        /* Buttons inside modal */
-        .modal-box .btn-cancel,
-        .modal-box .btn-submit,
-        .modal-box .btn-gotit {
-            padding: 10px 16px;
+        #submitModal .modal-box h3 {
+            color: #f900e0;
+            margin-bottom: 14px;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        #submitModal .modal-box p {
+            color: #00ffff;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Button Row */
+        .submit-btn-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* Cancel Button */
+        .btn-cancel {
+            padding: 10px 22px;
+            border: none;
             border-radius: 8px;
-            border: none;
-            font-weight: 600;
             cursor: pointer;
+            font-weight: bold;
+
+            background: rgba(85, 85, 85, 0.7);
+            color: #fff;
+            backdrop-filter: blur(5px);
+            transition: 0.25s;
         }
 
-        /* Cancel left (muted) */
-        .modal-box .btn-cancel {
-            background: transparent;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .btn-cancel:hover {
+            background: rgba(119, 119, 119, 0.8);
         }
 
-        /* Submit right (highlight) */
-        .modal-box .btn-submit {
-            background: linear-gradient(90deg, #f900e0, #00ffff);
-            color: #0b0b0b;
+        /* Submit Button */
+        .btn-submit {
+            padding: 10px 22px;
             border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+
+            background: rgba(0, 255, 255, 0.85);
+            color: #000;
+            backdrop-filter: blur(5px);
+            transition: 0.25s;
+        }
+
+        .btn-submit:hover {
+            background: #f900e0;
+            color: #000;
+            box-shadow: 0 0 15px #f900e0;
+        }
+
+        /* Fade In */
+        @keyframes fadeIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Neon Glow */
+        @keyframes neonGlowSubmit {
+            0% {
+                box-shadow: 0 0 10px #f900e080,
+                    0 0 20px #f900e060,
+                    0 0 30px #f900e040;
+            }
+
+            100% {
+                box-shadow: 0 0 20px #f900e0ff,
+                    0 0 40px #f900e0cc,
+                    0 0 60px #f900e099;
+            }
         }
     </style>
 </head>
@@ -478,19 +545,18 @@ $diet_plan = $query->get_result()->fetch_assoc();
 
     <script src="../js/templatemo-nexus-scripts.js"></script>
 
-    <!-- Submit confirmation modal -->
-    <div id="submitModal" class="modal-overlay" style="display:none;">
+    <!-- ===== Submit to Client Modal ===== -->
+    <div id="submitModal" class="modal-overlay">
         <div class="modal-box">
             <h3>Confirm submission</h3>
             <p>Are you sure you want to submit these workout and diet plans to that client? The plans for that client cannot be edited again anymore.</p>
 
-            <div style="display:flex; gap:12px; justify-content:space-between; margin-top:18px;">
-                <!-- Cancel button (left) -->
+            <div class="submit-btn-row">
+                <!-- Cancel -->
                 <button id="cancelSubmit" class="btn-cancel" type="button">Cancel</button>
 
-                <!-- Submit form (right) -->
+                <!-- Submit Form -->
                 <form id="confirmSubmitForm" method="post" action="submit_plan.php" style="margin:0;">
-                    <!-- send client_id as POST to server -->
                     <input type="hidden" name="client_id" value="<?php echo htmlspecialchars($client_id); ?>">
                     <button id="confirmSubmit" class="btn-submit" type="submit">Submit</button>
                 </form>
@@ -500,11 +566,13 @@ $diet_plan = $query->get_result()->fetch_assoc();
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+
             const openBtn = document.getElementById("openSubmitModal");
             const modal = document.getElementById("submitModal");
             const cancelBtn = document.getElementById("cancelSubmit");
             const form = document.getElementById("confirmSubmitForm");
 
+            // Open modal
             if (openBtn) {
                 openBtn.addEventListener("click", function(e) {
                     e.preventDefault();
@@ -512,20 +580,19 @@ $diet_plan = $query->get_result()->fetch_assoc();
                 });
             }
 
-            if (cancelBtn) {
-                cancelBtn.addEventListener("click", function() {
-                    modal.style.display = "none";
-                });
-            }
+            // Cancel => close
+            cancelBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
 
-            // optional: close on overlay click
+            // Close when clicking outside the box
             modal.addEventListener("click", function(e) {
                 if (e.target === modal) {
                     modal.style.display = "none";
                 }
             });
 
-            // Optional: prevent double-submit by disabling button after submit
+            // Disable submit button after clicking
             form.addEventListener("submit", function() {
                 const submitBtn = document.getElementById("confirmSubmit");
                 submitBtn.disabled = true;
