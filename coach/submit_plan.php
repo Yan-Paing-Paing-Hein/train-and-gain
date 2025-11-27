@@ -23,7 +23,7 @@ if (!$coach_id) {
     exit();
 }
 
-// Verify that this client belongs to this coach (via client_plan or other)
+// Verify that this client belongs to this coach (via client_plan)
 $check = $conn->prepare("
     SELECT cplan.client_id
     FROM client_plan cplan
@@ -39,21 +39,57 @@ if ($res->num_rows === 0) {
 }
 $check->close();
 
-// Update both tables to set status = 'Planned' for that client and coach
-// Use transactions (optional if your DB supports InnoDB)
+// Begin transaction
 $conn->begin_transaction();
 
 try {
-    $upd1 = $conn->prepare("UPDATE created_workout_plans SET status = 'Planned' WHERE client_id = ? AND coach_id = ?");
-    $upd1->bind_param("ii", $client_id, $coach_id);
-    $upd1->execute();
-    $upd1->close();
+    // --- Handle Workout Plan ---
+    $stmt = $conn->prepare("SELECT id FROM created_workout_plans WHERE client_id = ? AND coach_id = ? LIMIT 1");
+    $stmt->bind_param("ii", $client_id, $coach_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        // Update existing row
+        $upd = $conn->prepare("UPDATE created_workout_plans SET status = 'Planned' WHERE client_id = ? AND coach_id = ?");
+        $upd->bind_param("ii", $client_id, $coach_id);
+        $upd->execute();
+        $upd->close();
+    } else {
+        // Insert new row with status = Planned
+        $ins = $conn->prepare("
+            INSERT INTO created_workout_plans (client_id, coach_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday, status)
+            VALUES (?, ?, '', '', '', '', '', '', '', 'Planned')
+        ");
+        $ins->bind_param("ii", $client_id, $coach_id);
+        $ins->execute();
+        $ins->close();
+    }
+    $stmt->close();
 
-    $upd2 = $conn->prepare("UPDATE created_diet_plans SET status = 'Planned' WHERE client_id = ? AND coach_id = ?");
-    $upd2->bind_param("ii", $client_id, $coach_id);
-    $upd2->execute();
-    $upd2->close();
+    // --- Handle Diet Plan ---
+    $stmt = $conn->prepare("SELECT id FROM created_diet_plans WHERE client_id = ? AND coach_id = ? LIMIT 1");
+    $stmt->bind_param("ii", $client_id, $coach_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        // Update existing row
+        $upd = $conn->prepare("UPDATE created_diet_plans SET status = 'Planned' WHERE client_id = ? AND coach_id = ?");
+        $upd->bind_param("ii", $client_id, $coach_id);
+        $upd->execute();
+        $upd->close();
+    } else {
+        // Insert new row with status = Planned
+        $ins = $conn->prepare("
+            INSERT INTO created_diet_plans (client_id, coach_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday, status)
+            VALUES (?, ?, '', '', '', '', '', '', '', 'Planned')
+        ");
+        $ins->bind_param("ii", $client_id, $coach_id);
+        $ins->execute();
+        $ins->close();
+    }
+    $stmt->close();
 
+    // Commit transaction
     $conn->commit();
 } catch (Exception $e) {
     $conn->rollback();
