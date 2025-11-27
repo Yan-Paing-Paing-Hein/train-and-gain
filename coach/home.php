@@ -1,5 +1,6 @@
-<?php include("coach_protect.php"); ?>
 <?php
+include("coach_protect.php");
+
 // Make sure database connection is included
 require_once("../db_connect.php");
 
@@ -33,6 +34,46 @@ while ($row = $result->fetch_assoc()) {
 }
 
 $total_clients = count($clients);
+
+
+
+$plan_status = [];
+
+foreach ($clients as $client) {
+    $cid = $client['client_id'];
+
+    // Workout plan status
+    $stmtW = $conn->prepare("
+        SELECT status 
+        FROM created_workout_plans 
+        WHERE client_id = ? 
+        LIMIT 1
+    ");
+    $stmtW->bind_param("i", $cid);
+    $stmtW->execute();
+    $resW = $stmtW->get_result();
+    $workout = $resW->fetch_assoc()['status'] ?? 'Not Planned';
+    $stmtW->close();
+
+    // Diet plan status
+    $stmtD = $conn->prepare("
+        SELECT status 
+        FROM created_diet_plans 
+        WHERE client_id = ? 
+        LIMIT 1
+    ");
+    $stmtD->bind_param("i", $cid);
+    $stmtD->execute();
+    $resD = $stmtD->get_result();
+    $diet = $resD->fetch_assoc()['status'] ?? 'Not Planned';
+    $stmtD->close();
+
+    // Save status results
+    $plan_status[$cid] = [
+        'workout' => $workout,
+        'diet'    => $diet
+    ];
+}
 ?>
 
 
@@ -152,7 +193,8 @@ https://templatemo.com/tm-594-nexus-flow
                             <th>Profile Picture</th>
                             <th>Email</th>
                             <th>Gender</th>
-                            <th>Status</th>
+                            <th>Workout Plan</th>
+                            <th>Diet Plan</th>
                             <th>View Detail</th>
                         </tr>
                     </thead>
@@ -172,7 +214,17 @@ https://templatemo.com/tm-594-nexus-flow
                                     </td>
                                     <td><?php echo htmlspecialchars($client['client_email']); ?></td>
                                     <td><?php echo htmlspecialchars($client['gender'] ?? ''); ?></td>
-                                    <td><span class="status-approved">Planned</span></td>
+                                    <?php
+                                    // Workout plan dynamic class
+                                    $ws = $plan_status[$client['client_id']]['workout'];
+                                    $workout_class = ($ws === 'Planned') ? 'status-approved' : (($ws === 'Draft') ? 'status-pending' : 'status-rejected');
+
+                                    // Diet plan dynamic class
+                                    $ds = $plan_status[$client['client_id']]['diet'];
+                                    $diet_class = ($ds === 'Planned') ? 'status-approved' : (($ds === 'Draft') ? 'status-pending' : 'status-rejected');
+                                    ?>
+                                    <td><span class="<?php echo $workout_class; ?>"><?php echo htmlspecialchars($ws); ?></span></td>
+                                    <td><span class="<?php echo $diet_class; ?>"><?php echo htmlspecialchars($ds); ?></span></td>
                                     <td>
                                         <a href="client_detail.php?id=<?php echo (int)$client['client_id']; ?>"
                                             class="btn-view">
