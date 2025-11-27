@@ -109,6 +109,55 @@ $diet_plan = $query->get_result()->fetch_assoc();
             align-items: center;
             margin-top: 20px;
         }
+
+        /* Modal overlay (centered) */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+        }
+
+        /* Modal box */
+        .modal-box {
+            width: 420px;
+            max-width: 92%;
+            background: #0b0b0b;
+            border: 1.5px solid #f900e0;
+            padding: 22px;
+            border-radius: 10px;
+            color: #00ffff;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Buttons inside modal */
+        .modal-box .btn-cancel,
+        .modal-box .btn-submit,
+        .modal-box .btn-gotit {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Cancel left (muted) */
+        .modal-box .btn-cancel {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Submit right (highlight) */
+        .modal-box .btn-submit {
+            background: linear-gradient(90deg, #f900e0, #00ffff);
+            color: #0b0b0b;
+            border: none;
+        }
     </style>
 </head>
 
@@ -275,11 +324,22 @@ $diet_plan = $query->get_result()->fetch_assoc();
             </table>
 
             <br>
-            <div style="text-align: center;">
-                <a href="create_plan.php?id=<?php echo urlencode($client['client_id']); ?>" class="cyber-button">
-                    Create Plan
-                </a>
-            </div>
+
+            <?php
+            // hide action buttons when both plans are already Planned
+            $w_status = $workout_plan['status'] ?? 'Not Planned';
+            $d_status = $diet_plan['status'] ?? 'Not Planned';
+            $both_planned = ($w_status === 'Planned' && $d_status === 'Planned');
+            ?>
+
+            <?php if (!$both_planned): ?>
+                <!-- Create Plans button (shows only when NOT both planned) -->
+                <div style="text-align: center;">
+                    <a href="create_plan.php?id=<?php echo urlencode($client['client_id']); ?>" class="cyber-button">
+                        Create Plans
+                    </a>
+                </div>
+            <?php endif; ?>
 
         </div>
 
@@ -383,11 +443,15 @@ $diet_plan = $query->get_result()->fetch_assoc();
 
         <br>
 
-        <div class="action-bar fade-up">
-            <a href="../blogpost/edit.php?id=<?php echo $blog['id']; ?>">
-                <button type="button" class="btn-edit">Submit to client</button>
-            </a>
-        </div>
+        <?php if (!$both_planned): ?>
+            <!-- Submit button (shows only when NOT both planned) -->
+            <div class="action-bar fade-up">
+                <a href="#" id="openSubmitModal">
+                    <button type="button" class="btn-edit">Submit to client</button>
+                </a>
+            </div>
+        <?php endif; ?>
+
     </section>
 
 
@@ -413,6 +477,62 @@ $diet_plan = $query->get_result()->fetch_assoc();
     </footer>
 
     <script src="../js/templatemo-nexus-scripts.js"></script>
+
+    <!-- Submit confirmation modal -->
+    <div id="submitModal" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <h3>Confirm submission</h3>
+            <p>Are you sure you want to submit these workout and diet plans to that client? The plans for that client cannot be edited again anymore.</p>
+
+            <div style="display:flex; gap:12px; justify-content:space-between; margin-top:18px;">
+                <!-- Cancel button (left) -->
+                <button id="cancelSubmit" class="btn-cancel" type="button">Cancel</button>
+
+                <!-- Submit form (right) -->
+                <form id="confirmSubmitForm" method="post" action="submit_plan.php" style="margin:0;">
+                    <!-- send client_id as POST to server -->
+                    <input type="hidden" name="client_id" value="<?php echo htmlspecialchars($client_id); ?>">
+                    <button id="confirmSubmit" class="btn-submit" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const openBtn = document.getElementById("openSubmitModal");
+            const modal = document.getElementById("submitModal");
+            const cancelBtn = document.getElementById("cancelSubmit");
+            const form = document.getElementById("confirmSubmitForm");
+
+            if (openBtn) {
+                openBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    modal.style.display = "flex";
+                });
+            }
+
+            if (cancelBtn) {
+                cancelBtn.addEventListener("click", function() {
+                    modal.style.display = "none";
+                });
+            }
+
+            // optional: close on overlay click
+            modal.addEventListener("click", function(e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+
+            // Optional: prevent double-submit by disabling button after submit
+            form.addEventListener("submit", function() {
+                const submitBtn = document.getElementById("confirmSubmit");
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Submitting...";
+            });
+        });
+    </script>
 
     <script>
         document.querySelectorAll(".client-detail-table tr").forEach(row => {
