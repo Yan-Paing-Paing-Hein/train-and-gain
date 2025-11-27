@@ -67,6 +67,19 @@ if (!($workout_status === 'Planned' && $diet_status === 'Planned')) {
     header("Location: home.php");
     exit();
 }
+
+// --- NEW: Fetch the actual workout plan fields ---
+$plan_sql = "SELECT monday, tuesday, wednesday, thursday, friday, saturday, sunday 
+             FROM created_workout_plans 
+             WHERE client_id = ? 
+             LIMIT 1";
+
+$stmt_plan = $conn->prepare($plan_sql);
+$stmt_plan->bind_param("i", $client_id);
+$stmt_plan->execute();
+$plan_result = $stmt_plan->get_result();
+$workout_plan = $plan_result->fetch_assoc() ?: [];
+$stmt_plan->close();
 ?>
 
 
@@ -145,7 +158,7 @@ if (!($workout_status === 'Planned' && $diet_status === 'Planned')) {
 
         <div class="client-plan-container">
 
-            <h2 class="client-detail-title">Current Workout Plans for Client ID.<?php echo htmlspecialchars($client['client_id']); ?></h2>
+            <h2 class="client-detail-title">Your workout plans</h2>
 
             <table class="client-detail-table">
                 <tbody>
