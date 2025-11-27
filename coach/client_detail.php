@@ -385,7 +385,7 @@ $diet_plan = $query->get_result()->fetch_assoc();
 
         <div class="action-bar fade-up">
             <a href="../blogpost/edit.php?id=<?php echo $blog['id']; ?>">
-                <button type="button" class="btn-edit">Edit</button>
+                <button type="button" class="btn-edit">Submit to client</button>
             </a>
         </div>
     </section>
