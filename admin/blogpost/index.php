@@ -2,15 +2,31 @@
 // Protect admin access
 require_once "../admin_protect.php";
 
-// Include database connection
+// DB connection
 include '../../db_connect.php';
 
-// Fetch blogposts
-$sql = "SELECT id, category, title, publish_date, status FROM blogpost ORDER BY id ASC";
-$result = $conn->query($sql);
+// Number of rows per page
+$postsPerPage = 30;
 
-// Save the row count
-$totalPosts = ($result) ? $result->num_rows : 0;
+// Get current page (default = 1)
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+
+// Calculate offset
+$offset = ($page - 1) * $postsPerPage;
+
+// Fetch total number of posts
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM blogpost");
+$totalPosts = $totalResult->fetch_assoc()['total'];
+
+// Calculate total pages
+$totalPages = ceil($totalPosts / $postsPerPage);
+
+// Fetch paginated blogposts
+$sql = "SELECT id, category, title, publish_date, status
+        FROM blogpost
+        ORDER BY id ASC
+        LIMIT $postsPerPage OFFSET $offset";
+$result = $conn->query($sql);
 ?>
 
 
@@ -168,6 +184,25 @@ https://templatemo.com/tm-594-nexus-flow
                     <?php endif; ?>
                 </tbody>
             </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" style="text-align:center; margin:20px;">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>" class="btn-prev">Previous</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php if ($i == $page): ?>
+                    <strong>[<?php echo $i; ?>]</strong>
+                <?php else: ?>
+                    <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?php echo $page + 1; ?>" class="btn-next">Next</a>
+            <?php endif; ?>
         </div>
     </section>
 
